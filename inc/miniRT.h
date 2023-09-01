@@ -1,14 +1,18 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+
+# define ERROR_NUM_ARGS "Parse error: Invalid number of arguments\n"
+# define ERROR_FILE "Parse error: file cannot be opened\n"
+# define ERR_READ_FILE "Parse error: cannot read the file\n"
 
 enum e_type{
-    PLAN, //s'il y a seulement un plan
-    CYLINDRE, //s'il y a seulement un cylindre
-    SPHERE, //s'il y a seulement une sphere
-    plans, //s'il y a plusieurs plans
-    cylindres, //s'il y a plusieurs cylindres
-    spheres, //s'il y a plusieurs spheres
+    PLAN,
+    CYLINDRE, 
+    SPHERE,
 };
 
 typedef struct s_plan
@@ -54,5 +58,7 @@ typedef struct s_light
     int ratio;
     int color[3];
 }           t_light;
+
+int parsing(int ac, char **av);
 
 #endif 
