@@ -13,6 +13,7 @@
 # define ERROR_NUM_ARGS "Parse error: Invalid number of arguments\n"
 # define ERROR_FILE "Parse error: file cannot be opened\n"
 # define ERR_READ_FILE "Parse error: cannot read the file\n"
+# define ERR_INFOS_ELEM "Error: infos are not correct\n"
 
 //PARSING
 int parsing(t_scene *sc, t_objs *obj, int ac, char **av);

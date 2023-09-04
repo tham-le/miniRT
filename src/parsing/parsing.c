@@ -42,12 +42,11 @@ int init_and_parse(t_scene *sc, t_objs *objs, char **av)
 
     file_no = open(av[1], O_RDONLY);
     line = get_next_line(file_no);
-    if(check_line(sc, objs, line))
-        return(1);
-    while(line)
+    while(1)
     {
-        free(line);
         line = get_next_line(file_no);
+        if(!line)
+            break;
         if(check_line(sc, objs, line))
             return(1);
     }
