@@ -2,7 +2,10 @@
 
 int main(int ac, char **av)
 {
-    if(parsing(ac, av))
+    t_scene sc;
+    t_objs obj;
+
+    if(parsing(&sc, &obj, ac, av))
         return(1);
     return (0);
 }

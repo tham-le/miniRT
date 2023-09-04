@@ -2,12 +2,20 @@
 # define STRUCTS_H
 
 enum e_type{
-    PLAN,
-    CYLINDRE, 
-    SPHERE,
-    LIGHT,
+    AMBIENT,
     CAMERA,
+    LIGHT,
+    SPHERE,
+    CYLINDRE, 
+    PLAN,
 };
+
+typedef struct s_color
+{
+    int r;
+    int g;
+    int b;
+}              t_color;
 
 typedef struct s_vector
 {
@@ -18,48 +26,77 @@ typedef struct s_vector
 
 typedef struct s_ambient
 {
+    enum e_type type;
     int ratio;
-    t_vector color;
+    t_color color;
 }           t_ambient;
 
 typedef struct s_camera
 {
+    enum e_type   type;
     t_vector position;
     t_vector vector;
-    int fov;
-    t_vector color;
+    int      fov;
+    t_color color;
 }           t_camera;
 
 typedef struct s_light
 {
+    enum e_type   type;
     t_vector position;
-    int ratio;
-    t_vector color;
+    int      ratio;
+    t_color color;
     struct s_light *next;
 }           t_light;
 
 typedef struct s_objs
 {
-    int type;
+    enum e_type type;
+    struct t_objs *next;
+}               t_objs;
+
+typedef struct s_scene
+{
+    t_ambient	ambient;
+    t_light		light;
+    t_camera	camera;
+}       		t_scene;
+
+typedef struct s_sphere
+{
+    enum e_type type;
     t_vector point;
     t_vector center;
-    t_vector color;
+    t_color color;
+    int diameter;
+    struct t_objs *next;
+}           t_sphere;
+
+typedef struct s_cylindre
+{
+    enum e_type type;
+    t_vector point;
+    t_vector center;
+    t_color color;
     t_vector norm;
     t_vector oriented;
     int height;
     int diameter;
-    struct s_objs *next;
-}       t_objs;
+    struct t_objs *next;
+}           t_cylindre;
 
-typedef struct s_scene
+typedef struct s_plan
 {
-    int type;
-    t_light *light;
-    t_camera camera;
-
-}       t_scene;
-
-
+    enum e_type type;
+    t_vector point;
+    t_vector center;
+    t_color color;
+    t_vector norm;
+    t_vector oriented;
+    int height;
+    int diameter;
+    struct t_objs *next;
+}               t_plan;
 
 
 #endif
