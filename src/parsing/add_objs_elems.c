@@ -8,6 +8,7 @@ int add_a_sphere(t_objs *obj, char **elems)
         return(write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     obj->type = SPHERE;
     obj = (t_sphere *)sphere;
+    obj = obj->next;
     return(0);
 }
 
@@ -19,6 +20,7 @@ int add_a_clyindre(t_objs *obj, char **elems)
         return(write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     obj->type = CYLINDRE;
     obj = (t_cylindre *)cylindre;
+    obj = obj->next;
 }
 
 int add_a_plan(t_objs *obj, char **elems)
@@ -29,4 +31,5 @@ int add_a_plan(t_objs *obj, char **elems)
         return(write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     obj->type = PLAN;
     obj = (t_plan *)plan;
+    obj = obj->next;
 }
