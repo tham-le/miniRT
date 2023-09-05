@@ -37,7 +37,6 @@ typedef struct s_camera
     t_vector position;
     t_vector vector;
     int      fov;
-    t_color color;
 }           t_camera;
 
 typedef struct s_light
@@ -66,7 +65,6 @@ typedef struct s_sphere
 {
     enum e_type type;
     t_vector point;
-    t_vector center;
     t_color color;
     int diameter;
     struct t_objs *next;

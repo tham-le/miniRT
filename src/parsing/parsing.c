@@ -39,6 +39,7 @@ int init_and_parse(t_scene *sc, t_objs *objs, char **av)
 {
     int file_no;
     char *line;
+    int type;
 
     file_no = open(av[1], O_RDONLY);
     line = get_next_line(file_no);
@@ -47,8 +48,8 @@ int init_and_parse(t_scene *sc, t_objs *objs, char **av)
         line = get_next_line(file_no);
         if(!line)
             break;
-        if(check_line(sc, objs, line))
-            return(1);
+        type = get_type(line);
+        add_to_struct(sc, objs, type, line);
     }
     return(0);
 }

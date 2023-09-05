@@ -21,7 +21,13 @@ int init_and_parse(t_scene *sc, t_objs *objs, char **av);
 int parse_input(int ac, char **av);
 int check_line(t_scene *sc, t_objs *objs, char *line);
 int first_element(char *elem);
-int add_to_list(t_scene *sc, t_objs *obj, int type, char **elems);
+int add_to_struct(t_scene *sc, t_objs *obj, int type, char *line);
+int add_ambient(t_scene *sc, char **elems);
+int add_light(t_scene *sc, char **elems);
+int add_camera(t_scene *sc, char **elems);
+int add_a_sphere(t_objs *obj, char **elems);
+int add_a_clyindre(t_objs *obj, char **elems);
+int add_a_plan(t_objs *obj, char **elems);
 
 //GNL
 char	*get_next_line(int fd);
