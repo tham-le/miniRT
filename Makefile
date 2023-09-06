@@ -5,7 +5,7 @@ RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
 
 LIBFT_DIR = libft
-LIBFT = $(addprefix $(LIBFT_DIR)/, fd_printf.c ft_atoi.c ft_bzero.c ft_freearr.c ft_itoa.c ft_split.c ft_strchr.c ft_strcjoin.c ft_strcmp.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strrchr.c ft_strstr.c ft_subarr.c ft_substr.c ft_tabsize.c)
+LIBFT = $(addprefix $(LIBFT_DIR)/, fd_printf.c ft_atoi.c ft_bzero.c ft_freearr.c ft_itoa.c ft_split.c ft_strchr.c ft_strcjoin.c ft_strcmp.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strrchr.c ft_strstr.c ft_subarr.c ft_substr.c ft_tabsize.c ft_lstaddback.c)
 
 PARSING_DIR = src/parsing
 PARSE = $(addprefix $(PARSING_DIR)/, parsing.c file_elements.c)

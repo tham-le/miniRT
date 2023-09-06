@@ -51,6 +51,7 @@ typedef struct s_light
 typedef struct s_objs
 {
     enum e_type type;
+    void        *polym;
     struct t_objs *next;
 }               t_objs;
 
@@ -73,13 +74,11 @@ typedef struct s_sphere
 typedef struct s_cylindre
 {
     enum e_type type;
-    t_vector point;
     t_vector center;
-    t_color color;
     t_vector norm;
-    t_vector oriented;
-    int height;
     int diameter;
+    int height;
+    t_color color;
     struct t_objs *next;
 }           t_cylindre;
 
@@ -87,12 +86,8 @@ typedef struct s_plan
 {
     enum e_type type;
     t_vector point;
-    t_vector center;
+    t_vector orientation;
     t_color color;
-    t_vector norm;
-    t_vector oriented;
-    int height;
-    int diameter;
     struct t_objs *next;
 }               t_plan;
 
