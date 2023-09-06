@@ -1,9 +1,9 @@
 #include "../inc/miniRT.h"
 
 
-void	ft_lstaddback(t_list **alst, t_list *new)
+void	ft_lstaddback(t_objs **alst, t_objs *new)
 {
-	t_list *ptr;
+	t_objs *ptr;
 
 	if (alst && *alst)
 	{

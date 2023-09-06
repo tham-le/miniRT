@@ -28,6 +28,10 @@ int add_camera(t_scene *sc, char **elems);
 int add_a_sphere(t_objs *obj, char **elems);
 int add_a_clyindre(t_objs *obj, char **elems);
 int add_a_plan(t_objs *obj, char **elems);
+t_vector get_position(char *elems);
+t_color get_color(char *elems);
+int check_position(char *elems);
+int check_color(char *elems);
 
 //GNL
 char	*get_next_line(int fd);
