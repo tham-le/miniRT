@@ -17,22 +17,43 @@ int parse_input(int ac, char **av)
     return(0);
 }
 
-int check_line(t_scene *sc, t_objs *objs, char *line)
-{
-    (void)sc;
-    (void)objs;
-    char **elems;
-    int type;
-    int i;
+// int check_line(t_scene *sc, t_objs *objs, char *line)
+// {
+//     (void)sc;
+//     (void)objs;
+//     char **elems;
+//     int type;
+//     int i;
 
-    i = 1;
-    elems = ft_split(line, ' ');
-    if(!elems) //empty line
+//     i = 1;
+//     elems = ft_split(line, ' ');
+//     if(!elems) //empty line
+//         return(0);
+//     type = first_element(elems[0]);
+//     if(type == -1) //the type is not correct
+//         return(1);
+//     return(add_to_list(sc, objs, type, elems));
+// }
+
+int get_type(char *line)
+{
+    char **tab;
+
+    tab = ft_split(line, ' ');
+    if(!ft_strncmp(tab[0], "A", ft_strlen(tab[0])))
         return(0);
-    type = first_element(elems[0]);
-    if(type == -1) //the type is not correct
+    else if(!ft_strncmp(tab[0], "C", ft_strlen(tab[0])))
         return(1);
-    return(add_to_list(sc, objs, type, elems));
+    else if(!ft_strncmp(tab[0], "L", ft_strlen(tab[0])))
+        return (2);
+    else if(!ft_strncmp(tab[0], "sp", ft_strlen(tab[0])))
+        return(3);
+    else if(!ft_strncmp(tab[0], "cy", ft_strlen(tab[0])))
+        return(4);
+    else if(!ft_strncmp(tab[0], "pl", ft_strlen(tab[0])))
+        return(5);
+    else    
+        return(6);
 }
 
 int init_and_parse(t_scene *sc, t_objs *objs, char **av)
@@ -42,7 +63,6 @@ int init_and_parse(t_scene *sc, t_objs *objs, char **av)
     int type;
 
     file_no = open(av[1], O_RDONLY);
-    line = get_next_line(file_no);
     objs = (t_objs *)malloc(sizeof(t_objs));
     sc = (t_scene *)malloc(sizeof(t_scene));
     while(1)
@@ -51,7 +71,8 @@ int init_and_parse(t_scene *sc, t_objs *objs, char **av)
         if(!line)
             break;
         type = get_type(line);
-        add_to_struct(sc, objs, type, line);
+        if(add_to_struct(sc, objs, type, line))
+            return (1);
     }
     return(0);
 }
@@ -64,5 +85,6 @@ int parsing(t_scene *sc, t_objs *objs, int ac, char **av)
         return(1);
     if(init_and_parse(sc, objs, av))
         return(1);
+    print_struct(sc, objs);
     return(0);
 }

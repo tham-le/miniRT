@@ -1,6 +1,7 @@
 #include "../inc/miniRT.h"
 
 
+
 void	ft_lstaddback(t_objs **alst, t_objs *new)
 {
 	t_objs *ptr;

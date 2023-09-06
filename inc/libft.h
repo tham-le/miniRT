@@ -43,6 +43,8 @@ char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);
+t_bool	ft_iswhite(char c);
+double			ft_atod(const char *str);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char*));
 int			ft_putchar_fd(char c, int fd);

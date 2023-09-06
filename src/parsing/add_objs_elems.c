@@ -7,7 +7,7 @@ int add_a_sphere(t_objs *obj, char **elems)
 
     sphere = (t_sphere *)malloc(sizeof(t_sphere));
     obj2 = (t_objs *)malloc(sizeof(t_objs));
-    if(check_position(elems[1]) == NULL || ft_atod(elems[2]) || check_color(elems[3]))
+    if(check_position(elems[1])|| ft_atod(elems[2]) || check_color(elems[3]))
         return(write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     sphere->point = get_position(elems[1]);
     sphere->diameter = ft_atod(elems[2]);
@@ -20,7 +20,7 @@ int add_a_sphere(t_objs *obj, char **elems)
     return(0);
 }
 
-int add_a_clyindre(t_objs *obj, char **elems)
+int add_a_cylindre(t_objs *obj, char **elems)
 {
     t_cylindre *cylindre;
     t_objs *obj2;
@@ -55,7 +55,7 @@ int add_a_plan(t_objs *obj, char **elems)
     plan->orientation = get_position(elems[2]);
     plan->color = get_color(elems[3]);
     obj2->type = PLAN;
-    obj2 = (t_plan *)plan;
+    obj2->polym = (t_plan *)plan;
     obj2->next = NULL;
     ft_lstaddback(&obj, obj2);
     obj = obj->next;

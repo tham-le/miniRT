@@ -10,6 +10,12 @@ typedef enum e_type{
     PLAN,
 }          t_type;
 
+typedef enum	e_bool
+{
+	false = 0,
+	true = 1
+}				t_bool;
+
 typedef struct s_color
 {
     int r;
@@ -47,8 +53,9 @@ typedef struct s_light
 
 typedef struct s_objs
 {
+    t_type type;
     void        *polym;
-    struct t_objs *next;
+    struct s_objs *next;
 }               t_objs;
 
 typedef struct s_scene
