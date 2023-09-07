@@ -63,8 +63,7 @@ int init_and_parse(t_scene *sc, t_objs *objs, char **av)
     int type;
 
     file_no = open(av[1], O_RDONLY);
-    objs = (t_objs *)malloc(sizeof(t_objs));
-    sc = (t_scene *)malloc(sizeof(t_scene));
+    init_scene(sc);
     while(1)
     {
         line = get_next_line(file_no);

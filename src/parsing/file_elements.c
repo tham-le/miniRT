@@ -27,7 +27,7 @@ int add_to_struct(t_scene *sc, t_objs *obj, int type, char *line)
     if(!elems)
         return(1);
     if(type == SPHERE)
-        ret = add_a_sphere(obj, elems);
+        ret = add_a_sphere(&obj, elems);
     else if(type == CYLINDRE)
         ret = add_a_cylindre(obj, elems);
     else if(type == PLAN)

@@ -48,7 +48,6 @@ typedef struct s_light
     t_vector position;
     int      ratio;
     t_color color;
-    struct s_light *next;
 }           t_light;
 
 typedef struct s_objs

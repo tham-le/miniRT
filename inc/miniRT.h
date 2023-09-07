@@ -25,13 +25,17 @@ int add_to_struct(t_scene *sc, t_objs *obj, int type, char *line);
 int add_ambient(t_scene *sc, char **elems);
 int add_light(t_scene *sc, char **elems);
 int add_camera(t_scene *sc, char **elems);
-int add_a_sphere(t_objs *obj, char **elems);
+int add_a_sphere(t_objs **obj, char **elems);
 int add_a_cylindre(t_objs *obj, char **elems);
 int add_a_plan(t_objs *obj, char **elems);
 t_vector get_position(char *elems);
 t_color get_color(char *elems);
 int check_position(char *elems);
 int check_color(char *elems);
+void init_scene(t_scene *sc);
+void init_sc_camera(t_scene *sc);
+void init_sc_light(t_scene *sc);
+void init_sc_ambient(t_scene *sc);
 
 //DEBUG
 void print_struct(t_scene *sc, t_objs *obj);

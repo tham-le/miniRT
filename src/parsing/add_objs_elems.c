@@ -1,13 +1,15 @@
 #include "../../inc/miniRT.h"
 
-int add_a_sphere(t_objs *obj, char **elems)
+int add_a_sphere(t_objs **obj, char **elems)
 {
     t_sphere *sphere;
     t_objs *obj2;
 
     sphere = (t_sphere *)malloc(sizeof(t_sphere));
     obj2 = (t_objs *)malloc(sizeof(t_objs));
-    if(check_position(elems[1])|| ft_atod(elems[2]) || check_color(elems[3]))
+    if(!elems[1] || !elems[2] || !elems[3] || elems[4])
+        return(write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
+    if(check_position(elems[1])|| check_color(elems[3]))
         return(write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     sphere->point = get_position(elems[1]);
     sphere->diameter = ft_atod(elems[2]);
@@ -15,8 +17,9 @@ int add_a_sphere(t_objs *obj, char **elems)
     obj2->type = SPHERE;
     obj2->polym = (t_sphere *)sphere;
     obj2->next = NULL;
-    ft_lstaddback(&obj, obj2);
-    obj = obj->next;
+    ft_lstaddback(obj, obj2);
+    printf("obj: %d\n", (*obj)->type);
+    *obj = (*obj)->next;
     return(0);
 }
 
