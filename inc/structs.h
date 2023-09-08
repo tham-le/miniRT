@@ -25,14 +25,14 @@ typedef struct s_color
 
 typedef struct s_vector
 {
-    double x;
-    double y;
-    double z;
+    float x;
+    float y;
+    float z;
 }              t_vector;
 
 typedef struct s_ambient
 {
-    int ratio;
+    float ratio;
     t_color color;
 }           t_ambient;
 
@@ -46,7 +46,7 @@ typedef struct s_camera
 typedef struct s_light
 {
     t_vector position;
-    int      ratio;
+    float      ratio;
     t_color color;
 }           t_light;
 
