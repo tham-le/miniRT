@@ -18,7 +18,7 @@ int add_a_sphere(t_objs **obj, char **elems)
     obj2->polym = (t_sphere *)sphere;
     obj2->next = NULL;
     ft_lstaddback(obj, obj2);
-    printf("obj: %d\n", (*obj)->type);
+    //printf("obj: %d\n", (*obj)->type);
     *obj = (*obj)->next;
     return(0);
 }
