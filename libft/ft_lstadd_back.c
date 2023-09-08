@@ -6,7 +6,6 @@ void	ft_lstaddback(t_objs **alst, t_objs *new)
 
 	if (alst && (*alst)->polym)
 	{
-		printf("la\n");
 		ptr = *alst;
 		while (ptr->next)
 			ptr = ptr->next;
@@ -14,7 +13,6 @@ void	ft_lstaddback(t_objs **alst, t_objs *new)
 	}
 	else if(*alst)
 	{
-		printf("ici\n");
 		*alst = new;
 		(*alst)->next = NULL;
 	}
