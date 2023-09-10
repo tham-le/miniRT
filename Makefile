@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/09/10 18:09:31 by thi-le           ###   ########.fr        #
+#    Updated: 2023/09/10 20:02:04 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
 
 #utilities
 UTILS_DIR	=	utils/
-UTILS_FILES	=	ft_atod.c ft_lstadd_back.c
+UTILS_FILES	=	ft_atod.c ft_lstadd_back.c clean.c print_help.c
 SRC_FILES	+=	$(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 
