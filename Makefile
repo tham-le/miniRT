@@ -1,34 +1,116 @@
-NAME = miniRT
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
+#    Updated: 2023/09/10 18:09:31 by thi-le           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC = cc
-RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror
+#Variables
 
-LIBFT_DIR = libft
-LIBFT = $(addprefix $(LIBFT_DIR)/, fd_printf.c ft_atoi.c ft_bzero.c ft_freearr.c ft_itoa.c ft_split.c ft_strchr.c ft_strcjoin.c ft_strcmp.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strrchr.c ft_strstr.c ft_subarr.c ft_substr.c ft_tabsize.c ft_lstadd_back.c ft_atod.c)
+NAME		= miniRT
+INCLUDE		= includes/
+LIBFT_DIR	= library/libft
+LIBFT		= $(LIBFT_DIR)/libft.a
+MLX_DIR		= library/minilibx-linux
+MLX			= $(MLX_DIR)/libmlx.a
+SRC_DIR		= srcs/
+OBJ_DIR		= objs/
+CC			= cc
+INC			= -I $(INCLUDE) -I$(LIBFT_DIR) -I$(MLX_DIR)\
+			-I/usr/include
 
-PARSING_DIR = src/parsing
-PARSE = $(addprefix $(PARSING_DIR)/, parsing.c file_elements.c add_objs_elems.c add_scene_elems.c infos_elements.c print_struct.c init_scene.c)
+OPTI_FLAGS	= -O3
+#OPTI_FLAGS	= -O3 -march=native -flto -ffast-math -fforce-addr -fno-plt
+#THR_FLAGS	= -pthread
 
-UTILS_DIR = src/utils
-UTILS = $(addprefix $(UTILS_DIR)/, gnl.c)
 
-SRCS_DIR = src
-SRCS = $(addprefix $(SRCS_DIR)/, main.c)
+CFLAGS		= -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
 
-OBJS = $(SRCS:.c=.o) $(PARSE:.c=.o) $(UTILS:.c=.o) $(LIBFT:.c=.o) 
+LFLAGS		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz\
+			-L$(LIBFT_DIR) -lft
 
-all: $(NAME)
+RM			= rm -rf
 
-$(NAME): $(OBJS)
-		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+#Sources
 
+SRC_FILES	=	main.c
+
+#parse
+PARSE_DIR	=	parsing/
+PARSE_FILES	=	add_objs_elems.c infos_elements.c print_struct.c \
+				add_scene_elems.c init_scene.c file_elements.c \
+				parsing.c
+SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
+
+#utilities
+UTILS_DIR	=	utils/
+UTILS_FILES	=	ft_atod.c ft_lstadd_back.c
+SRC_FILES	+=	$(addprefix $(UTILS_DIR), $(UTILS_FILES))
+
+
+SRC		 =   $(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJ		 =   $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
+DEP		 =   $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.d, $(SRC))
+###
+
+MAKEFLAGS += --no-print-directory
+
+all:		$(NAME)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+			@mkdir -p $(OBJ_DIR)
+			@mkdir -p $(@D)
+			@$(CC) $(CFLAGS) -MMD -MP  -c $< -o $@
+			@echo "$(WHITE) $@ created  $(NOC)"
+
+$(LIBFT):
+			@make -s -C $(LIBFT_DIR)
+			@echo "$(GREEN)Libft created!$(DEFAULT)"
+
+$(MLX):
+			@make -s -C $(MLX_DIR)
+			@echo "$(GREEN)Mlx created!$(DEFAULT)"
+
+$(NAME):	$(MLX) $(LIBFT) $(OBJ) Makefile
+			@${CC}  ${OBJ} ${CFLAGS} ${LFLAGS} -o ${NAME}
+			@echo "$(BLUE)$(NAME) created! -> Project successfully compiled"
+	
+-include $(DEP)
+
+bonus:		all
+	
 clean:
-	@$(RM) $(OBJS)
+			@$(RM) $(OBJ_DIR)
+			@make -C $(LIBFT_DIR) clean 
+			@echo  "$(YELLOW)Object files deleted!$(DEFAULT)"
 
-fclean: clean
-	@$(RM) $(NAME)
+fclean:		clean
+			@$(RM) $(NAME)
+			@make clean -C $(MLX_DIR) 
+			@make fclean -C $(LIBFT_DIR)
+			@echo "$(RED)All deleted!$(DEFAULT)"
 
-re: fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re
+norm:
+			@norminette -R CheckForbiddenSourceHeader \
+			$(SRC) $(INCLUDE) $(LIBFT) 
+
+.PHONY:		all clean fclean re norm mlx lib bonus short
+#COLORS
+NOC         = \033[0m
+BOLD        = \033[1m
+UNDERLINE   = \033[4m
+BLACK       = \033[1;30m
+RED         = \033[1;31m
+GREEN       = \033[1;32m
+YELLOW      = \033[1;33m
+BLUE        = \033[1;34m
+VIOLET      = \033[1;35m
+CYAN        = \033[1;36m
+WHITE       = \033[1;37m
