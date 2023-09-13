@@ -42,17 +42,16 @@ int	init_display(t_data *data, char *fname)
 
 int main(int ac, char **av)
 {
-	t_scene	sc;
-	t_objs	obj;
-	t_data	data;
+	t_data	*data;
 	//int		state;
 
+	data = ft_calloc(sizeof(t_data), 1);
 	if (ac != 2)
 		return (ft_print_help());
-	if (parsing(&sc, &obj, ac, av) != SUCESS)
+	if (parsing(data, ac, av) != SUCESS)
 		return (1);
-	data.scene = &sc;
-	data.objs = &obj;
+	// data.scene = &sc;
+	// data.objs = &obj;
 	// state = init_display(&data, av[1]);
 	// if (state != SUCESS)
 	// 	return (clean(&data, state));

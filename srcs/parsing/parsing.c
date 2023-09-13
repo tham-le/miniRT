@@ -41,49 +41,49 @@ int get_type(char *line)
 
     tab = ft_split(line, ' ');
     if(!ft_strncmp(tab[0], "A", ft_strlen(tab[0])))
-        return(0);
+        return(AMBIENT);
     else if(!ft_strncmp(tab[0], "C", ft_strlen(tab[0])))
-        return(1);
+        return(CAMERA);
     else if(!ft_strncmp(tab[0], "L", ft_strlen(tab[0])))
-        return (2);
+        return (LIGHT);
     else if(!ft_strncmp(tab[0], "sp", ft_strlen(tab[0])))
-        return(3);
+        return(SPHERE);
     else if(!ft_strncmp(tab[0], "cy", ft_strlen(tab[0])))
-        return(4);
+        return(CYLINDRE);
     else if(!ft_strncmp(tab[0], "pl", ft_strlen(tab[0])))
-        return(5);
+        return(PLAN);
     else    
         return(6);
 }
 
-int init_and_parse(t_scene *sc, t_objs *objs, char **av)
+int init_and_parse(t_data *data, char **av)
 {
     int file_no;
     char *line;
     int type;
 
     file_no = open(av[1], O_RDONLY);
-    init_scene(sc);
+    // init_scene(sc);
     while(1)
     {
         line = get_next_line(file_no);
         if(!line)
             break;
         type = get_type(line);
-        if(add_to_struct(sc, objs, type, line))
+        if(add_to_struct(data, type, line))
             return (1);
     }
     return(0);
 }
 
-int parsing(t_scene *sc, t_objs *objs, int ac, char **av)
+int parsing(t_data *data, int ac, char **av)
 {
-    ft_bzero(sc, sizeof(t_scene));
-    ft_bzero(objs, sizeof(t_objs));
+    // ft_bzero(sc, sizeof(t_scene));
+    // ft_bzero(objs, sizeof(t_objs));
     if(parse_input(ac, av))
         return(1);
-    if(init_and_parse(sc, objs, av))
+    if(init_and_parse(data, av))
         return(1);
-    print_struct(sc, objs);
+    print_struct(data);
     return(0);
 }

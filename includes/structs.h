@@ -66,42 +66,21 @@ typedef struct s_light
 typedef struct s_objs
 {
     t_type type;
-    void        *polym;
+    int fov;
+    float diametre;
+    float height;
+    float ratio;
+    t_color color;
+    t_vector position;
+    t_vector vector;
     struct s_objs *next;
 }               t_objs;
 
 typedef struct s_scene
 {
-    t_ambient	ambient;
-    t_light		light;
-    t_camera	camera;
+    t_ambient	*ambient;
+    t_light		*light;
+    t_camera	*camera;
 }       		t_scene;
-
-typedef struct s_sphere
-{
-    t_vector point;
-    t_color color;
-    int diameter;
-    struct t_objs *next;
-}           t_sphere;
-
-typedef struct s_cylindre
-{
-    t_vector center;
-    t_vector norm;
-    int diameter;
-    int height;
-    t_color color;
-    struct t_objs *next;
-}           t_cylindre;
-
-typedef struct s_plan
-{
-    t_vector point;
-    t_vector orientation;
-    t_color color;
-    struct t_objs *next;
-}               t_plan;
-
 
 #endif
