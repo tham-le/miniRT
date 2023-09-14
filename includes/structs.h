@@ -78,9 +78,9 @@ typedef struct s_objs
 
 typedef struct s_scene
 {
-    t_ambient	*ambient;
-    t_light		*light;
-    t_camera	*camera;
+    t_ambient	ambient;
+    t_light		light;
+    t_camera	camera;
 }       		t_scene;
 
 #endif

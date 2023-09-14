@@ -33,7 +33,7 @@ typedef struct	s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	t_scene	*scene;
+	t_scene	scene;
 	t_objs *objs;
 }				t_data;
 
@@ -44,8 +44,8 @@ int parse_input(int ac, char **av);
 int check_line(t_scene *sc, t_objs *objs, char *line);
 int first_element(char *elem);
 int add_to_struct(t_data *data, int type, char *line);
-int add_ambient(t_scene *sc, char **elems);
-int add_light(t_scene *sc, char **elems);
+int add_ambient(t_data *data, char **elems);
+int add_light(t_data *data, char **elems);
 int add_camera(t_data *data, char **elems);
 int add_a_sphere(t_data *data, char **elems);
 int add_a_cylindre(t_data *data, char **elems);
