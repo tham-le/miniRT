@@ -1,0 +1,19 @@
+LISTE D'ERREURS PARSING✅❌
+
+-Mauvais nombre d'arguments (!=2)✅
+
+-Ce n'est pas un fichier ".rt"❌
+
+-Le fichier n'existe pas ou qu'on ne peut pas l'ouvrir❌
+
+-Bon nombre d'elements pour chaque type (elements avec majuscule: 1, sinon plusieurs)
+
+-Bon nombre d'informations pour chqaue element❌
+
+-Nom/type d'element incorrect❌
+
+-Il manque une ou plusieurs informations pour un element❌
+
+-Une ou plusieures infos sont incorrectes❌
+    -Une information ne respecte pas la range imposee ❌
+    -Une information contient une lettre

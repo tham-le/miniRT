@@ -6,8 +6,8 @@ int parse_input(int ac, char **av)
     int file_no;
     
     buffer = NULL;
-    if(ac != 2)
-        return(write(STDERR_FILENO, ERROR_NUM_ARGS, 42));
+    if(check_extension(av[1]))
+        return(write(STDERR_FILENO, ERROR_FILE, 35));
     file_no = open(av[1], O_RDONLY);
     if(file_no == -1)
         return(write(STDERR_FILENO, ERROR_FILE, 35));
