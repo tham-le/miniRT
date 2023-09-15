@@ -1,13 +1,26 @@
 #include "miniRT.h"
 
+int check_extension(char *file_name)
+{
+    char *ext;
+
+    if(!ft_strchr(file_name, '.'))
+        return(1);
+    ext = file_name + ft_strlen(file_name) - 3;
+    if(ft_strncmp(ext, ".rt", ft_strlen(ext)))
+        return(1);
+    return(0);
+}
+
 int parse_input(int ac, char **av)
 {
     char *buffer;
     int file_no;
+    (void)ac;
     
-    buffer = NULL;
+    buffer = malloc(sizeof(int));
     if(check_extension(av[1]))
-        return(write(STDERR_FILENO, ERROR_FILE, 35));
+        return(write(STDERR_FILENO, ERR_FILE_NAME, 33));
     file_no = open(av[1], O_RDONLY);
     if(file_no == -1)
         return(write(STDERR_FILENO, ERROR_FILE, 35));
@@ -16,24 +29,6 @@ int parse_input(int ac, char **av)
     close(file_no);
     return(0);
 }
-
-// int check_line(t_scene *sc, t_objs *objs, char *line)
-// {
-//     (void)sc;
-//     (void)objs;
-//     char **elems;
-//     int type;
-//     int i;
-
-//     i = 1;
-//     elems = ft_split(line, ' ');
-//     if(!elems) //empty line
-//         return(0);
-//     type = first_element(elems[0]);
-//     if(type == -1) //the type is not correct
-//         return(1);
-//     return(add_to_list(sc, objs, type, elems));
-// }
 
 int get_type(char *line)
 {

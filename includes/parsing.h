@@ -22,6 +22,8 @@
 # define ERROR_FILE "Parse error: file cannot be opened\n"
 # define ERR_READ_FILE "Parse error: cannot read the file\n"
 # define ERR_INFOS_ELEM "Error: infos are not correct\n"
+# define ERR_FILE_NAME "Error: file should be a .rt file\n"
+
 
 
 typedef struct	s_data
@@ -58,6 +60,7 @@ void init_scene(t_scene *sc);
 void init_sc_camera(t_scene *sc);
 void init_sc_light(t_scene *sc);
 void init_sc_ambient(t_scene *sc);
+int check_extension(char *file_name);
 
 //DEBUG
 void print_struct(t_data *data);

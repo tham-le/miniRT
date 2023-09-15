@@ -4,10 +4,12 @@
 int check_position(char *elems)
 {
     char **position;
+    int ret;
+    (void)ret;
 
     position = ft_split(elems, ',');
     if(!position)
-        return(write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
     return(0);
 }
 
@@ -26,10 +28,12 @@ t_vector get_position(char *elems)
 int check_color(char *elems)
 {
     char **color;
+    int ret;
+    (void)ret;
 
     color = ft_split(elems, ',');
     if(!color)
-        return(write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
     return(0);
 }
 
