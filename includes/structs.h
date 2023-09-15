@@ -81,6 +81,9 @@ typedef struct s_scene
     t_ambient	ambient;
     t_light		light;
     t_camera	camera;
+    int nb_amb;
+    int nb_light;
+    int nb_cam;
 }       		t_scene;
 
 #endif

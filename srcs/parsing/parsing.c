@@ -23,9 +23,9 @@ int parse_input(int ac, char **av)
         return(write(STDERR_FILENO, ERR_FILE_NAME, 33));
     file_no = open(av[1], O_RDONLY);
     if(file_no == -1)
-        return(write(STDERR_FILENO, ERROR_FILE, 35));
+        return(write(STDERR_FILENO, ERROR_FILE, 29));
     if(!read(file_no, buffer, sizeof(int)))
-        return(close(file_no), write(STDERR_FILENO, ERR_READ_FILE, 35));
+        return(close(file_no), write(STDERR_FILENO, ERR_READ_FILE, 28));
     close(file_no);
     return(0);
 }
@@ -48,7 +48,7 @@ int get_type(char *line)
     else if(!ft_strncmp(tab[0], "pl", ft_strlen(tab[0])))
         return(PLAN);
     else    
-        return(6);
+        return(-1);
 }
 
 int init_and_parse(t_data *data, char **av)
@@ -56,16 +56,17 @@ int init_and_parse(t_data *data, char **av)
     int file_no;
     char *line;
     int type;
+    (void)type;
 
     file_no = open(av[1], O_RDONLY);
-    // init_scene(sc);
+    init_scene(data);
     while(1)
     {
         line = get_next_line(file_no);
         if(!line)
             break;
         type = get_type(line);
-        if(add_to_struct(data, type, line))
+        if(add_to_struct(data, type, line) > 5)
             return (1);
     }
     return(0);

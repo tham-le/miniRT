@@ -1,4 +1,5 @@
 #include "miniRT.h"
+#include <float.h>
 
 int add_ambient(t_data *data, char **elems)
 {
@@ -7,10 +8,13 @@ int add_ambient(t_data *data, char **elems)
     (void)ret;
 
     ft_bzero(&ambient, sizeof(t_ambient));
-    if(!elems[1] || !elems[2] || elems[3])
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
-    if(check_color(elems[2]))
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
+    data->scene.nb_amb++;
+    if(data->scene.nb_amb > 1)
+        return(ret = write(STDIN_FILENO, ERR_NB_AMBIENT, 41), 6);
+    if(ft_tabsize(elems) != 3 || is_void(elems[2][0]))
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+    if(check_float(elems[1]) || check_color(elems[2]))
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
     ambient.ratio = ft_atod(elems[1]);
     ambient.color = get_color(elems[2]);
     data->scene.ambient = ambient;
@@ -24,10 +28,13 @@ int add_light(t_data *data, char **elems)
     (void)ret;
 
     ft_bzero(&light, sizeof(t_light));
-    if(!elems[1] || !elems[2] || !elems[3] || elems[4])
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
-    if(check_position(elems[1]) == -1 || ft_atod(elems[2]) == -1 || check_color(elems[3]) == -1 || elems[4])
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
+    data->scene.nb_light++;
+    if(data->scene.nb_light > 1)
+        return(ret = write(STDIN_FILENO, ERR_NB_LIGHT, 33), 6);
+    if(ft_tabsize(elems) != 4 || is_void(elems[3][0]))
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+    if(check_position(elems[1]), check_float(elems[2]) || check_color(elems[3]))
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
     light.position = get_position(elems[1]);
     light.ratio = ft_atod(elems[2]);
     light.color = get_color(elems[3]);
@@ -42,10 +49,13 @@ int add_camera(t_data *data, char **elems)
     (void)ret;
 
     ft_bzero(&camera, sizeof(t_camera));
-    if(!elems[1] || !elems[2] || !elems[3] || elems[4])
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
-    if(check_position(elems[1]) == -1 || check_position(elems[2]) || !ft_atoi(elems[3]))
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
+    data->scene.nb_cam++;
+    if(data->scene.nb_cam > 1)
+        return(ret = write(STDIN_FILENO, ERR_NB_CAMERA, 34), 6);
+    if(ft_tabsize(elems) != 4 || is_void(elems[3][0]))
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+    if(check_position(elems[1]) || check_position(elems[2]) || only_digits(elems[3]))
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
     camera.position = get_position(elems[1]);
     camera.vector = get_position(elems[2]);
     camera.fov = ft_atoi(elems[3]);

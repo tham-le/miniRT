@@ -23,10 +23,12 @@ int add_to_struct(t_data *data, int type, char *line)
     int ret;
 
     elems = ft_split(line, ' ');
-    ret = 0;
+    ret = -1;
     if(!elems)
         return(1);
-    if(type == SPHERE)
+    if(type == -1)
+        ret = write(STDERR_FILENO, ERR_NAME_ELMT, 31);
+    else if(type == SPHERE)
         ret = add_a_sphere(data, elems);
     else if(type == CYLINDRE)
         ret = add_a_cylindre(data, elems);

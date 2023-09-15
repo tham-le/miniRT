@@ -21,7 +21,7 @@ void	        ft_lstaddback(t_objs **alst, t_objs *new);
 double			ft_atod(const char *str);
 // int	            clean(t_data *data, int state);
 int	            ft_print_help(void);
-
+int		ft_tabsize(char **tab);
 
 
 

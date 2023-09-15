@@ -49,7 +49,7 @@ SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
 
 #utilities
 UTILS_DIR	=	utils/
-UTILS_FILES	=	ft_atod.c ft_lstadd_back.c clean.c print_help.c
+UTILS_FILES	=	ft_atod.c ft_lstadd_back.c clean.c print_help.c ft_tabsize.c
 SRC_FILES	+=	$(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 
