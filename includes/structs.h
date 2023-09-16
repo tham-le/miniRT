@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:54:20 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/16 16:15:59 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/16 16:46:18 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_camera
 {
 	t_vector	position;
 	t_vector	vector;
-	int			fov;
+	double			fov;
 }		t_camera;
 
 typedef struct s_light
