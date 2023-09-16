@@ -58,7 +58,9 @@ int add_camera(t_data *data, char **elems)
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
     camera.position = get_position(elems[1]);
     camera.vector = get_position(elems[2]);
-    camera.fov = ft_atoi(elems[3]);
+    camera.fov = ft_atoi(elems[3]) * DEG_2_RAD;
     data->scene.camera = camera;
     return(0);
 }
+
+//fov in redian to easy use
