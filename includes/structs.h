@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:54:20 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/09 18:54:26 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/16 16:15:59 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef enum e_type{
     CAMERA,
     LIGHT,
     SPHERE,
-    CYLINDRE, 
+    CYLINDRE,
     PLAN,
 }          t_type;
 
@@ -51,10 +51,10 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-    t_vector position;
-    t_vector vector;
-    int      fov;
-}           t_camera;
+	t_vector	position;
+	t_vector	vector;
+	int			fov;
+}		t_camera;
 
 typedef struct s_light
 {
@@ -85,5 +85,27 @@ typedef struct s_scene
     int nb_light;
     int nb_cam;
 }       		t_scene;
+
+typedef struct	s_settings
+{
+	int			width;
+	int			height;
+	int			render_scale;
+}				t_settings;
+
+typedef struct	s_data
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	t_scene		scene;
+	t_objs		*objs;
+	t_settings	settings;
+}				t_data;
+
 
 #endif

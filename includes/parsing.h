@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:35:49 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/10 19:21:30 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/16 15:53:18 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,6 @@
 # define ERR_NB_CAMERA "Error: only one camera is allowed\n"
 # define ERR_NB_LIGHT "Error: only one light is allowed\n"
 # define ERR_NAME_ELMT "Error: invalid name of element\n"
-
-
-
-typedef struct	s_data
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	t_scene	scene;
-	t_objs *objs;
-}				t_data;
 
 //PARSING
 int parsing(t_data *data, int ac, char **av);
@@ -74,4 +59,4 @@ int is_void(char c);
 void print_struct(t_data *data);
 
 
-#endif 
+#endif
