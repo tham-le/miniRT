@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:08:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/10 20:02:38 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/16 16:16:19 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,22 @@ int	print_error(char *str, int state)
 		ft_putendl(str);
 	return (state);
 }
+
+// int	clean(t_data *data, int state)
+// {
+// 	// if (state > 4)
+// 	// 	free(data)
+// 	if (state > 3)
+// 		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
+// 	if (state > 2)
+// 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+// 	if (state > 1)
+// 	{
+// 		mlx_destroy_display(data->mlx_ptr);
+// 		free(data->mlx_ptr);
+// 	}
+// 	return (1);
+// }
 
 int	init_display(t_data *data, char *fname)
 {
@@ -50,8 +66,6 @@ int main(int ac, char **av)
 		return (ft_print_help());
 	if (parsing(data, ac, av) != SUCESS)
 		return (1);
-	// data.scene = &sc;
-	// data.objs = &obj;
 	// state = init_display(&data, av[1]);
 	// if (state != SUCESS)
 	// 	return (clean(&data, state));
@@ -59,6 +73,6 @@ int main(int ac, char **av)
 	// if (state != SUCESS)
 	// 	return (clean(&data, state));
 	// hookloop(&data);
-	
+
     return (0);
 }
