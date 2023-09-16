@@ -44,7 +44,7 @@ SRC_FILES	=	main.c
 PARSE_DIR	=	parsing/
 PARSE_FILES	=	add_objs_elems.c infos_elements.c print_struct.c \
 				add_scene_elems.c init_scene.c file_elements.c \
-				parsing.c
+				parsing.c range_check.c
 SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
 
 #utilities

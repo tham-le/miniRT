@@ -55,6 +55,10 @@ int only_digits(char *str);
 char *after_dot(char *elems, int *dot);
 char *before_dot(char *elems, int *dot);
 int is_void(char c);
+int check_ratio(char *flt);
+int check_vector(char *vect);
+int check_fov(char *fov);
+
 //DEBUG
 void print_struct(t_data *data);
 

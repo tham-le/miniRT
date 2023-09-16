@@ -14,7 +14,13 @@ LISTE D'ERREURS PARSING✅❌
 
 -Il manque une ou plusieurs informations pour un element✅
 
--Une ou plusieures infos sont incorrectes❌
-    -Une information ne respecte pas la range imposee ❌
-    -Une information contient une lettre❌
-    - "-"❌
+-Une ou plusieures infos sont incorrectes✅
+    -Une information ne respecte pas la range imposee ✅
+        -color entre 0-255✅
+        -ratio entre 0-1✅
+        -vecteurs entre -1;1✅
+        -fov entre 0-180✅
+        -diametre negatif✅
+    -Une information contient une lettre✅
+
+-tous types d'espaces entre les elements✅

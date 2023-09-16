@@ -1,5 +1,4 @@
 #include "miniRT.h"
-#include <float.h>
 
 int add_ambient(t_data *data, char **elems)
 {
@@ -13,7 +12,7 @@ int add_ambient(t_data *data, char **elems)
         return(ret = write(STDIN_FILENO, ERR_NB_AMBIENT, 41), 6);
     if(ft_tabsize(elems) != 3 || is_void(elems[2][0]))
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
-    if(check_float(elems[1]) || check_color(elems[2]))
+    if(check_ratio(elems[1]) || check_color(elems[2]))
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
     ambient.ratio = ft_atod(elems[1]);
     ambient.color = get_color(elems[2]);
@@ -33,7 +32,7 @@ int add_light(t_data *data, char **elems)
         return(ret = write(STDIN_FILENO, ERR_NB_LIGHT, 33), 6);
     if(ft_tabsize(elems) != 4 || is_void(elems[3][0]))
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
-    if(check_position(elems[1]), check_float(elems[2]) || check_color(elems[3]))
+    if(check_position(elems[1])|| check_ratio(elems[2]) || check_color(elems[3]))
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
     light.position = get_position(elems[1]);
     light.ratio = ft_atod(elems[2]);
@@ -54,7 +53,7 @@ int add_camera(t_data *data, char **elems)
         return(ret = write(STDIN_FILENO, ERR_NB_CAMERA, 34), 6);
     if(ft_tabsize(elems) != 4 || is_void(elems[3][0]))
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
-    if(check_position(elems[1]) || check_position(elems[2]) || only_digits(elems[3]))
+    if(check_position(elems[1]) || check_vector(elems[2]) || check_fov(elems[3]))
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
     camera.position = get_position(elems[1]);
     camera.vector = get_position(elems[2]);
