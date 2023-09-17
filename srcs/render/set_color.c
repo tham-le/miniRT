@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setting.h                                          :+:      :+:    :+:   */
+/*   set_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 17:16:11 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 18:53:04 by thi-le           ###   ########.fr       */
+/*   Created: 2023/09/17 18:16:23 by thi-le            #+#    #+#             */
+/*   Updated: 2023/09/17 18:35:12 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETTING_H
-# define SETTING_H
+#include "miniRT.h"
 
-#include "structs.h"
+int	set_color(t_data *data, int x, int y, int color_int)
+{
+	char *dst;
 
-void	init_setting(t_data *data);
-
-
-
-#endif
+	if (x < 0 || x >= W_WIDTH || y < 0 || y >= W_HEIGHT)
+		return (ERROR);
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color_int;
+	return (SUCESS);
+}

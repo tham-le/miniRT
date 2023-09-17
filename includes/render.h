@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setting.h                                          :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 17:16:11 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 18:53:04 by thi-le           ###   ########.fr       */
+/*   Created: 2023/09/17 18:13:03 by thi-le            #+#    #+#             */
+/*   Updated: 2023/09/17 18:33:44 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETTING_H
-# define SETTING_H
+#ifndef RENDER_H
+# define RENDER_H
 
-#include "structs.h"
+#include "miniRT.h"
 
-void	init_setting(t_data *data);
-
-
+int		ft_draw(t_data *data);
+int		get_rgb(t_color color);
+int		set_color(t_data *data, int x, int y, int color_int);
 
 #endif

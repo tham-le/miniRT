@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/09/17 17:49:05 by thi-le           ###   ########.fr        #
+#    Updated: 2023/09/17 18:41:34 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,11 +40,15 @@ RM			= rm -rf
 
 SRC_FILES	=	main.c
 
-#miniRT
-MINIRT_DIR =
-MINIRT_FILES =
-SRC_FILES += $(addprefix $(MINIRT_DIR), $(MINIRT_FILES))
+#setting
+SETTING_DIR	=	setting/
+SETTING_FILES = init_setting.c
+SRC_FILES	+=	$(addprefix $(SETTING_DIR), $(SETTING_FILES))
 
+#render
+RENDER_DIR	=	render/
+RENDER_FILES = draw.c get_rgb.c set_color.c
+SRC_FILES	+=	$(addprefix $(RENDER_DIR), $(RENDER_FILES))
 
 #hooks
 HOOKS_DIR	=	hook/

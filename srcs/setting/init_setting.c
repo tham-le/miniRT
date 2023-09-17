@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setting.h                                          :+:      :+:    :+:   */
+/*   init_setting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 17:16:11 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 18:53:04 by thi-le           ###   ########.fr       */
+/*   Created: 2023/09/17 18:38:12 by thi-le            #+#    #+#             */
+/*   Updated: 2023/09/17 18:47:53 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SETTING_H
-# define SETTING_H
+#include "miniRT.h"
+#include "setting.h"
 
-#include "structs.h"
+void	init_setting(t_data *data)
+{
+	data->settings.hsize = W_WIDTH;
+	data->settings.vsize = W_HEIGHT;
 
-void	init_setting(t_data *data);
-
-
-
-#endif
+}
