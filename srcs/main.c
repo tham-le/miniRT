@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:08:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 17:47:38 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/17 18:41:43 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,11 @@ int main(int ac, char **av)
 		return (1);
 	state = init_display(&data, av[1]);
 	if (state != SUCESS)
-		return (ret = write(STDERR_FILENO, "err\n", 4), clean(data, state));
-	/*state = draw(data);
+		return (clean(data, state));
+	init_setting(data);
+	state = ft_draw(data);
 	if (state != SUCESS)
-	 	return (ret = write(STDERR_FILENO, "err\n", 4), clean(data, state));*/
+	 	return (clean(data, state));
 	hooks(data);
 	mlx_loop(data->mlx_ptr);
     return (0);
