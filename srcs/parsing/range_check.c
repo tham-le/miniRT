@@ -8,10 +8,7 @@ int check_ratio(char *flt)
         return(1);
     converted_num = ft_atod(flt);
     if(converted_num < 0 || converted_num > 1)
-    {
-        printf("ratio not in range [-1; 1]: %f\n", converted_num);
         return(1);
-    }
     return(0);
 }
 

@@ -58,6 +58,9 @@ int is_void(char c);
 int check_ratio(char *flt);
 int check_vector(char *vect);
 int check_fov(char *fov);
+char *spaces_check(char *line);
+char	*str_concate(char *s, char c);
+char *dup_one(char c);
 
 //DEBUG
 void print_struct(t_data *data);

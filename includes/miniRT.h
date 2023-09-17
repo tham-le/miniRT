@@ -52,5 +52,7 @@
 *	Structures
 */
 
+int draw(t_data **data);
+void hookloop(t_data **data);
 
 #endif

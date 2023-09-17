@@ -35,6 +35,8 @@ int get_type(char *line)
     char **tab;
 
     tab = ft_split(line, ' ');
+    if(!tab)
+        printf("void\n");
     if(!ft_strncmp(tab[0], "A", ft_strlen(tab[0])))
         return(AMBIENT);
     else if(!ft_strncmp(tab[0], "C", ft_strlen(tab[0])))
@@ -55,6 +57,7 @@ int init_and_parse(t_data *data, char **av)
 {
     int file_no;
     char *line;
+    char *sp_line;
     int type;
     (void)type;
 
@@ -65,8 +68,11 @@ int init_and_parse(t_data *data, char **av)
         line = get_next_line(file_no);
         if(!line)
             break;
-        type = get_type(line);
-        if(add_to_struct(data, type, line) > 5)
+        sp_line = spaces_check(line);
+        if(!sp_line)
+            continue;
+        type = get_type(sp_line);
+        if(add_to_struct(data, type, sp_line) > 5)
             return (1);
     }
     return(0);
@@ -74,12 +80,10 @@ int init_and_parse(t_data *data, char **av)
 
 int parsing(t_data *data, int ac, char **av)
 {
-    // ft_bzero(sc, sizeof(t_scene));
-    // ft_bzero(objs, sizeof(t_objs));
     if(parse_input(ac, av))
         return(1);
     if(init_and_parse(data, av))
         return(1);
-    print_struct(data);
+    //print_struct(data);
     return(0);
 }

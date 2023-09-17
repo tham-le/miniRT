@@ -23,8 +23,8 @@
  */
 int		clean(t_data *data, int state)
 {
-	// if (state > 4)
-	// 	free(data)
+	if (state > 4)
+		free(data);
 	if (state > 3)
 		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	if (state > 2)
