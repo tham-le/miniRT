@@ -6,11 +6,12 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:08:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 18:41:43 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/17 21:57:40 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+int	draw(t_data *data);
 
 int	print_error(char *str, int state)
 {
@@ -57,7 +58,7 @@ int main(int ac, char **av)
 	if (state != SUCESS)
 		return (clean(data, state));
 	init_setting(data);
-	state = ft_draw(data);
+	state = draw(data);
 	if (state != SUCESS)
 	 	return (clean(data, state));
 	hooks(data);

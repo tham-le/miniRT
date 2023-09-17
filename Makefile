@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/09/17 18:41:34 by thi-le           ###   ########.fr        #
+#    Updated: 2023/09/17 22:09:18 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,12 +24,12 @@ CC			= cc
 INC			= -I $(INCLUDE) -I$(LIBFT_DIR) -I$(MLX_DIR)\
 			-I/usr/include
 
-OPTI_FLAGS	= -O3
+OPTI_FLAGS	= -O3 -g3
 #OPTI_FLAGS	= -O3 -march=native -flto -ffast-math -fforce-addr -fno-plt
 #THR_FLAGS	= -pthread
 
 
-CFLAGS		= -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC) -g3
+CFLAGS		= -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
 
 LFLAGS		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz\
 			-L$(LIBFT_DIR) -lft
@@ -46,9 +46,10 @@ SETTING_FILES = init_setting.c
 SRC_FILES	+=	$(addprefix $(SETTING_DIR), $(SETTING_FILES))
 
 #render
-RENDER_DIR	=	render/
-RENDER_FILES = draw.c get_rgb.c set_color.c
-SRC_FILES	+=	$(addprefix $(RENDER_DIR), $(RENDER_FILES))
+RENDER_DIR		=	render/
+RENDER_FILES	=	draw.c get_rgb.c set_color.c ray_to_pixel.c\
+				intersect_color.c intersect_sphere.c
+SRC_FILES		+=	$(addprefix $(RENDER_DIR), $(RENDER_FILES))
 
 #hooks
 HOOKS_DIR	=	hook/
@@ -61,6 +62,14 @@ PARSE_FILES	=	add_objs_elems.c infos_elements.c print_struct.c \
 				add_scene_elems.c init_scene.c file_elements.c \
 				parsing.c range_check.c parse_helpers.c
 SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
+
+#math_operations
+MATH_DIR	=	math/
+MATH_FILES	=	vec_add.c vec_dot.c vec_minus.c\
+				vec_scala_multi.c scalar_comp.c vec_cross.c\
+				vec_len.c vec_norm.c
+SRC_FILES	+=	$(addprefix $(MATH_DIR), $(MATH_FILES))
+
 
 #utilities
 UTILS_DIR	=	utils/

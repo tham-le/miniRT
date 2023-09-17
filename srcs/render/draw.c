@@ -6,33 +6,36 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 18:40:56 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/17 21:22:07 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <render.h>
 
-int	ft_draw(t_data *data)
+int	draw(t_data *data)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	t_ray	ray;
+	t_color	color;
 
 	y = 0;
-	printf("hsize: %f, vsize: %f\n", data->settings.hsize, data->settings.vsize);
 	while (y < data->settings.hsize)
 	{
+		if (y % 100 == 0)
+			printf("remaining: %f\n", data->settings.hsize - y);
 		x = 0;
 		while (x < data->settings.vsize)
 		{
-			data->objs->color.r = 255.99 * (double)x / (data->settings.vsize - 1);
-			data->objs->color.g = 255.99 * (double)y / (data->settings.hsize - 1);
-			data->objs->color.b = 0;
-			printf("x: %d, y: %d, r: %d, g: %d, b: %d\n", x, y, data->objs->color.r, data->objs->color.g, data->objs->color.b);
-			set_color(data, x, y, get_rgb(data->objs->color));
+			ray  = ray_to_pixel(data, x, y);
+			color = intersect_color(data, &ray);
+			set_color(data, x, y, get_rgb(ray.color));
 			x++;
 		}
 		y++;
 	}
+	printf("remaining: %f\n", data->settings.hsize - y);
+	printf("done\n");
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (SUCESS);
 }

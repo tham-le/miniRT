@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:31:50 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/15 16:46:53 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/17 20:10:57 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,5 @@
 
 t_vector	vec_add(t_vector *a, t_vector *b)
 {
-	t_vector	c;
-
-	c.x = a->x + b->x;
-	c.y = a->y + b->y;
-	c.z = a->z + b->z;
-	return (c);
+	return ((t_vector){a->x + b->x, a->y + b->y, a->z + b->z});
 }

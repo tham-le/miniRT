@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:43:42 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/15 16:44:00 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/17 20:12:26 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,5 @@
 
 t_vector	vec_scala_multi(t_vector *a, double b)
 {
-	t_vector	c;
-
-	c.x = a->x * b;
-	c.y = a->y * b;
-	c.z = a->z * b;
-	return (c);
+	return ((t_vector){a->x * b, a->y * b, a->z * b});
 }

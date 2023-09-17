@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:44:43 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/15 17:01:00 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/17 20:12:02 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@
 
 double	vec_dot(t_vector *a, t_vector *b)
 {
-	double	c;
-
-	c = a->x * b->x + a->y * b->y + a->z * b->z;
-	return (c);
+	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
 /*
