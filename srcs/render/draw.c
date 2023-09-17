@@ -18,6 +18,7 @@ int	draw(t_data *data)
 	int		y;
 	t_ray	ray;
 	t_color	color;
+	(void)color;
 
 	y = 0;
 	while (y < data->settings.hsize)

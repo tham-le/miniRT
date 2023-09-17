@@ -1,0 +1,7 @@
+EXECUTION MINIRT
+
+-parcourir chaque pixel de l'image
+-creer un rayon par pixel
+-chaque rayon atterit sur un objet (ou non) avec une couleur
+-recuperer la couleur du pixel et la mettre sur l'image
+

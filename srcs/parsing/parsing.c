@@ -35,8 +35,6 @@ int get_type(char *line)
     char **tab;
 
     tab = ft_split(line, ' ');
-    if(!tab)
-        printf("void\n");
     if(!ft_strncmp(tab[0], "A", ft_strlen(tab[0])))
         return(AMBIENT);
     else if(!ft_strncmp(tab[0], "C", ft_strlen(tab[0])))
