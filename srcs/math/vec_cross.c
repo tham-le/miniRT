@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 17:10:50 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/15 17:33:21 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/17 20:11:50 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 t_vector	vec_cross(t_vector *a, t_vector *b)
 {
-	t_vector	c;
-
-	c.x = a->y * b->z - a->z * b->y;
-	c.y = a->z * b->x - a->x * b->z;
-	c.z = a->x * b->y - a->y * b->x;
-	return (c);
+	return ((t_vector){a->y * b->z - a->z * b->y, \
+						a->z * b->x - a->x * b->z, \
+						a->x * b->y - a->y * b->x});
 }
 
 /* c is perpendicular to both a and b, t parallel to each other
