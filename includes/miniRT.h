@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:20:40 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/16 16:14:56 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/17 17:46:48 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@
 #include "utils.h"
 #include "libft.h"
 #include "parsing.h"
+#include "setting.h"
+#include "hook.h"
 
 /*
 *	Structures
 */
 
-int draw(t_data **data);
-void hookloop(t_data **data);
+
 
 #endif

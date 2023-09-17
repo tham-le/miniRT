@@ -6,13 +6,15 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:54:20 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/16 16:46:18 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/17 17:17:16 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+#include <setting.h>
 
 typedef enum e_type{
     AMBIENT,
@@ -85,13 +87,6 @@ typedef struct s_scene
     int nb_light;
     int nb_cam;
 }       		t_scene;
-
-typedef struct	s_settings
-{
-	int			width;
-	int			height;
-	int			render_scale;
-}				t_settings;
 
 typedef struct	s_data
 {
