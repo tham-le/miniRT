@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/09/10 20:02:04 by thi-le           ###   ########.fr        #
+#    Updated: 2023/09/17 17:49:05 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OPTI_FLAGS	= -O3
 #THR_FLAGS	= -pthread
 
 
-CFLAGS		= -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
+CFLAGS		= -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC) -g3
 
 LFLAGS		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz\
 			-L$(LIBFT_DIR) -lft
@@ -41,9 +41,15 @@ RM			= rm -rf
 SRC_FILES	=	main.c
 
 #miniRT
-MINIRT_DIR = miniRT/
-MINIRT_FILES = draw.c
+MINIRT_DIR =
+MINIRT_FILES =
 SRC_FILES += $(addprefix $(MINIRT_DIR), $(MINIRT_FILES))
+
+
+#hooks
+HOOKS_DIR	=	hook/
+HOOKS_FILES	=	hook.c
+SRC_FILES	+=	$(addprefix $(HOOKS_DIR), $(HOOKS_FILES))
 
 #parse
 PARSE_DIR	=	parsing/
@@ -84,19 +90,19 @@ $(MLX):
 $(NAME):	$(MLX) $(LIBFT) $(OBJ) Makefile
 			@${CC}  ${OBJ} ${CFLAGS} ${LFLAGS} -o ${NAME}
 			@echo "$(BLUE)$(NAME) created! -> Project successfully compiled"
-	
+
 -include $(DEP)
 
 bonus:		all
-	
+
 clean:
 			@$(RM) $(OBJ_DIR)
-			@make -C $(LIBFT_DIR) clean 
+			@make -C $(LIBFT_DIR) clean
 			@echo  "$(YELLOW)Object files deleted!$(DEFAULT)"
 
 fclean:		clean
 			@$(RM) $(NAME)
-			@make clean -C $(MLX_DIR) 
+			@make clean -C $(MLX_DIR)
 			@make fclean -C $(LIBFT_DIR)
 			@echo "$(RED)All deleted!$(DEFAULT)"
 
@@ -104,7 +110,7 @@ re:			fclean all
 
 norm:
 			@norminette -R CheckForbiddenSourceHeader \
-			$(SRC) $(INCLUDE) $(LIBFT) 
+			$(SRC) $(INCLUDE) $(LIBFT)
 
 .PHONY:		all clean fclean re norm mlx lib bonus short
 #COLORS
