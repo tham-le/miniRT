@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 17:07:35 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 22:10:02 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/18 23:47:06 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* vec len is  */
 
-double	vec_len(t_vector *a)
+double	vec_len(t_vector a)
 {
-	return (sqrt(a->x * a->x + a->y * a->y + a->z * a->z));
+	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }

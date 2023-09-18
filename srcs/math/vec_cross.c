@@ -6,17 +6,17 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 17:10:50 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 20:11:50 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/18 23:45:31 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 
-t_vector	vec_cross(t_vector *a, t_vector *b)
+t_vector	vec_cross(t_vector a, t_vector b)
 {
-	return ((t_vector){a->y * b->z - a->z * b->y, \
-						a->z * b->x - a->x * b->z, \
-						a->x * b->y - a->y * b->x});
+	return ((t_vector){a.y * b.z - a.z * b.y, \
+						a.z * b.x - a.x * b.z, \
+						a.x * b.y - a.y * b.x});
 }
 
 /* c is perpendicular to both a and b, t parallel to each other

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:08:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 21:57:40 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/18 23:39:16 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int main(int ac, char **av)
 	if (state != SUCESS)
 		return (clean(data, state));
 	init_setting(data);
+	transform(data);
 	state = draw(data);
 	if (state != SUCESS)
 	 	return (clean(data, state));

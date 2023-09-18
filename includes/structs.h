@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:54:20 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 21:19:47 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/19 00:00:22 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ typedef struct	s_settings
 	float			half_width;
 	float			half_height;
 	float			pixel_size;
-	}				t_settings;
+	float			cam_theta;
+	float			cam_phi;
+}				t_settings;
 
 typedef struct	s_data
 {
