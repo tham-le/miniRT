@@ -20,6 +20,7 @@ typedef enum e_type{
     SPHERE,
     CYLINDRE,
     PLAN,
+    TRIANGLE,
 }          t_type;
 
 typedef enum	e_bool

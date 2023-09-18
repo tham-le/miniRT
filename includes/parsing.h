@@ -41,6 +41,7 @@ int add_camera(t_data *data, char **elems);
 int add_a_sphere(t_data *data, char **elems);
 int add_a_cylindre(t_data *data, char **elems);
 int add_a_plan(t_data *data, char **elems);
+int add_a_triangle(t_data *data, char **elems);
 t_vector get_position(char *elems);
 t_color get_color(char *elems);
 int check_position(char *elems);

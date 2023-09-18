@@ -16,6 +16,8 @@ void print_struct(t_data *data)
             printf("CYLINDRE: coord: [%f, %f, %f], vector: [%f, %f, %f], diametre: [%f], height: [%f], color: [%d, %d, %d]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->diametre, obj->height, obj->color.r, obj->color.g, obj->color.b);
         if(obj->type == PLAN)
             printf("PLAN: coord: [%f, %f, %f], vector: [%f, %f, %f], color: [%d, %d, %d]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->color.r, obj->color.g, obj->color.b);
+        if(obj->type == TRIANGLE)
+            printf("TRIANGLE: coord: [%f, %f, %f], vector: [%f, %f, %f], color: [%d, %d, %d]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->color.r, obj->color.g, obj->color.b);
         obj = obj->next;
     }
     printf("AMBIENT: ratio: [%f], rgb: [%d,%d,%d]\n", scene.ambient.ratio, scene.ambient.color.r, scene.ambient.color.g, scene.ambient.color.b);
