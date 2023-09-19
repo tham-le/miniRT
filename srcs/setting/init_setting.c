@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:38:12 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 21:09:06 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/18 23:37:37 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,9 @@ void	init_setting(t_data *data)
 	}
 	data->settings.pixel_size = (data->settings.half_width * 2) / \
 	(double)data->settings.hsize;
+	data->settings.cam_theta = atan2(data->scene.camera.vector.z, \
+								data->scene.camera.vector.x);
+	data->settings.cam_phi = acos(data->scene.camera.vector.y);
+
+
 }

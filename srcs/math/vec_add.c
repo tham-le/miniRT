@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:31:50 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 20:10:57 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/18 23:45:16 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 //  then their sum, C = A + B, is also an m x n matrix,
 //  and its entries are given by the formula cij = aij + bij.
 
-t_vector	vec_add(t_vector *a, t_vector *b)
+t_vector	vec_add(t_vector a, t_vector b)
 {
-	return ((t_vector){a->x + b->x, a->y + b->y, a->z + b->z});
+  return ((t_vector){a.x + b.x, a.y + b.y, a.z + b.z});
 }

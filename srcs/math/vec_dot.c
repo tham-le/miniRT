@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:44:43 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 20:12:02 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/18 23:45:46 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 ** For two vectors →a=⟨a1,...,an⟩ and →b=⟨b1,...,bn⟩ in Rn,
 ** the dot product →a⋅→b is the scalar a1b1+⋯+anbn. */
 
-double	vec_dot(t_vector *a, t_vector *b)
+double	vec_dot(t_vector a, t_vector b)
 {
-	return (a->x * b->x + a->y * b->y + a->z * b->z);
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
 /*

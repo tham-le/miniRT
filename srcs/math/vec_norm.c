@@ -6,18 +6,18 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:13:42 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 22:10:12 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/18 23:47:00 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_vector	vec_norm(t_vector *a)
+t_vector	vec_norm(t_vector a)
 {
 	double	len;
 
 	len = vec_len(a);
-	return ((t_vector){a->x / len, a->y / len, a->z / len});
+	return ((t_vector){a.x / len, a.y / len, a.z / len});
 }
 
 /* Normalizing refers to the process of making something “standard” or, well,
