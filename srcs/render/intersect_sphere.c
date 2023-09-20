@@ -41,7 +41,6 @@ void    intersect_plane(t_ray *ray, t_objs *ob)
 {
     float    t;
 
-    //Pour savoir si le rayon est parallele au plan, on calcule la valeur absolue (fabs) du rayon
     if(fabs(ray->direction.y) < EPSILON)
         return;
     t = -(ray)->origin.y / (ray)->direction.y;
@@ -50,8 +49,19 @@ void    intersect_plane(t_ray *ray, t_objs *ob)
     ray->color = ob->color;
 }
 
-// void    intersect_cylinder(t_ray *ray, t_objs *ob)
-// {
-//     if(fabs(ray->direction.y) < EPSILON)
-//         return;
-// }
+void    intersect_cylinder(t_ray *ray, t_objs *ob)
+{
+    t_vector    oc;
+    double        a;
+    double        b;
+    double        c;
+    double        discriminant;
+
+    oc = vec_minus(ray->origin, ob->position);
+    a = vec_dot(ray->direction, ray->direction);
+    b = 2.0 * vec_dot(oc, ray->direction);
+    c = vec_dot(oc, oc) - ob->diametre * ob->diametre;
+    discriminant = b * b - 4 * a * c;
+    if(discriminant < 0)
+        return;
+}

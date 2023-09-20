@@ -30,6 +30,7 @@ int		set_color(t_data *data, int x, int y, int color_int);
 t_ray	ray_to_pixel(t_data *data, int x, int y);
 t_color	intersect_color(t_data *data, t_ray *ray);
 void	intersect_sphere(t_data *data, t_ray *ray, t_objs *ob);
-
+void    intersect_cylinder(t_ray *ray, t_objs *ob);
+void    intersect_plane(t_ray *ray, t_objs *ob);
 
 #endif

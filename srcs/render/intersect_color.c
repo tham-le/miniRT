@@ -21,12 +21,12 @@ void	intersect_world(t_data	*data, t_ray *ray)
 	{
 		if (obj->type == SPHERE)
 			intersect_sphere(data, ray, obj);
-		// else if (obj->type == PLANE)
-		// 	intersect_plane(data, ray, obj);
+		else if (obj->type == PLANE)
+			intersect_plane(ray, obj);
+		else if (obj->type == CYLINDER)
+			intersect_cylinder(ray, obj);
 		// else if (obj->type == SQUARE)
 		// 	intersect_square(data, ray, obj);
-		// else if (obj->type == CYLINDER)
-		// 	intersect_cylinder(data, ray, obj);
 		// else if (obj->type == TRIANGLE)
 		// 	intersect_triangle(data, ray, obj);
 		obj = obj->next;
