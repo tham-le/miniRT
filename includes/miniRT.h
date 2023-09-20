@@ -18,6 +18,7 @@
 # define SUCESS 0
 # define ERROR 1
 
+# define EPSILON		0.00001
 
 # define W_WIDTH 900
 # define W_HEIGHT 900\

@@ -12,9 +12,9 @@ void print_struct(t_data *data)
     {
         if(obj->type == SPHERE)
             printf("SPHERE: coord: [%f, %f, %f], diametre: [%f], color: [%d, %d, %d]\n", obj->position.x, obj->position.y, obj->position.z, obj->diametre, obj->color.r, obj->color.g, obj->color.b);
-        if(obj->type == CYLINDRE)
+        if(obj->type == CYLINDER)
             printf("CYLINDRE: coord: [%f, %f, %f], vector: [%f, %f, %f], diametre: [%f], height: [%f], color: [%d, %d, %d]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->diametre, obj->height, obj->color.r, obj->color.g, obj->color.b);
-        if(obj->type == PLAN)
+        if(obj->type == PLANE)
             printf("PLAN: coord: [%f, %f, %f], vector: [%f, %f, %f], color: [%d, %d, %d]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->color.r, obj->color.g, obj->color.b);
         if(obj->type == TRIANGLE)
             printf("TRIANGLE: coord: [%f, %f, %f], vector: [%f, %f, %f], color: [%d, %d, %d]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->color.r, obj->color.g, obj->color.b);

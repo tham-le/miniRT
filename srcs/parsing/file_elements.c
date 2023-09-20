@@ -11,9 +11,9 @@ int first_element(char *elem)
     else if(!ft_strncmp(elem, "sp", ft_strlen(elem)))
         return (SPHERE);
     else if(!ft_strncmp(elem, "cy", ft_strlen(elem)))
-        return (CYLINDRE);
+        return (CYLINDER);
     else if(!ft_strncmp(elem, "pl", ft_strlen(elem)))
-        return (PLAN);
+        return (PLANE);
     else if(!ft_strncmp(elem, "tr", ft_strlen(elem)))
         return (TRIANGLE);
     return(-1);
@@ -32,9 +32,9 @@ int add_to_struct(t_data *data, int type, char *line)
         ret = write(STDERR_FILENO, ERR_NAME_ELMT, 31);
     else if(type == SPHERE)
         ret = add_a_sphere(data, elems);
-    else if(type == CYLINDRE)
+    else if(type == CYLINDER)
         ret = add_a_cylindre(data, elems);
-    else if(type == PLAN)
+    else if(type == PLANE)
         ret = add_a_plan(data, elems);
     else if(type == TRIANGLE)
         ret = add_a_triangle(data, elems);

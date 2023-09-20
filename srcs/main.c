@@ -58,7 +58,7 @@ int main(int ac, char **av)
 	if (state != SUCESS)
 		return (clean(data, state));
 	init_setting(data);
-	transform(data);
+	//transform(data);
 	state = draw(data);
 	if (state != SUCESS)
 	 	return (clean(data, state));

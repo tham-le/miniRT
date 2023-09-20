@@ -44,11 +44,13 @@ int get_type(char *line)
     else if(!ft_strncmp(tab[0], "sp", ft_strlen(tab[0])))
         return(SPHERE);
     else if(!ft_strncmp(tab[0], "cy", ft_strlen(tab[0])))
-        return(CYLINDRE);
+        return(CYLINDER);
     else if(!ft_strncmp(tab[0], "pl", ft_strlen(tab[0])))
-        return(PLAN);
+        return(PLANE);
     else if(!ft_strncmp(tab[0], "tr", ft_strlen(tab[0])))
         return(TRIANGLE);
+    else if(!ft_strncmp(tab[0], "#", 1))
+        return(COMMENT);
     else    
         return(-1);
 }
@@ -72,7 +74,7 @@ int init_and_parse(t_data *data, char **av)
         if(!sp_line)
             continue;
         type = get_type(sp_line);
-        if(add_to_struct(data, type, sp_line) > 6)
+        if(add_to_struct(data, type, sp_line) > 7)
             return (1);
     }
     return(0);

@@ -54,7 +54,7 @@ int add_a_cylindre(t_data *data, char **elems)
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
     if(check_position(elems[1]) || check_vector(elems[2]) || check_float(elems[3]) || check_float(elems[3]) || check_color(elems[5]))
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
-    obj->type = CYLINDRE;
+    obj->type = CYLINDER;
     obj->position = get_position(elems[1]);
     obj->vector = get_position(elems[2]);
     obj->diametre = ft_atod(elems[3]);

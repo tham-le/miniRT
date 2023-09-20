@@ -21,7 +21,7 @@ t_ray	ray_to_pixel(t_data *data, int x, int y)
 	ray.direction.y = (1 - 2 * ((y + 0.5) / data->settings.hsize))
 		* data->scene.camera.fov;
 	ray.direction.z = -1;
-	ray.direction = vec_norm(&ray.direction);
+	ray.direction = vec_norm(ray.direction);
 	ray.origin = data->scene.camera.position;
 	return (ray);
 }

@@ -18,9 +18,11 @@ typedef enum e_type{
     CAMERA,
     LIGHT,
     SPHERE,
-    CYLINDRE,
+    PLANE,
+    CYLINDER,
     PLAN,
     TRIANGLE,
+    COMMENT,
 }          t_type;
 
 typedef enum	e_bool
