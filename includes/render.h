@@ -32,5 +32,4 @@ t_color	intersect_color(t_data *data, t_ray *ray);
 void	intersect_sphere(t_data *data, t_ray *ray, t_objs *ob);
 void    intersect_cylinder(t_ray *ray, t_objs *ob);
 void    intersect_plane(t_ray *ray, t_objs *ob);
-
 #endif

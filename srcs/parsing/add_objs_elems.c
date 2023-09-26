@@ -34,6 +34,8 @@ int add_a_sphere(t_data *data, char **elems)
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
     if(check_position(elems[1]) || check_float(elems[2]) || check_color(elems[3]))
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+    if(elems[4])
+        obj->bump_img = elems[4];
     obj->type = SPHERE;
     obj->position = get_position(elems[1]);
     obj->diametre = ft_atod(elems[2]);
@@ -41,6 +43,7 @@ int add_a_sphere(t_data *data, char **elems)
         obj->diametre = 0;
     obj->color = get_color(elems[3]);
     push_object(obj, &data->objs);
+    set_texture(&data->objs, data->mlx_ptr);
     return(0);
 }
 

@@ -65,6 +65,17 @@ typedef struct s_light
     t_color color;
 }           t_light;
 
+typedef struct s_xpm_img{
+
+    void		*img_ptr;
+	char		*addr;
+	int			bpp;
+	int			line;
+	int			endian;
+	int			height;
+	int			width;
+}               t_xpm_img;
+
 typedef struct s_objs
 {
     t_type type;
@@ -75,6 +86,9 @@ typedef struct s_objs
     t_color color;
     t_vector position;
     t_vector vector;
+    char *bump_img;
+    t_xpm_img *surface;
+    t_xpm_img *map;
     struct s_objs *next;
 }               t_objs;
 
@@ -113,6 +127,8 @@ typedef struct	s_data
 	void		*win_ptr;
 	void		*img_ptr;
 	char		*addr;
+	int			height;
+	int			width;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;

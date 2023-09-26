@@ -48,6 +48,7 @@ SRC_FILES	+=	$(addprefix $(SETTING_DIR), $(SETTING_FILES))
 #render
 RENDER_DIR		=	render/
 RENDER_FILES	=	draw.c get_rgb.c set_color.c ray_to_pixel.c\
+					render_texture.c\
 				intersect_color.c intersect_sphere.c
 SRC_FILES		+=	$(addprefix $(RENDER_DIR), $(RENDER_FILES))
 
@@ -60,7 +61,8 @@ SRC_FILES	+=	$(addprefix $(HOOKS_DIR), $(HOOKS_FILES))
 PARSE_DIR	=	parsing/
 PARSE_FILES	=	add_objs_elems.c infos_elements.c print_struct.c \
 				add_scene_elems.c init_scene.c file_elements.c \
-				parsing.c range_check.c parse_helpers.c
+				parsing.c range_check.c parse_helpers.c \
+				set_texture.c 
 SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
 
 #math_operations

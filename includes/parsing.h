@@ -62,6 +62,8 @@ int check_fov(char *fov);
 char *spaces_check(char *line);
 char	*str_concate(char *s, char c);
 char *dup_one(char c);
+void set_texture(t_objs **obj, void *mlx_ptr);
+t_xpm_img *load_img(char *bmp_img, void *mlx_ptr);
 
 //DEBUG
 void print_struct(t_data *data);
