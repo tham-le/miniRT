@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:16:23 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 18:35:12 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/29 18:12:53 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	set_color(t_data *data, int x, int y, int color_int)
 {
 	char *dst;
 
-	if (x < 0 || x >= W_WIDTH || y < 0 || y >= W_HEIGHT)
+	if (x < 0 || x >= W_W || y < 0 || y >= W_H)
 		return (ERROR);
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color_int;
+	*(unsigned int *)dst = color_int;
 	return (SUCESS);
 }

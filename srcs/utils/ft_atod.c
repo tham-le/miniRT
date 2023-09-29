@@ -6,13 +6,14 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:41:05 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/09 18:57:28 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/29 17:58:48 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "stdbool.h"
 
-static t_bool	ft_iswhite(char c)
+static bool	ft_iswhite(char c)
 {
 	if (c == '\n' || c == ' ' || c == '\f' || c == '\t' || c == '\v'
 		|| c == '\r')
@@ -20,7 +21,7 @@ static t_bool	ft_iswhite(char c)
 	return (false);
 }
 
-double			ft_atod(const char *str)
+double		ft_atod(const char *str)
 {
 	double			nb;
 	double			part;

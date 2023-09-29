@@ -2,8 +2,11 @@
 
 void set_texture(t_objs **obj, void *mlx_ptr)
 {
-    if((*obj)->bump_img)
-        (*obj)->surface = load_img((*obj)->bump_img, mlx_ptr);
+	(void)obj;
+	(void)mlx_ptr;
+	return;
+    // if((*obj)->bump_img)
+    //     (*obj)->surface = load_img((*obj)->bump_img, mlx_ptr);
 }
 
 t_xpm_img *load_img(char *bmp_img, void *mlx_ptr)

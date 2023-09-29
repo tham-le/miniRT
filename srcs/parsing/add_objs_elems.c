@@ -40,7 +40,9 @@ int add_a_sphere(t_data *data, char **elems)
     obj->position = get_position(elems[1]);
     obj->diametre = ft_atod(elems[2]);
     if(obj->diametre < 0)
-        obj->diametre = 0;
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+    obj->radius = obj->diametre / 2;
+    obj->squared_radius = obj->radius * obj->radius;
     obj->color = get_color(elems[3]);
     push_object(obj, &data->objs);
     set_texture(&data->objs, data->mlx_ptr);

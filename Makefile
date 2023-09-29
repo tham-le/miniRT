@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/09/17 22:09:18 by thi-le           ###   ########.fr        #
+#    Updated: 2023/09/29 18:23:38 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,13 @@ SRC_DIR		= srcs/
 OBJ_DIR		= objs/
 CC			= cc
 INC			= -I $(INCLUDE) -I$(LIBFT_DIR) -I$(MLX_DIR)\
-			-I/usr/include
 
-OPTI_FLAGS	= -O3 -g3
+OPTI_FLAGS	= -O3
 #OPTI_FLAGS	= -O3 -march=native -flto -ffast-math -fforce-addr -fno-plt
 #THR_FLAGS	= -pthread
 
 
-CFLAGS		= -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
+CFLAGS		= -Werror -Wextra -Wall  -g3 $(OPTI_FLAGS) $(INC)
 
 LFLAGS		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz\
 			-L$(LIBFT_DIR) -lft
@@ -42,14 +41,14 @@ SRC_FILES	=	main.c
 
 #setting
 SETTING_DIR	=	setting/
-SETTING_FILES = init_setting.c
+SETTING_FILES = init_setting.c camera_setting.c
 SRC_FILES	+=	$(addprefix $(SETTING_DIR), $(SETTING_FILES))
 
 #render
 RENDER_DIR		=	render/
-RENDER_FILES	=	draw.c get_rgb.c set_color.c ray_to_pixel.c\
-					render_texture.c\
-				intersect_color.c intersect_sphere.c
+RENDER_FILES	=	transform.c  fill_pixel.c  \
+					intersect_sphere.c  render.c \
+					camera.c	get_rgb.c ray_to_pixel.c  set_color.c
 SRC_FILES		+=	$(addprefix $(RENDER_DIR), $(RENDER_FILES))
 
 #hooks
@@ -67,15 +66,16 @@ SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
 
 #math_operations
 MATH_DIR	=	math/
-MATH_FILES	=	vec_add.c vec_dot.c vec_minus.c\
-				vec_scala_multi.c scalar_comp.c vec_cross.c\
-				vec_len.c vec_norm.c
+MATH_FILES	=	mat_operation1.c mat_operation2.c mat_operation3.c\
+				mat_transform.c \
+				vec_operation1.c vec_operation2.c
 SRC_FILES	+=	$(addprefix $(MATH_DIR), $(MATH_FILES))
 
 
 #utilities
 UTILS_DIR	=	utils/
-UTILS_FILES	=	ft_atod.c ft_lstadd_back.c clean.c print_help.c ft_tabsize.c
+UTILS_FILES	=	ft_atod.c ft_lstadd_back.c clean.c print_help.c ft_tabsize.c\
+				color_operation.c
 SRC_FILES	+=	$(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 
@@ -102,7 +102,7 @@ $(MLX):
 			@make -s -C $(MLX_DIR)
 			@echo "$(GREEN)Mlx created!$(DEFAULT)"
 
-$(NAME):	$(MLX) $(LIBFT) $(OBJ) Makefile
+$(NAME):	$(MLX) $(LIBFT) $(OBJ) Makefile 
 			@${CC}  ${OBJ} ${CFLAGS} ${LFLAGS} -o ${NAME}
 			@echo "$(BLUE)$(NAME) created! -> Project successfully compiled"
 

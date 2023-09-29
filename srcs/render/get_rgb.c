@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 23:27:32 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 18:32:25 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/09/25 16:33:53 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	get_rgb(t_color color)
 {
-    return(0 << 24 | color.r << 16 | color.g << 8 | color.b);
+	color.r = color.r;
+	color.g = color.g;
+	color.b = color.b;
+	return (0 << 24 | color.r << 16 | color.g << 8 | color.b);
 }
-
-
