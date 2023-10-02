@@ -64,7 +64,7 @@ int init_and_parse(t_data *data, char **av)
     (void)type;
 
     file_no = open(av[1], O_RDONLY);
-    init_scene(data);
+    // init_scene(data);
     while(1)
     {
         line = get_next_line(file_no);
@@ -74,7 +74,7 @@ int init_and_parse(t_data *data, char **av)
         if(!sp_line)
             continue;
         type = get_type(sp_line);
-        if(add_to_struct(data, type, sp_line) > 7)
+        if(add_to_struct(data, type, sp_line) > 0)
             return (1);
     }
     return(0);

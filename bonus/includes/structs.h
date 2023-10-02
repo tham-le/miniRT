@@ -77,6 +77,7 @@ typedef struct s_light
 	t_mat4		rotat;
 	t_vector	rot_trans;
 	double		theta;
+	struct s_light	*next;
 }		   t_light;
 
 typedef struct s_xpm_img{
@@ -123,7 +124,7 @@ typedef struct s_objs
 typedef struct s_scene
 {
 	t_ambient	ambient;
-	t_light		light;
+	t_light		*light;
 	t_camera	camera;
 	int nb_amb;
 	int nb_light;

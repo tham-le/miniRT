@@ -4,7 +4,7 @@
 void init_scene(t_data *data)
 {
     init_sc_ambient(data->scene.ambient);
-    init_sc_light(data->scene.light);
+    init_sc_light(*data->scene.light);
     init_sc_camera(data->scene.camera);
 }
 

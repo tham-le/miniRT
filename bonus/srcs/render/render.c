@@ -235,7 +235,7 @@ bool	get_specular_and_diffuse(t_data * data,
 	//double		spotlight_angle;
 
 	//spotlight_angle = 0;
-	sub_vec(&light_v, &data->scene.light.position, &itx->over_point);
+	sub_vec(&light_v, &data->scene.light->position, &itx->over_point);
 	normalize_vec(&light_v);
 	itx->normal.w = 0;
 	light_dot_normal = dot_product(&light_v, &itx->normal);
@@ -244,14 +244,14 @@ bool	get_specular_and_diffuse(t_data * data,
 	if (light_dot_normal < 0)
 		return (false);
 	mult_color(&phong->diffuse, &phong->effective_color, light_dot_normal
-		* itx->obj->diffuse * data->scene.light.ratio);
+		* itx->obj->diffuse * data->scene.light->ratio);
 
 	// if (scene->lights[light_idx].type == SPOT
 	// 	&& acos(spotlight_angle) > scene->lights[light_idx].theta * 0.9 / 4)
 	// 	mult_color(&phong->diffuse, &phong->diffuse, 0.8);
 	negate_vec(&light_v, &light_v);
 	reflect_vector(&reflect_v, &light_v, &itx->normal);
-	calculate_specular(&reflect_v, itx, phong, &data->scene.light);
+	calculate_specular(&reflect_v, itx, phong, data->scene.light);
 	return (true);
 }
 
@@ -262,14 +262,14 @@ t_color	shading(t_intersect *itx,	t_data *data)
 	t_color			result;
 	t_color			shape_color;
 	const double	light_dist = vec_distance(&itx->point,\
-	&data->scene.light.position);
-	const double	attenuation = (100 * data->scene.light.ratio\
-	- light_dist) / (100 * data->scene.light.ratio - 1);
+	&data->scene.light->position);
+	const double	attenuation = (100 * data->scene.light->ratio\
+	- light_dist) / (100 * data->scene.light->ratio - 1);
 
 
 	shape_color = itx->obj->color;
 	blend_colors(&phong.effective_color, &shape_color,
-		&data->scene.light.color);
+		&data->scene.light->color);
 	if (get_specular_and_diffuse(data, itx, &phong) == false)
 		return (get_ambient(&data->scene, shape_color));
 	result = get_ambient(&data->scene, shape_color);

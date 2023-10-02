@@ -9,11 +9,11 @@ int add_ambient(t_data *data, char **elems)
     ft_bzero(&ambient, sizeof(t_ambient));
     data->scene.nb_amb++;
     if(data->scene.nb_amb > 1)
-        return(ret = write(STDIN_FILENO, ERR_NB_AMBIENT, 41), 6);
+        return(ret = write(STDIN_FILENO, ERR_NB_AMBIENT, 41), 1);
     if(ft_tabsize(elems) != 3 || is_void(elems[2][0]))
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     if(check_ratio(elems[1]) || check_color(elems[2]))
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     ambient.ratio = ft_atod(elems[1]);
     ambient.color = get_color(elems[2]);
     data->scene.ambient = ambient;
@@ -22,22 +22,22 @@ int add_ambient(t_data *data, char **elems)
 
 int add_light(t_data *data, char **elems)
 {
-    t_light light;
+    t_light *light2;
     int ret;
     (void)ret;
 
-    ft_bzero(&light, sizeof(t_light));
+    light2 = ft_calloc(sizeof(t_light), 1);
     data->scene.nb_light++;
-    if(data->scene.nb_light > 1)
-        return(ret = write(STDIN_FILENO, ERR_NB_LIGHT, 33), 6);
+    // if(data->scene.nb_light > 1)
+    //     return(ret = write(STDIN_FILENO, ERR_NB_LIGHT, 33), 6);
     if(ft_tabsize(elems) != 4 || is_void(elems[3][0]))
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     if(check_position(elems[1])|| check_ratio(elems[2]) || check_color(elems[3]))
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
-    light.position = get_position(elems[1]);
-    light.ratio = ft_atod(elems[2]);
-    light.color = get_color(elems[3]);
-    data->scene.light = light;
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
+    light2->position = get_position(elems[1]);
+    light2->ratio = ft_atod(elems[2]);
+    light2->color = get_color(elems[3]);
+    push_light(light2, &data->scene.light);
     return(0);
 }
 
@@ -50,11 +50,11 @@ int add_camera(t_data *data, char **elems)
     ft_bzero(&camera, sizeof(t_camera));
     data->scene.nb_cam++;
     if(data->scene.nb_cam > 1)
-        return(ret = write(STDIN_FILENO, ERR_NB_CAMERA, 34), 6);
+        return(ret = write(STDIN_FILENO, ERR_NB_CAMERA, 34), 1);
     if(ft_tabsize(elems) != 4 || is_void(elems[3][0]))
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     if(check_position(elems[1]) || check_vector(elems[2]) || check_fov(elems[3]))
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 6);
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     camera.position = get_position(elems[1]);
     camera.vector = get_position(elems[2]);
     camera.fov = ft_atoi(elems[3]) * DEG_2_RAD;

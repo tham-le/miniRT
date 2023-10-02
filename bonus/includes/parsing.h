@@ -65,6 +65,7 @@ char		*str_concate(char *s, char c);
 char		*dup_one(char c);
 void		set_texture(t_objs **obj, void *mlx_ptr);
 t_xpm_img	*load_img(char *bmp_img, void *mlx_ptr);
+void	push_light(t_light *obj, t_light **objs);
 
 //DEBUG
 void		print_struct(t_data *data);
