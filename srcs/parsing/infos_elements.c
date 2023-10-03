@@ -72,13 +72,16 @@ int check_float(char *elems)
     if(nb_dots(elems) > 1)
         return (1);
     if(only_digits(bef_dot) || only_digits(aft_dot))
-        return(1);
+        return(free(bef_dot), free(aft_dot), 1);
+    free(bef_dot);
+    free(aft_dot);
     return(0);
 }
 
 int check_position(char *elems)
 {
     char **position;
+
     int ret;
     (void)ret;
 
@@ -86,7 +89,8 @@ int check_position(char *elems)
     if(!position)
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
     if(check_float(position[0]) || check_float(position[1]) || check_float(position[2]))
-        return(1);
+        return(ft_freearr(position), 1);
+    ft_freearr(position);
     return(0);
 }
 
@@ -99,6 +103,7 @@ t_vector get_position(char *elems)
     vec_pos.x = ft_atod(position[0]);
     vec_pos.y = ft_atod(position[1]);
     vec_pos.z = ft_atod(position[2]);
+    ft_freearr(position);
     return(vec_pos);
 }
 
@@ -118,9 +123,10 @@ int check_color(char *elems)
     if(!color)
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
     if(only_digits(color[0]) || only_digits(color[1]) || only_digits(color[2]))
-        return(1);
+        return(ft_freearr(color), 1);
     if(col_r < 0 || col_r > 255 || col_g < 0 || col_g > 255 || col_b < 0 || col_b > 255)
-        return(1);
+        return(ft_freearr(color), 1);
+    ft_freearr(color);
     return(0);
 }
 

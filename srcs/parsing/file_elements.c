@@ -44,5 +44,6 @@ int add_to_struct(t_data *data, int type, char *line)
         ret = add_light(data, elems);
     else if(type == CAMERA)
         ret = add_camera(data, elems);
+    ft_freearr(elems);
     return(ret);
 }

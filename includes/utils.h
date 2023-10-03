@@ -25,7 +25,7 @@ void	add_colors(t_color *res, const t_color *c1, const t_color *c2);
 void	mult_color(t_color *res, const t_color *color, double val);
 void	sub_colors(t_color *res, const t_color *c1, const t_color *c2);
 void	blend_colors(t_color *res, const t_color *c1, const t_color *c2);
-
+void	ft_freearr(char **tab);
 
 
 #endif

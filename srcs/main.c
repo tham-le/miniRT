@@ -46,9 +46,9 @@ int	main(int ac, char **av)
 
 	data = ft_calloc(sizeof(t_data), 1);
 	if (ac != 2)
-		return (ft_print_help());
+		return (free(data), ft_print_help());
 	if (parsing(data, ac, av) != SUCESS)
-		return (1);
+		return (free(data), 1);
 	print_struct(data);
 	state = init_display(&data, av[1]);
 	if (state != SUCESS)
