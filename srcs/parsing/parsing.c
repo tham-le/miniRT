@@ -97,6 +97,5 @@ int parsing(t_data *data, int ac, char **av)
         return(1);
     if(init_and_parse(data, av))
         return(1);
-    //print_struct(data);
     return(0);
 }
