@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:03:31 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/29 17:57:15 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/04 20:49:06 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef enum e_type{
 
 typedef struct s_color
 {
-	int r;
-	int g;
-	int b;
+	double	r;
+	double	g;
+	double	b;
 }			  t_color;
 
 typedef struct s_vector

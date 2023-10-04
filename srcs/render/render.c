@@ -6,13 +6,14 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/29 18:24:57 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/04 19:54:57 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 #include "miniRT.h"
 #include "structs.h"
+#include <stdio.h>
 
 void	intersect(t_ray	*ray, t_objs *obj, t_intersect_list *arr)
 {
@@ -123,6 +124,7 @@ void	pre_computations(t_intersect *intersection,
 {
 	ray_position(&intersection->point, ray, intersection->t);
 	intersection->normal = normal_at(intersection->obj, &intersection->point);
+	
 	negate_vec(&intersection->eye, &ray->direction);
 	intersection->eye.w = 0;
 	intersection->inside = false;
@@ -221,9 +223,59 @@ t_color	get_ambient(t_scene *scene, t_color patter_color)
 	t_color	ambient;
 
 	mult_color(&ambient, &patter_color,
-		scene->ambient.ratio);
+		2 * scene->ambient.ratio);
 	blend_colors(&ambient, &ambient, &scene->ambient.color);
 	return (ambient);
+}
+
+// bool	check_spotlight(t_data *data, t_ray *ray,
+// 			double *angle)
+// {
+// 	if (scene->lights[light_idx].type == SPOT)
+// 	{
+// 		*angle = (dot_product(&ray->dir, &scene->lights[light_idx].direction));
+// 		if (*angle < 0)
+// 			return (true);
+// 		if (*angle >= -1 && *angle <= 1)
+// 		{
+// 			*angle = acos(*angle);
+// 			if (*angle > (scene->lights[light_idx].theta / 4))
+// 				return (true);
+// 		}
+// 	}
+// 	return (false);
+// }
+
+bool	is_shadowed(t_data	*data, t_vector *itx_point,
+			double *angle)
+{
+	double				distance;
+	int					i;
+	t_ray				ray;
+	t_intersect_list	arr;
+	t_intersect			*itx;
+	t_objs				*obj;
+
+	(void)angle;
+
+	sub_vec(&ray.direction, &data->scene.light->position, itx_point);
+	distance = vec_magnitude(&ray.direction);
+	scale_vec(&ray.direction, &ray.direction, 1 / distance);
+	ray.origin = *itx_point;
+	// if (check_spotlight(data, &ray, angle) == true)
+	// 	return (true);
+	i = -1;
+	arr.count = 0;
+	obj = data->objs;
+	while (obj)
+	{
+		intersect(&ray, obj, &arr);
+		obj = obj->next;
+	}
+	itx = hit(&arr);
+	if (itx && itx->t < distance)
+		return (true);
+	return (false);
 }
 
 bool	get_specular_and_diffuse(t_data * data,
@@ -232,21 +284,20 @@ bool	get_specular_and_diffuse(t_data * data,
 	double		light_dot_normal;
 	t_vector	light_v;
 	t_vector	reflect_v;
-	//double		spotlight_angle;
+	double		spotlight_angle;
 
-	//spotlight_angle = 0;
+	spotlight_angle = 0;
 	sub_vec(&light_v, &data->scene.light->position, &itx->over_point);
 	normalize_vec(&light_v);
 	itx->normal.w = 0;
 	light_dot_normal = dot_product(&light_v, &itx->normal);
-	//|| is_shadowed(scene, light_idx, &itx->over_point,
-	//		&spotlight_angle
-	if (light_dot_normal < 0)
+	if (light_dot_normal < 0 || is_shadowed(data, &itx->over_point,
+			&spotlight_angle))
 		return (false);
 	mult_color(&phong->diffuse, &phong->effective_color, light_dot_normal
 		* itx->obj->diffuse * data->scene.light->ratio);
-
-	// if (scene->lights[light_idx].type == SPOT
+	// printf("phong->diffuse: %f %f %f\n", phong->diffuse.r, phong->diffuse.g, phong->diffuse.b);
+		// if (scene->lights[light_idx].type == SPOT
 	// 	&& acos(spotlight_angle) > scene->lights[light_idx].theta * 0.9 / 4)
 	// 	mult_color(&phong->diffuse, &phong->diffuse, 0.8);
 	negate_vec(&light_v, &light_v);
@@ -254,6 +305,35 @@ bool	get_specular_and_diffuse(t_data * data,
 	calculate_specular(&reflect_v, itx, phong, data->scene.light);
 	return (true);
 }
+
+// t_color	cast_reflection_ray(t_scene *scene, t_intersect *intersection,
+// 		int remaining, int light_idx)
+// {
+// 	t_ray				ray;
+// 	t_intersect_list	arr;
+// 	int					shape_idx;
+// 	t_color			reflected;
+// 	t_intersect	*itx;
+
+// 	ft_bzero(&reflected, sizeof(t_color));
+// 	if (intersection->obj->reflective == 0 || remaining == 0)
+// 		return (reflected);
+// 	ray.origin = intersection->over_point;
+// 	ray.direction = intersection->reflect_vec;
+// 	arr.count = 0;
+// 	shape_idx = -1;
+// 	while (++shape_idx < scene->count.shapes)
+// 		intersect(&scene->shapes[shape_idx], &ray, &arr);
+// 	itx = hit(&arr);
+// 	if (itx != NULL)
+// 	{
+// 		prepare_computations(itx, &ray);
+// 		reflected = reflection_color(itx, scene, remaining, light_idx);
+// 	}
+// 	mult_color(&reflected, &reflected,
+// 		intersection->shape->props.reflectiveness);
+// 	return (reflected);
+// }
 
 
 t_color	shading(t_intersect *itx,	t_data *data)
@@ -263,9 +343,8 @@ t_color	shading(t_intersect *itx,	t_data *data)
 	t_color			shape_color;
 	const double	light_dist = vec_distance(&itx->point,\
 	&data->scene.light->position);
-	const double	attenuation = (100 * data->scene.light->ratio\
-	- light_dist) / (100 * data->scene.light->ratio - 1);
-
+	const double	attenuation = (100 * 2 * data->scene.light->ratio\
+	- light_dist) / (100 * 2 * data->scene.light->ratio - 1);
 
 	shape_color = itx->obj->color;
 	blend_colors(&phong.effective_color, &shape_color,
@@ -274,16 +353,22 @@ t_color	shading(t_intersect *itx,	t_data *data)
 		return (get_ambient(&data->scene, shape_color));
 	result = get_ambient(&data->scene, shape_color);
 	if (attenuation < 0)
+	{
+		printf("attenuation: %f\n", attenuation);
 		return (result);
+	}
 	else if (attenuation > 0 && attenuation <= 1)
 	{
 		mult_color(&phong.diffuse, &phong.diffuse, attenuation);
 		mult_color(&phong.specular, &phong.specular, attenuation);
+		// printf("phong.diffuse: %f %f %f\n", phong.diffuse.r, phong.diffuse.g, phong.diffuse.b);
 	}
+	
 	result.r += phong.diffuse.r + phong.specular.r;
 	result.g += phong.diffuse.g + phong.specular.g;
 	result.b += phong.diffuse.b + phong.specular.b;
-	return (result);
+	//printf("result: %f %f %f\n", result.r, result.g, result.b);
+ 	return (result);
 }
 
 t_color	shade( t_data *data,t_intersect_list *arr, t_ray *ray)
@@ -292,26 +377,18 @@ t_color	shade( t_data *data,t_intersect_list *arr, t_ray *ray)
 	// int				light_idx;
 	t_color			final_color;
 	t_color			surface_color;
-	// t_color			reflected;
+	//t_color			reflected;
 
-	(void)data;
-	(void)ray;
 	itx = hit(arr);
 	ft_bzero(&final_color, sizeof(t_color));
-	ft_bzero(&surface_color, sizeof(t_color));
+	//ft_bzero(&reflected, sizeof(t_color));
 	if (itx != NULL)
 	{
 		pre_computations(itx, ray);
-		add_colors(&final_color, &final_color, &itx->obj->color);
 		surface_color = shading(itx, data);
-		// reflected = cast_reflection_ray(scene, itx,
-		// 		s_->settings.reflection_depth, light_idx);
 		add_colors(&final_color, &final_color, &surface_color);
-		// add_colors(&final_color, &final_color, &reflected);
-		// light_idx++;
+		//add_colors(&final_color, &final_color, &reflected);
 	}
-	else
-		final_color = data->scene.ambient.color;
 	return (final_color);
 }
 
@@ -330,21 +407,8 @@ void	render_ray(t_data *data, t_intersect_list *arr, int x, int y)
 		intersect(&ray, obj, arr);
 		obj = obj->next;
 	}
-	if (arr->count == 0)
-		color = data->scene.ambient.color;
-	else
-		color = data->objs->color;
-	//color = shade(data, arr, &ray);
+	color = shade(data, arr, &ray);
 	set_color(data, x, y, get_rgb(color));
-}
-
-void	default_objs(t_objs *obj)
-{
-	obj->diffuse = 0.9;
-	obj->highlighted = true;
-	obj->reflective= 0.2;
-	obj->shininess = 50;
-	obj->specular = 0.8;
 }
 
 int	render(t_data *data)
@@ -357,9 +421,12 @@ int	render(t_data *data)
 	while (++y < W_H)
 	{
 		x = -1;
+		if (y % (100) == 0)
+			printf("Rendering %d%%\n", (int)((y / (double)W_H) * 100));
 		while (++x < W_W)
 			render_ray(data, &arr, x, y);
 	}
+	printf("Rendering 100%%\n");
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (SUCESS);
 }

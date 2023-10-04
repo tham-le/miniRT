@@ -117,9 +117,9 @@ int check_color(char *elems)
     (void)ret;
 
     color = ft_split(elems, ',');
-    col_r = ft_atoi(color[0]);
-    col_g = ft_atoi(color[1]);
-    col_b = ft_atoi(color[2]);
+    col_r = ft_atod(color[0]);
+    col_g = ft_atod(color[1]);
+    col_b = ft_atod(color[2]);
     if(!color)
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
     if(only_digits(color[0]) || only_digits(color[1]) || only_digits(color[2]))
@@ -136,8 +136,8 @@ t_color get_color(char *elems)
     t_color vec_col;
 
     color = ft_split(elems, ',');
-    vec_col.r = ft_atoi(color[0]);
-    vec_col.g = ft_atoi(color[1]);
-    vec_col.b = ft_atoi(color[2]);
+    vec_col.r = ft_atod(color[0])/ 255.f;
+    vec_col.g = ft_atod(color[1]) / 255.f;
+    vec_col.b = ft_atod(color[2]) / 255.f;
     return(vec_col);
 }
