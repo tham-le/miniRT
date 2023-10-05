@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/09/29 18:23:38 by thi-le           ###   ########.fr        #
+#    Updated: 2023/10/05 11:41:34 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ SRC_FILES	+=	$(addprefix $(MATH_DIR), $(MATH_FILES))
 #utilities
 UTILS_DIR	=	utils/
 UTILS_FILES	=	ft_atod.c ft_lstadd_back.c clean.c print_help.c ft_tabsize.c\
-				color_operation.c
+				color_operation.c init_obj_value.c
 SRC_FILES	+=	$(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 

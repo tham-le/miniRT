@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calcul_transform.c                                 :+:      :+:    :+:   */
+/*   transform.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:17:55 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/22 17:00:09 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/05 19:01:23 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "mathRT.h"
 #include "miniRT.h"
+#include "structs.h"
 
 void	multiply_transforms(t_objs *obj, t_mat4 *scale, t_mat4 *rot,
 	t_mat4 *translate)
@@ -38,7 +40,7 @@ void	object_transform(t_objs *obj)
 	t_mat4	rot;
 	t_mat4	translate;
 
-	obj->scale = (t_vector){0.7, 0.7, 0.7, 1};
+	obj->scale = (t_vector){obj->radius, obj->radius, obj->radius, 1};
 	identity_matrix(&obj->transf);
 	identity_matrix(&scale);
 	identity_matrix(&rot);
@@ -65,6 +67,7 @@ void	object_transform(t_objs *obj)
 void	calcul_transform(t_data	*data)
 {
 	t_objs	*obj;
+	t_light	*light;
 
 	camera_transform(&data->scene);
 	obj = data->objs;
@@ -73,6 +76,11 @@ void	calcul_transform(t_data	*data)
 		object_transform(obj);
 		obj = obj->next;
 	}
-	// mat_vec_multiply(data->scene.light.direction, &data->scene.camera.inv_transf,
-	// 	data->scene.light.dir);
+	light = data->scene.light;
+	while (light)
+	{
+		mat_vec_multiply(&light->dir, &light->added_rots, &light->dir);
+		light = light->next;
+	}
+
 }

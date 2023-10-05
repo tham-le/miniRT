@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_color.c                                        :+:      :+:    :+:   */
+/*   init_obj_value.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 18:16:23 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/05 12:02:41 by thi-le           ###   ########.fr       */
+/*   Created: 2023/10/05 11:40:22 by thi-le            #+#    #+#             */
+/*   Updated: 2023/10/05 17:02:34 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	set_color(t_data *data, int x, int y, int color_int)
+void	init_obj_value(t_objs	*obj)
 {
-	char	*dst;
-
-	if (x < 0 || x >= W_W || y < 0 || y >= W_H)
-		return (ERROR);
-	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
-	*(unsigned int *)dst = color_int;
-	return (SUCESS);
+	obj->diffuse = 0.9;
+	obj->highlighted = true;
+	obj->reflective= 0.5;
+	obj->shininess = 50;
+	obj->specular = 0.8;
+	identity_matrix(&obj->added_rots);
 }
