@@ -86,8 +86,8 @@ int check_position(char *elems)
     (void)ret;
 
     position = ft_split(elems, ',');
-    if(!position)
-        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
+    if(!position || !position[2])
+        return(1);
     if(check_float(position[0]) || check_float(position[1]) || check_float(position[2]))
         return(ft_freearr(position), 1);
     ft_freearr(position);
