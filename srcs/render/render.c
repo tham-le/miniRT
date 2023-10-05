@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/04 19:54:57 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/05 19:05:51 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "miniRT.h"
 #include "structs.h"
 #include <stdio.h>
+
+t_color	shading(t_intersect *itx,	t_data *data, t_light *light);
+
+
+t_color	cast_reflection_ray(t_data	*data, t_intersect *intersection,
+		int reflection_depth, t_light	*light);
 
 void	intersect(t_ray	*ray, t_objs *obj, t_intersect_list *arr)
 {
@@ -246,11 +252,10 @@ t_color	get_ambient(t_scene *scene, t_color patter_color)
 // 	return (false);
 // }
 
-bool	is_shadowed(t_data	*data, t_vector *itx_point,
+bool	is_shadowed(t_data	*data, t_light *light, t_vector *itx_point, 
 			double *angle)
 {
 	double				distance;
-	int					i;
 	t_ray				ray;
 	t_intersect_list	arr;
 	t_intersect			*itx;
@@ -258,13 +263,12 @@ bool	is_shadowed(t_data	*data, t_vector *itx_point,
 
 	(void)angle;
 
-	sub_vec(&ray.direction, &data->scene.light->position, itx_point);
+	sub_vec(&ray.direction, &light->position, itx_point);
 	distance = vec_magnitude(&ray.direction);
 	scale_vec(&ray.direction, &ray.direction, 1 / distance);
 	ray.origin = *itx_point;
 	// if (check_spotlight(data, &ray, angle) == true)
 	// 	return (true);
-	i = -1;
 	arr.count = 0;
 	obj = data->objs;
 	while (obj)
@@ -278,7 +282,7 @@ bool	is_shadowed(t_data	*data, t_vector *itx_point,
 	return (false);
 }
 
-bool	get_specular_and_diffuse(t_data * data,
+bool	get_specular_and_diffuse(t_data * data, t_light *light,
 	t_intersect *itx, t_phong *phong)
 {
 	double		light_dot_normal;
@@ -287,107 +291,126 @@ bool	get_specular_and_diffuse(t_data * data,
 	double		spotlight_angle;
 
 	spotlight_angle = 0;
-	sub_vec(&light_v, &data->scene.light->position, &itx->over_point);
+	sub_vec(&light_v, &light->position, &itx->over_point);
 	normalize_vec(&light_v);
 	itx->normal.w = 0;
 	light_dot_normal = dot_product(&light_v, &itx->normal);
-	if (light_dot_normal < 0 || is_shadowed(data, &itx->over_point,
+	if (light_dot_normal < 0 || is_shadowed(data, light, &itx->over_point,
 			&spotlight_angle))
 		return (false);
 	mult_color(&phong->diffuse, &phong->effective_color, light_dot_normal
-		* itx->obj->diffuse * data->scene.light->ratio);
-	// printf("phong->diffuse: %f %f %f\n", phong->diffuse.r, phong->diffuse.g, phong->diffuse.b);
-		// if (scene->lights[light_idx].type == SPOT
-	// 	&& acos(spotlight_angle) > scene->lights[light_idx].theta * 0.9 / 4)
+		* itx->obj->diffuse * light->ratio);
+		// if (lights.type == SPOT
+	// 	&& acos(spotlight_angle) > lights.theta * 0.9 / 4)
 	// 	mult_color(&phong->diffuse, &phong->diffuse, 0.8);
 	negate_vec(&light_v, &light_v);
 	reflect_vector(&reflect_v, &light_v, &itx->normal);
-	calculate_specular(&reflect_v, itx, phong, data->scene.light);
+	calculate_specular(&reflect_v, itx, phong, light);
 	return (true);
 }
 
-// t_color	cast_reflection_ray(t_scene *scene, t_intersect *intersection,
-// 		int remaining, int light_idx)
-// {
-// 	t_ray				ray;
-// 	t_intersect_list	arr;
-// 	int					shape_idx;
-// 	t_color			reflected;
-// 	t_intersect	*itx;
+t_color	reflection_color(t_intersect *itx, t_data *data, \
+		int remaining, t_light *light)
+{
+	t_color			final_color;
+	t_color			light_color;
+	t_color			reflected;
 
-// 	ft_bzero(&reflected, sizeof(t_color));
-// 	if (intersection->obj->reflective == 0 || remaining == 0)
-// 		return (reflected);
-// 	ray.origin = intersection->over_point;
-// 	ray.direction = intersection->reflect_vec;
-// 	arr.count = 0;
-// 	shape_idx = -1;
-// 	while (++shape_idx < scene->count.shapes)
-// 		intersect(&scene->shapes[shape_idx], &ray, &arr);
-// 	itx = hit(&arr);
-// 	if (itx != NULL)
-// 	{
-// 		prepare_computations(itx, &ray);
-// 		reflected = reflection_color(itx, scene, remaining, light_idx);
-// 	}
-// 	mult_color(&reflected, &reflected,
-// 		intersection->shape->props.reflectiveness);
-// 	return (reflected);
-// }
+	ft_bzero(&final_color, sizeof(t_color));
+	light_color = shading(itx, data, light);
+	reflected = cast_reflection_ray(data, itx, remaining - 1, light);
+	add_colors(&final_color, &final_color, &light_color);
+	add_colors(&final_color, &final_color, &reflected);
+	return (final_color);
+}
 
 
-t_color	shading(t_intersect *itx,	t_data *data)
+t_color	cast_reflection_ray(t_data	*data, t_intersect *intersection,
+		int reflection_depth, t_light	*light)
+{
+	t_ray				ray;
+	t_intersect_list	arr;
+	t_objs				*obj;
+	t_color				reflected;
+	t_intersect			*itx;
+
+	ft_bzero(&reflected, sizeof(t_color));
+	if (intersection->obj->reflective == 0 || reflection_depth == 0)
+		return (reflected);
+	ray.origin = intersection->over_point;
+	ray.direction = intersection->reflect;
+	arr.count = 0;
+	obj = data->objs;
+	while (obj)
+	{
+		intersect(&ray, obj, &arr);
+		obj = obj->next;
+	}
+	itx = hit(&arr);
+	if (itx != NULL)
+	{
+		pre_computations(itx, &ray);
+		reflected = reflection_color(itx, data, reflection_depth, light);
+	}
+	mult_color(&reflected, &reflected,
+		intersection->obj->reflective);
+	return (reflected);
+}
+
+
+t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 {
 	t_phong			phong;
 	t_color			result;
 	t_color			shape_color;
 	const double	light_dist = vec_distance(&itx->point,\
-	&data->scene.light->position);
-	const double	attenuation = (100 * 2 * data->scene.light->ratio\
+	&light->position);
+	const double	attenuation = (100 * 2 * light->ratio\
 	- light_dist) / (100 * 2 * data->scene.light->ratio - 1);
 
 	shape_color = itx->obj->color;
 	blend_colors(&phong.effective_color, &shape_color,
-		&data->scene.light->color);
-	if (get_specular_and_diffuse(data, itx, &phong) == false)
+		&light->color);
+	if (get_specular_and_diffuse(data, light, itx, &phong) == false)
 		return (get_ambient(&data->scene, shape_color));
 	result = get_ambient(&data->scene, shape_color);
 	if (attenuation < 0)
-	{
-		printf("attenuation: %f\n", attenuation);
 		return (result);
-	}
 	else if (attenuation > 0 && attenuation <= 1)
 	{
 		mult_color(&phong.diffuse, &phong.diffuse, attenuation);
 		mult_color(&phong.specular, &phong.specular, attenuation);
-		// printf("phong.diffuse: %f %f %f\n", phong.diffuse.r, phong.diffuse.g, phong.diffuse.b);
 	}
 	
 	result.r += phong.diffuse.r + phong.specular.r;
 	result.g += phong.diffuse.g + phong.specular.g;
 	result.b += phong.diffuse.b + phong.specular.b;
-	//printf("result: %f %f %f\n", result.r, result.g, result.b);
  	return (result);
 }
 
 t_color	shade( t_data *data,t_intersect_list *arr, t_ray *ray)
 {
 	t_intersect		*itx;
-	// int				light_idx;
+	t_light			*light;
 	t_color			final_color;
 	t_color			surface_color;
-	//t_color			reflected;
+	t_color			reflected;
 
 	itx = hit(arr);
 	ft_bzero(&final_color, sizeof(t_color));
-	//ft_bzero(&reflected, sizeof(t_color));
 	if (itx != NULL)
 	{
 		pre_computations(itx, ray);
-		surface_color = shading(itx, data);
-		add_colors(&final_color, &final_color, &surface_color);
-		//add_colors(&final_color, &final_color, &reflected);
+		light = data->scene.light;
+		while (light)
+		{
+			surface_color = shading(itx, data, light);
+			add_colors(&final_color, &final_color, &surface_color);
+			reflected = cast_reflection_ray(data, itx,
+					data->reflection_depth, light);
+			add_colors(&final_color, &final_color, &reflected);
+			light = light->next;
+		}
 	}
 	return (final_color);
 }
@@ -399,7 +422,7 @@ void	render_ray(t_data *data, t_intersect_list *arr, int x, int y)
 	t_objs	*obj;
 	t_color	color;
 
-	ray_to_pixel(data, &ray, x + 0.5, y + 0.5);
+	ray_to_pixel(&data->scene.camera, &ray, x + 0.5, y + 0.5);
 	arr->count = 0;
 	obj = data->objs;
 	while (obj)
@@ -417,16 +440,13 @@ int	render(t_data *data)
 	int					x;
 	int					y;
 
+
 	y = -1;
 	while (++y < W_H)
 	{
 		x = -1;
-		if (y % (100) == 0)
-			printf("Rendering %d%%\n", (int)((y / (double)W_H) * 100));
 		while (++x < W_W)
 			render_ray(data, &arr, x, y);
 	}
-	printf("Rendering 100%%\n");
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (SUCESS);
 }

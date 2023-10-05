@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:03:31 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/04 20:49:06 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/05 17:18:57 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_light
 	t_color		color;
 	t_mat4		rotat;
 	t_vector	rot_trans;
+	t_mat4		added_rots;;
 	double		theta;
 	struct s_light	*next;
 }		   t_light;
@@ -166,11 +167,12 @@ typedef struct	s_data
 	char		*addr;
 	int			height;
 	int			width;
-	int			bits_per_pixel;
+	int			bpp;
 	int			line_length;
 	int			endian;
 	t_scene		scene;
 	t_objs		*objs;
+	double		reflection_depth;
 }				t_data;
 
 

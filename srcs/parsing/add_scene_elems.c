@@ -1,3 +1,4 @@
+#include "mathRT.h"
 #include "miniRT.h"
 
 int add_ambient(t_data *data, char **elems)
@@ -37,6 +38,7 @@ int add_light(t_data *data, char **elems)
     light2->position = get_position(elems[1]);
     light2->ratio = ft_atod(elems[2]);
     light2->color = get_color(elems[3]);
+    identity_matrix(&light2->added_rots);
     push_light(light2, &data->scene.light);
     return(0);
 }

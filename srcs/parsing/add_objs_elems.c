@@ -44,6 +44,7 @@ int add_a_sphere(t_data *data, char **elems)
 	(void)ret;
 
 	obj = ft_calloc(sizeof(t_objs), 1);
+	init_obj_value(obj);
 	if(ft_tabsize(elems) != 4 || is_void(elems[3][0]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
 	if(check_position(elems[1]) || check_float(elems[2]) || check_color(elems[3]))
@@ -69,6 +70,7 @@ int add_a_cylindre(t_data *data, char **elems)
 	int ret;
 	(void)ret;
 	obj = ft_calloc(sizeof(t_objs), 1);
+	init_obj_value(obj);
 	if(ft_tabsize(elems) != 6 || is_void(elems[5][0]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
 	if(check_position(elems[1]) || check_vector(elems[2]) || check_float(elems[3]) || check_float(elems[3]) || check_color(elems[5]))
@@ -92,6 +94,7 @@ int add_a_plan(t_data *data, char **elems)
 	(void)ret;
 	
 	obj = ft_calloc(sizeof(t_objs), 1);
+	init_obj_value(obj);
 	if(ft_tabsize(elems) != 4 || is_void(elems[3][0]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
 	if(check_position(elems[1]) || check_vector(elems[2]) || check_color(elems[3]))
@@ -110,6 +113,7 @@ int add_a_triangle(t_data *data, char **elems)
 	int ret;
 	(void)ret;
 	obj = ft_calloc(sizeof(t_objs), 1);
+	init_obj_value(obj);
 	if(ft_tabsize(elems) != 6 || is_void(elems[5][0]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
 	if(check_position(elems[1]) || check_vector(elems[2]) || check_float(elems[3]) || check_float(elems[3]) || check_color(elems[5]))

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:54:29 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/27 22:47:08 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/05 17:31:19 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	camera_transform(t_scene *scene)
 	from.x = scene->camera.position.x;
 	from.y = scene->camera.position.y;
 	from.z = scene->camera.position.z;
-	from.w = 1;
+	from.w = 0;
 	normalize_vec(&scene->camera.vector);
 	up.x = 0;
 	up.y = 1;
