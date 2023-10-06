@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:49:21 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/29 18:00:29 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/06 19:32:12 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ t_objs *sphere)
 	sub_vec(&oc, &ray->origin, &sphere->position);
 	b = dot_product(&oc, &ray->direction);
 	c = dot_product(&oc, &oc) - sphere->squared_radius;
-	h = b * b - c;
-	if (h <= EPSILON)
+	h = b * b - c ;
+	if (h <= - EPSILON)
 		return (false);
 	h = sqrt(h);
 	xs->arr[xs->count].t = -b - h;
@@ -69,19 +69,19 @@ t_objs *sphere)
 	return (true);
 }
 
-// bool	intersect_plane(const t_ray *ray, t_objs *plane,
-// 		t_intersect_list *xs)
-// {
-// 	double	denom;
-// 	double	distance_from_origin;
+bool	intersect_plane(const t_ray *ray, t_objs *plane,
+		t_intersect_list *xs)
+{
+	double	denom;
+	double	distance_from_origin;
 
-// 	distance_from_origin = dot_product(&plane->vector, &plane->position);
-// 	denom = dot_product(&ray->direction, &plane->vector);
-// 	if (fabs(denom) < 0.00001)
-// 		return (false);
-// 	xs->arr[xs->count].t = -(dot_product(&ray->origin, &plane->vector) \
-// 		- distance_from_origin) / denom;
-// 	xs->arr[xs->count].obj = plane;
-// 	xs->count++;
-// 	return (true);
-// }
+	distance_from_origin = dot_product(&plane->vector, &plane->position);
+	denom = dot_product(&ray->direction, &plane->vector);
+	if (fabs(denom) < EPSILON)
+		return (false);
+	xs->arr[xs->count].t = -(dot_product(&ray->origin, &plane->vector) \
+		- distance_from_origin) / denom;
+	xs->arr[xs->count].obj = plane;
+	xs->count++;
+	return (true);
+}
