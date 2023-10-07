@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 16:44:43 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/21 12:01:39 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/07 20:17:39 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ double	vec_magnitude(const t_vector *vec)
  */
 void	normalize_vec(t_vector *vec)
 {
+    if (vec_magnitude(vec) == 0)
+        return ;
 	scale_vec(vec, vec, 1 / vec_magnitude(vec));
 	vec->w = 0;
 }

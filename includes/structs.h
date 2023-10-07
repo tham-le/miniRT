@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:03:31 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/05 17:18:57 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/07 20:12:41 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,18 @@ typedef struct s_xpm_img{
 	int			width;
 }				t_xpm_img;
 
+typedef enum s_pattern
+{
+	PLAIN,
+	CHECKER,
+	STRIPE,
+	RING,
+	GRADIENT,
+	NOISE,
+	MARBLE,
+}		  t_pattern;
+
+
 typedef struct s_objs
 {
 	t_type			type;
@@ -112,6 +124,7 @@ typedef struct s_objs
 	t_mat4			inv_transf;
 	t_mat4			norm_transf;
 	t_mat4			added_rots;
+	t_pattern		pattern_type;
 	double			diffuse;
 	bool			highlighted;
 	double			shininess;
