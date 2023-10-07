@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:08:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/05 19:14:15 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/05 19:06:31 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_print_help());
 	data = ft_calloc(sizeof(t_data), 2);
-	data->reflection_depth = 2;
+	data->reflection_depth = 1;
 	if (parsing(data, ac, av) != SUCESS)
 		return (free(data), 1);
 	print_struct(data);

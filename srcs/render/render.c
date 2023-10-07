@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/06 20:27:27 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/05 19:05:51 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,7 +352,8 @@ t_color	cast_reflection_ray(t_data	*data, t_intersect *intersection,
 		pre_computations(itx, &ray);
 		reflected = reflection_color(itx, data, reflection_depth, light);
 	}
-	mult_color(&reflected, &reflected,intersection->obj->reflective);
+	mult_color(&reflected, &reflected,
+		intersection->obj->reflective);
 	return (reflected);
 }
 
@@ -364,8 +365,8 @@ t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 	t_color			shape_color;
 	const double	light_dist = vec_distance(&itx->point,\
 	&light->position);
-	const double	attenuation = (100 * light->ratio\
-	- light_dist) / (100 * data->scene.light->ratio - 1);
+	const double	attenuation = (100 * 2 * light->ratio\
+	- light_dist) / (100 * 2 * data->scene.light->ratio - 1);
 
 	shape_color = itx->obj->color;
 	blend_colors(&phong.effective_color, &shape_color,
@@ -373,9 +374,9 @@ t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 	if (get_specular_and_diffuse(data, light, itx, &phong) == false)
 		return (get_ambient(&data->scene, shape_color));
 	result = get_ambient(&data->scene, shape_color);
-	if (attenuation < EPSILON)
+	if (attenuation < 0)
 		return (result);
-	else if (attenuation > EPSILON && attenuation <= 1)
+	else if (attenuation > 0 && attenuation <= 1)
 	{
 		mult_color(&phong.diffuse, &phong.diffuse, attenuation);
 		mult_color(&phong.specular, &phong.specular, attenuation);
@@ -404,9 +405,9 @@ t_color	shade( t_data *data,t_intersect_list *arr, t_ray *ray)
 		while (light)
 		{
 			surface_color = shading(itx, data, light);
+			add_colors(&final_color, &final_color, &surface_color);
 			reflected = cast_reflection_ray(data, itx,
 					data->reflection_depth, light);
-			add_colors(&final_color, &final_color, &surface_color);
 			add_colors(&final_color, &final_color, &reflected);
 			light = light->next;
 		}
@@ -439,16 +440,13 @@ int	render(t_data *data)
 	int					x;
 	int					y;
 
-	y = -1;
 
+	y = -1;
 	while (++y < W_H)
 	{
 		x = -1;
 		while (++x < W_W)
-		{
-			render_ray(data, &arr, x, y);	
-		}
+			render_ray(data, &arr, x, y);
 	}
-	printf("rendered\n");
 	return (SUCESS);
 }
