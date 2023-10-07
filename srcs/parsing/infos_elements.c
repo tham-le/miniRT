@@ -121,8 +121,8 @@ int check_color(char *elems)
     col_r = ft_atod(color[0]);
     col_g = ft_atod(color[1]);
     col_b = ft_atod(color[2]);
-    if(!color || !color[2])
-        return(1);
+    if(!color)
+        return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
     if(only_digits(color[0]) || only_digits(color[1]) || only_digits(color[2]))
         return(ft_freearr(color), 1);
     if(col_r < 0 || col_r > 255 || col_g < 0 || col_g > 255 || col_b < 0 || col_b > 255)
