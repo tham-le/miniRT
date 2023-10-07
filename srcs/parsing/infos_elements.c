@@ -103,6 +103,7 @@ t_vector get_position(char *elems)
     vec_pos.x = ft_atod(position[0]);
     vec_pos.y = ft_atod(position[1]);
     vec_pos.z = ft_atod(position[2]);
+    vec_pos.w = 1;
     ft_freearr(position);
     return(vec_pos);
 }
@@ -136,7 +137,7 @@ t_color get_color(char *elems)
     t_color vec_col;
 
     color = ft_split(elems, ',');
-    vec_col.r = ft_atod(color[0])/ 255.f;
+    vec_col.r = ft_atod(color[0]) / 255.f;
     vec_col.g = ft_atod(color[1]) / 255.f;
     vec_col.b = ft_atod(color[2]) / 255.f;
     return(vec_col);

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/05 19:05:51 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/07 20:14:34 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ t_color	get_ambient(t_scene *scene, t_color patter_color)
 	t_color	ambient;
 
 	mult_color(&ambient, &patter_color,
-		2 * scene->ambient.ratio);
+		scene->ambient.ratio);
 	blend_colors(&ambient, &ambient, &scene->ambient.color);
 	return (ambient);
 }
@@ -352,23 +352,27 @@ t_color	cast_reflection_ray(t_data	*data, t_intersect *intersection,
 		pre_computations(itx, &ray);
 		reflected = reflection_color(itx, data, reflection_depth, light);
 	}
-	mult_color(&reflected, &reflected,
-		intersection->obj->reflective);
+	mult_color(&reflected, &reflected, intersection->obj->reflective);
 	return (reflected);
 }
+t_color	get_obj_color(t_objs *obj)
+{
+	if (obj->pattern_type == PLAIN)
+		return (obj->color);
+	return (obj->color);
+}
 
-
+// Phong Blinn shading model
 t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 {
 	t_phong			phong;
 	t_color			result;
 	t_color			shape_color;
-	const double	light_dist = vec_distance(&itx->point,\
-	&light->position);
-	const double	attenuation = (100 * 2 * light->ratio\
-	- light_dist) / (100 * 2 * data->scene.light->ratio - 1);
+	const double	light_dist = vec_distance(&itx->point, &light->position);
+	const double	attenuation = (100 * light->ratio\
+	- light_dist) / (100 * data->scene.light->ratio - 1);
 
-	shape_color = itx->obj->color;
+	shape_color = get_obj_color(itx->obj);
 	blend_colors(&phong.effective_color, &shape_color,
 		&light->color);
 	if (get_specular_and_diffuse(data, light, itx, &phong) == false)
@@ -381,7 +385,6 @@ t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 		mult_color(&phong.diffuse, &phong.diffuse, attenuation);
 		mult_color(&phong.specular, &phong.specular, attenuation);
 	}
-	
 	result.r += phong.diffuse.r + phong.specular.r;
 	result.g += phong.diffuse.g + phong.specular.g;
 	result.b += phong.diffuse.b + phong.specular.b;
@@ -405,9 +408,9 @@ t_color	shade( t_data *data,t_intersect_list *arr, t_ray *ray)
 		while (light)
 		{
 			surface_color = shading(itx, data, light);
-			add_colors(&final_color, &final_color, &surface_color);
 			reflected = cast_reflection_ray(data, itx,
 					data->reflection_depth, light);
+			add_colors(&final_color, &final_color, &surface_color);
 			add_colors(&final_color, &final_color, &reflected);
 			light = light->next;
 		}
