@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:17:55 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/06 20:07:56 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/06 19:32:27 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void	calcul_transform(t_data	*data)
 		mat_vec_multiply(&light->dir, &light->added_rots, &light->dir);
 		light = light->next;
 	}
+
 }

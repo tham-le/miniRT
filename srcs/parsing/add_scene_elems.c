@@ -4,7 +4,6 @@
 int add_ambient(t_data *data, char **elems)
 {
     t_ambient ambient;
-    // double color_sum;
     int ret;
     (void)ret;
 
@@ -18,13 +17,6 @@ int add_ambient(t_data *data, char **elems)
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     ambient.ratio = ft_atod(elems[1]);
     ambient.color = get_color(elems[2]);
-    // color_sum = ambient.color.r + ambient.color.g + ambient.color.b;
-    // if(color_sum > 0)
-    // {
-    // 	ambient.color.r /= color_sum;
-	// 	ambient.color.g /= color_sum;
-	// 	ambient.color.b /= color_sum;
-    // }
     data->scene.ambient = ambient;
     return(0);
 }
@@ -33,8 +25,7 @@ int add_light(t_data *data, char **elems)
 {
     t_light *light2;
     int ret;
-    // double color_sum;
-    
+    (void)ret;
 
     light2 = ft_calloc(sizeof(t_light), 1);
     data->scene.nb_light++;
@@ -47,13 +38,6 @@ int add_light(t_data *data, char **elems)
     light2->position = get_position(elems[1]);
     light2->ratio = ft_atod(elems[2]);
     light2->color = get_color(elems[3]);
-    //color_sum = light2->color.r + light2->color.g + light2->color.b;
-    // if(light2->color.r > 0 && light2->color.g > 0 && light2->color.b > 0)
-	// {
-	// 	light2->color.r /= color_sum;
-	// 	light2->color.g /= color_sum;
-	// 	light2->color.b /= color_sum;
-	// }
     identity_matrix(&light2->added_rots);
     push_light(light2, &data->scene.light);
     return(0);

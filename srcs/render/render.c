@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/06 20:27:27 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/06 19:54:49 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -373,9 +373,9 @@ t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 	if (get_specular_and_diffuse(data, light, itx, &phong) == false)
 		return (get_ambient(&data->scene, shape_color));
 	result = get_ambient(&data->scene, shape_color);
-	if (attenuation < EPSILON)
+	if (attenuation < 0)
 		return (result);
-	else if (attenuation > EPSILON && attenuation <= 1)
+	else if (attenuation > 0 && attenuation <= 1)
 	{
 		mult_color(&phong.diffuse, &phong.diffuse, attenuation);
 		mult_color(&phong.specular, &phong.specular, attenuation);
@@ -404,9 +404,9 @@ t_color	shade( t_data *data,t_intersect_list *arr, t_ray *ray)
 		while (light)
 		{
 			surface_color = shading(itx, data, light);
+			add_colors(&final_color, &final_color, &surface_color);
 			reflected = cast_reflection_ray(data, itx,
 					data->reflection_depth, light);
-			add_colors(&final_color, &final_color, &surface_color);
 			add_colors(&final_color, &final_color, &reflected);
 			light = light->next;
 		}
