@@ -28,13 +28,15 @@ double	vec_magnitude(const t_vector *vec)
  * @brief Normalizes a vector
  * @param vec Vector to be normalized
  */
-void	normalize_vec(t_vector *vec)
+void normalize_vec(t_vector *vec)
 {
     if (vec_magnitude(vec) == 0)
-        return ;
-	scale_vec(vec, vec, 1 / vec_magnitude(vec));
-	vec->w = 0;
+        return;
+    
+    scale_vec(vec, vec, 1 / vec_magnitude(vec));
+    vec->w = 0;
 }
+
 
 /**
  * @brief Returns the dot product of two vectors

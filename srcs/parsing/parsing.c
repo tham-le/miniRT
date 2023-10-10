@@ -73,7 +73,7 @@ int init_and_parse(t_data *data, char **av)
     while(i)
     {
         line = get_next_line(file_no);
-         i = 2;
+        i = 2;
         if(!line)
             break;
         sp_line = spaces_check(line);

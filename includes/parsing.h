@@ -66,6 +66,7 @@ char		*dup_one(char c);
 void		set_texture(t_objs **obj, void *mlx_ptr);
 t_xpm_img	*load_img(char *bmp_img, void *mlx_ptr);
 void	push_light(t_light *obj, t_light **objs);
+void    readbump_img(t_objs *obj);
 
 //DEBUG
 void		print_struct(t_data *data);

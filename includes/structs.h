@@ -103,6 +103,21 @@ typedef enum s_pattern
 	MARBLE,
 }		  t_pattern;
 
+typedef struct s_bumpmap
+{
+	char 			**bump_tab;
+	int				width;
+	int				height;
+	int 			nb_colors;
+	int				char_per_pixel;
+}			t_bumpmap;
+
+typedef struct s_colors_bmp
+{
+	char			c;
+	char	*color;
+	struct s_colors_bmp	*next;
+}			t_colors_bmp;
 
 typedef struct s_objs
 {
@@ -118,6 +133,8 @@ typedef struct s_objs
 	t_vector		vector;
 	t_vector		scale;
 	char			*bump_img;
+	t_bumpmap		*bmp_img;
+	t_colors_bmp	*colors_bmp;
 	t_xpm_img		*surface;
 	t_xpm_img		*map;
 	t_mat4			transf;
