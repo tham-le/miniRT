@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:08:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/05 19:06:31 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/11 16:26:14 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int ac, char **av)
 	data->reflection_depth = 1;
 	if (parsing(data, ac, av) != SUCESS)
 		return (free(data), 1);
-	// print_struct(data);
+	print_struct(data);
 	state = init_display(&data, av[1]);
 	if (state != SUCESS)
 		return (clean(data, state));
