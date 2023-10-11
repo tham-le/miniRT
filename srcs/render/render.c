@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/07 20:14:34 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/11 17:39:53 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,32 @@ t_color	shading(t_intersect *itx,	t_data *data, t_light *light);
 t_color	cast_reflection_ray(t_data	*data, t_intersect *intersection,
 		int reflection_depth, t_light	*light);
 
+void	transform_ray(t_ray *transformed_ray, const t_ray *ray,
+	const t_objs *obj)
+{
+	mat_vec_multiply(&transformed_ray->origin, &obj->inv_transf,
+		&ray->origin);
+	mat_vec_multiply(&transformed_ray->direction, &obj->inv_transf,
+		&ray->direction);
+}
+
 void	intersect(t_ray	*ray, t_objs *obj, t_intersect_list *arr)
 {
+	t_ray	transformed_ray;
+
 	if (arr->count >= MAX_INTERSECT)
 		return ;
 	if (obj->type == SPHERE)
 		intersect_sphere(ray, arr, obj);
-	// else if (obj->type == PLAN)
-	// 	intersect_plane(ray, obj, arr);
-	//transform_ray(ray, obj);
-	// else if (obj->type == SQUARE)
-	// 	intersect_square(ray, obj, arr);
-	// else if (obj->type == CYLINDER)
-	// 	intersect_cylinder(ray, obj, arr);
+	if (obj->type == PLAN)
+		intersect_plane(ray, obj, arr);
+	transform_ray(&transformed_ray, ray, obj);
+	if (obj->type == CYLINDER)
+		intersect_cylinder(&transformed_ray, obj, arr);
 	// else if (obj->type == TRIANGLE)
 	// 	intersect_triangle(ray, obj, arr);
+	// 		// else if (obj->type == SQUARE)
+	// 	intersect_square(ray, obj, arr);
 }
 
 t_intersect	*hit(t_intersect_list *xs)
@@ -69,14 +80,6 @@ void	ray_position(t_vector *pos, const t_ray *ray, double time)
 	pos->w = 1;
 }
 
-void	transform_ray(t_ray *transformed_ray, const t_ray *ray,
-	const t_objs *obj)
-{
-	mat_vec_multiply(&transformed_ray->origin, &obj->inv_transf,
-		&ray->origin);
-	mat_vec_multiply(&transformed_ray->direction, &obj->inv_transf,
-		&ray->direction);
-}
 
 t_vector	sphere_normal(t_vector *normal, const t_objs *obj,
 				const t_vector *itx_point)
@@ -94,6 +97,52 @@ t_vector	sphere_normal(t_vector *normal, const t_objs *obj,
 	return (world_normal);
 }
 
+t_vector	plane_normal(const t_objs *shape, const t_vector *itx_point)
+{
+	t_vector	object_normal;
+	t_vector	world_normal;
+
+	object_normal.x = 0;
+	object_normal.y = 1;
+	object_normal.z = 0;
+	object_normal.w = 0;
+	(void)itx_point;
+	// if (shape->normal_tex != NULL)
+	// 	return (normal_map(&object_normal, shape, itx_point));
+	mat_vec_multiply(&world_normal, &shape->norm_transf, &object_normal);
+	world_normal.w = 0;
+	normalize_vec(&world_normal);
+	return (world_normal);
+}
+
+t_vector	cylinder_normal(const t_objs *shape, const t_vector *itx_point)
+{
+	double		distance;
+	t_vector	normal;
+	t_vector	point;
+	t_vector	world_normal;
+
+	mat_vec_multiply(&point, &shape->inv_transf, itx_point);
+	point.w = 0;
+	distance = point.x * point.x + point.z * point.z;
+	ft_bzero(&normal, sizeof(t_vector));
+	if (distance < 1 && (point.y >= (shape->height / 2) - EPSILON))
+		normal.y = 1;
+	else if (distance < 1 && (point.y <= -(shape->height / 2) + EPSILON))
+		normal.y = -1;
+	else
+	{
+		normal.x = point.x;
+		normal.z = point.z;
+		normalize_vec(&normal);
+	}
+	// if (shape->normal_tex != NULL)
+		// return (normal_map(&normal, shape, itx_point));
+	mat_vec_multiply(&world_normal, &shape->norm_transf, &normal);
+	world_normal.w = 0;
+	normalize_vec(&world_normal);
+	return (world_normal);
+}
 
 t_vector	normal_at(const t_objs *obj, const t_vector *itx_point)
 {
@@ -102,10 +151,10 @@ t_vector	normal_at(const t_objs *obj, const t_vector *itx_point)
 
 	if (obj->type == SPHERE)
 		return (sphere_normal(&normal, obj, itx_point));
-	// else if (obj->type == PLANE)
-	// 	return (plane_normal(obj, itx_point));
-	// else if (obj->type == CYLINDER)
-	// 	return (cylinder_normal(obj, itx_point));
+	else if (obj->type == PLANE)
+		return (plane_normal(obj, itx_point));
+	else if (obj->type == CYLINDER)
+		return (cylinder_normal(obj, itx_point));
 	// else if (obj->type == CONE)
 	// 	return (cone_normal(obj, itx_point));
 	// normal = cube_normal(obj, itx_point);

@@ -1,3 +1,4 @@
+#include "mathRT.h"
 #include "miniRT.h"
 
 void	push_light(t_light *obj, t_light **objs)
@@ -82,6 +83,7 @@ int add_a_cylindre(t_data *data, char **elems)
 	obj->diametre = ft_atod(elems[3]);
 	if(obj->diametre < 0)
 		obj->diametre = 0;
+	obj->radius = obj->diametre / 2;
 	obj->height = ft_atod(elems[4]);
 	obj->color = get_color(elems[5]);
 	push_object(obj, &data->objs);
@@ -104,6 +106,7 @@ int add_a_plan(t_data *data, char **elems)
 	obj->position = get_position(elems[1]);
 	obj->vector = get_position(elems[2]);
 	obj->color = get_color(elems[3]);
+	obj->distance_to_origin = dot_product(&obj->vector, &obj->position);
 	push_object(obj, &data->objs);
 	return(0);
 }
