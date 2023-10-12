@@ -29,6 +29,7 @@ int check_vector(char *vect)
     vec_x = ft_atod(position[0]);
     vec_y = ft_atod(position[1]);
     vec_z = ft_atod(position[2]);
+    ft_freearr(position);
     if(vec_x < -1 || vec_x > 1 || vec_y < -1 || vec_y > 1 || vec_z < -1 || vec_z > 1)
         return(1);
     return(0);

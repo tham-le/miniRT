@@ -40,7 +40,7 @@ int	init_display(t_data **data, char *fname)
 int	main(int ac, char **av)
 {
 	t_data	*data;
-	int		state;
+	//int		state;
 
 	if (ac != 2)
 		return (ft_print_help());
@@ -49,7 +49,7 @@ int	main(int ac, char **av)
 	if (parsing(data, ac, av) != SUCESS)
 		return (free(data), 1);
 	//print_struct(data);
-	state = init_display(&data, av[1]);
+	/*state = init_display(&data, av[1]);
 	if (state != SUCESS)
 		return (clean(data, state));
 	hooks(data);
@@ -59,6 +59,6 @@ int	main(int ac, char **av)
 	if (state != SUCESS)
 		return (clean(data, state));
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
-	mlx_loop(data->mlx_ptr);
+	mlx_loop(data->mlx_ptr);*/
 	return (0);
 }

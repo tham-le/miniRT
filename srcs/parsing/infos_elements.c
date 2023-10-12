@@ -140,5 +140,6 @@ t_color get_color(char *elems)
     vec_col.r = ft_atod(color[0]) / 255.f;
     vec_col.g = ft_atod(color[1]) / 255.f;
     vec_col.b = ft_atod(color[2]) / 255.f;
+    ft_freearr(color);
     return(vec_col);
 }

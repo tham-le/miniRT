@@ -88,7 +88,7 @@ int init_and_parse(t_data *data, char **av)
             free(sp_line);
             return (1);
         }
-       
+        free(sp_line);
     }
     return(0);
 }
