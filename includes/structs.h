@@ -24,9 +24,8 @@ typedef enum e_type{
 	CAMERA,
 	LIGHT,
 	SPHERE,
-	PLANE,
-	CYLINDER,
 	PLAN,
+	CYLINDER,
 	TRIANGLE,
 	COMMENT,
 }		  t_type;

@@ -151,7 +151,7 @@ t_vector	normal_at(const t_objs *obj, const t_vector *itx_point)
 
 	if (obj->type == SPHERE)
 		return (sphere_normal(&normal, obj, itx_point));
-	else if (obj->type == PLANE)
+	else if (obj->type == PLAN)
 		return (plane_normal(obj, itx_point));
 	else if (obj->type == CYLINDER)
 		return (cylinder_normal(obj, itx_point));

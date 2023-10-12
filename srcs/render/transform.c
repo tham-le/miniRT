@@ -79,7 +79,7 @@ void	object_transform(t_objs *obj)
 	// if (obj->type == CONE)
 	// 	scaling_matrix(&scale, obj->props.radius * 2,
 	// 		obj->props.height * 2, obj->props.radius * 2);
-	if (obj->type == PLANE || obj->type == CYLINDER)
+	if (obj->type == PLAN || obj->type == CYLINDER)
 		calculate_orientation(&rot, obj);
 	translate_matrix(&translate, obj->position.x,
 		obj->position.y, obj->position.z);
