@@ -15,6 +15,7 @@
 void	free_all_ok(t_data *data)
 {
 	clean(data, 6);
+	free_all(data);
 	exit(0);
 }
 

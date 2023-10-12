@@ -69,6 +69,6 @@ void    readbump_img(t_objs *obj);
 
 //DEBUG
 void		print_struct(t_data *data);
-
+void free_all(t_data *data);
 
 #endif

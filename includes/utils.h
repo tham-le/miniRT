@@ -27,5 +27,6 @@ void	sub_colors(t_color *res, const t_color *c1, const t_color *c2);
 void	blend_colors(t_color *res, const t_color *c1, const t_color *c2);
 void	ft_freearr(char **tab);
 void	init_obj_value(t_objs	*obj);
-
+void	ft_clear_light(t_light **lst, void (*del)(void *));
+void	ft_clear_obj(t_objs **lst, void (*del)(void *));
 #endif

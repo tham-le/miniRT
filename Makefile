@@ -75,7 +75,7 @@ SRC_FILES	+=	$(addprefix $(MATH_DIR), $(MATH_FILES))
 #utilities
 UTILS_DIR	=	utils/
 UTILS_FILES	=	ft_atod.c ft_lstadd_back.c clean.c print_help.c ft_tabsize.c\
-				color_operation.c init_obj_value.c
+				color_operation.c init_obj_value.c ft_lstclear.c
 SRC_FILES	+=	$(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 
