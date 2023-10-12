@@ -48,7 +48,8 @@ int	main(int ac, char **av)
 	data->reflection_depth = 1;
 	if (parsing(data, ac, av) != SUCESS)
 		return (free(data), 1);
-	print_struct(data);
+	printf("ici\n");
+	//print_struct(data);
 	state = init_display(&data, av[1]);
 	if (state != SUCESS)
 		return (clean(data, state));

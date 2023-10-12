@@ -27,7 +27,7 @@ int parse_input(t_data **data, int ac, char **av)
     if(file_no == -1)
         return(free(*data), free(buffer), write(STDERR_FILENO, ERROR_FILE, 29));
     if(!read(file_no, buffer, sizeof(int)))
-        return(free(*data), free(buffer), close(file_no), write(STDERR_FILENO, ERR_READ_FILE, 28));
+        return(free(buffer), close(file_no), write(STDERR_FILENO, ERR_READ_FILE, 28));
     close(file_no);
     free(buffer);
     return(0);

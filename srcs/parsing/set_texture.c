@@ -9,7 +9,7 @@ void set_texture(t_objs **obj, void *mlx_ptr)
     //     (*obj)->surface = load_img((*obj)->bump_img, mlx_ptr);
 }
 
-t_xpm_img *load_img(char *bmp_img, void *mlx_ptr)
+/*t_xpm_img *load_img(char *bmp_img, void *mlx_ptr)
 {
     t_xpm_img	*img;
 
@@ -24,4 +24,4 @@ t_xpm_img *load_img(char *bmp_img, void *mlx_ptr)
 	  img->addr = mlx_get_data_addr(img->img_ptr, \
 		  &img->bpp, &img->line, &img->endian);
 	return (img);
-}
+}*/

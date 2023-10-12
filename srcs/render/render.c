@@ -199,9 +199,9 @@ void	pre_computations(t_intersect *intersection,
 // {
 // 	if (itx->obj->tex_tile != 0)
 // 	{
-// 		u = (int)floor(u * (itx->obj->tex_height - 1) * itx->obj->tex_tile) \
+// 		u = (int)floor(u * (itx->obj->tex_height - 1) * itx->obj->tex_tile) 
 // 		% itx->obj->tex_height;
-// 		v = (int)floor(v * (itx->obj->tex_width - 1) * itx->obj->tex_tile) \
+// 		v = (int)floor(v * (itx->obj->tex_width - 1) * itx->obj->tex_tile) 
 // 		% itx->obj->tex_width;
 // 	}
 // 	else

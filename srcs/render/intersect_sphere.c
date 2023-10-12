@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 
-// bool	intersect_sphere(t_ray *ray, t_intersect_list *xs,\
+// bool	intersect_sphere(t_ray *ray, t_intersect_list *xs,
 // t_objs *sphere)
 // {
 // 	t_vector	oc;

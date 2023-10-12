@@ -62,7 +62,7 @@ int add_a_sphere(t_data *data, char **elems)
 	obj->color = get_color(elems[3]);
 	push_object(obj, &data->objs);
 	set_texture(&data->objs, data->mlx_ptr);
-	readbump_img(data->objs);
+	//readbump_img(data->objs);
 	return(0);
 }
 
