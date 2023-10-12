@@ -26,6 +26,7 @@ typedef enum e_type{
 	SPHERE,
 	PLAN,
 	CYLINDER,
+	CONE,
 	TRIANGLE,
 	COMMENT,
 }		  t_type;

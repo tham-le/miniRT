@@ -42,7 +42,7 @@ int			add_a_sphere(t_data *data, char **elems);
 int			add_a_cylindre(t_data *data, char **elems);
 int			add_a_plan(t_data *data, char **elems);
 int			add_a_triangle(t_data *data, char **elems);
-
+int add_a_cone(t_data *data, char **elems);
 t_vector	get_position(char *elems);
 t_color		get_color(char *elems);
 int			check_position(char *elems);
@@ -63,7 +63,6 @@ int			check_fov(char *fov);
 char		*spaces_check(char *line);
 char		*str_concate(char *s, char c);
 char		*dup_one(char c);
-void		set_texture(t_objs **obj, void *mlx_ptr);
 t_xpm_img	*load_img(char *bmp_img, void *mlx_ptr);
 void	push_light(t_light *obj, t_light **objs);
 void    readbump_img(t_objs *obj);

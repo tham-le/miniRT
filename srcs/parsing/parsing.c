@@ -50,6 +50,8 @@ int get_type(char *line)
         return(ft_freearr(tab), CYLINDER);
     else if(!ft_strncmp(tab[0], "pl", ft_strlen(tab[0])))
         return(ft_freearr(tab), PLAN);
+    else if(!ft_strncmp(tab[0], "co", ft_strlen(tab[0])))
+        return(ft_freearr(tab), CONE);
     else if(!ft_strncmp(tab[0], "tr", ft_strlen(tab[0])))
         return(ft_freearr(tab), TRIANGLE);
     else if(!ft_strncmp(tab[0], "#", 1))

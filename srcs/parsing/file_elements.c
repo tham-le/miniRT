@@ -14,6 +14,8 @@ int first_element(char *elem)
         return (CYLINDER);
     else if(!ft_strncmp(elem, "pl", ft_strlen(elem)))
         return (PLAN);
+    else if(!ft_strncmp(elem, "co", ft_strlen(elem)))
+        return (CONE);
     else if(!ft_strncmp(elem, "tr", ft_strlen(elem)))
         return (TRIANGLE);
     return(-1);
@@ -38,6 +40,8 @@ int add_to_struct(t_data *data, int type, char *line)
         ret = add_a_plan(data, elems);
     else if(type == TRIANGLE)
         ret = add_a_triangle(data, elems);
+    else if(type == CONE)
+        ret = add_a_cone(data, elems);
     else if(type == AMBIENT)
         ret = add_ambient(data, elems);
     else if(type == LIGHT)
