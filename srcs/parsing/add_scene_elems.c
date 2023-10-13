@@ -36,7 +36,7 @@ int add_light(t_data *data, char **elems)
     if(check_position(elems[1])|| check_ratio(elems[2]) || check_color(elems[3]))
         return(ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
     light2->position = get_position(elems[1]);
-    light2->ratio = ft_atod(elems[2]);
+    light2->ratio = 2 * ft_atod(elems[2]);
     light2->color = get_color(elems[3]);
     identity_matrix(&light2->added_rots);
     push_light(light2, &data->scene.light);

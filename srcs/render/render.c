@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/11 17:39:53 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/13 17:01:15 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	intersect(t_ray	*ray, t_objs *obj, t_intersect_list *arr)
 	transform_ray(&transformed_ray, ray, obj);
 	if (obj->type == CYLINDER)
 		intersect_cylinder(&transformed_ray, obj, arr);
+	if (obj->type == CONE)
+		intersect_cone(&transformed_ray, obj, arr);
+	
 	// else if (obj->type == TRIANGLE)
 	// 	intersect_triangle(ray, obj, arr);
 	// 		// else if (obj->type == SQUARE)
@@ -144,6 +147,35 @@ t_vector	cylinder_normal(const t_objs *shape, const t_vector *itx_point)
 	return (world_normal);
 }
 
+t_vector	cone_normal(const t_objs *shape, const t_vector *itx_point)
+{
+	double		distance;
+	t_vector	normal;
+	t_vector	point;
+	t_vector	world_normal;
+
+	mat_vec_multiply(&point, &shape->inv_transf, itx_point);
+	distance = point.x * point.x + point.z * point.z;
+	ft_bzero(&normal, sizeof(t_vector));
+	if (distance < fabs(point.y) * fabs(point.y) && (point.y >= 0.5 - EPSILON))
+		normal.y = 1;
+	else if (distance < fabs(point.y) * fabs(point.y) && (point.y <= EPSILON))
+		normal.y = -1;
+	else
+	{
+		normal.y = sqrt(distance);
+		if (point.y > 0)
+			normal.y *= -1;
+		normal = (t_vector){point.x, normal.y, point.z, 0};
+		normalize_vec(&normal);
+	}
+	// if (shape->normal_tex != NULL)
+	// 	return (normal_map(&normal, shape, itx_point));
+	mat_vec_multiply(&world_normal, &shape->norm_transf, &normal);
+	normalize_vec(&world_normal);
+	return (world_normal);
+}
+
 t_vector	normal_at(const t_objs *obj, const t_vector *itx_point)
 {
 	t_vector	normal;
@@ -155,8 +187,8 @@ t_vector	normal_at(const t_objs *obj, const t_vector *itx_point)
 		return (plane_normal(obj, itx_point));
 	else if (obj->type == CYLINDER)
 		return (cylinder_normal(obj, itx_point));
-	// else if (obj->type == CONE)
-	// 	return (cone_normal(obj, itx_point));
+	else if (obj->type == CONE)
+		return (cone_normal(obj, itx_point));
 	// normal = cube_normal(obj, itx_point);
 	// if (obj->normal_tex != NULL)
 	// 	return (normal_map(&normal, obj, itx_point));

@@ -43,15 +43,6 @@ static bool	check_cylinder_caps(const t_ray *ray, t_objs *obj,
 	return (intersected);
 }
 
-static void	ft_swapd(double *a, double *b)
-{
-	double	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
 static bool	add_cylinder_intersections(t_objs *obj, const t_ray *ray,
 		t_intersect_list *xs, double *ts)
 {
