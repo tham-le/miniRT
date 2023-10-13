@@ -1,4 +1,5 @@
 #include "miniRT.h"
+#include <stdio.h>
 
 void print_struct(t_data *data)
 {
@@ -18,6 +19,8 @@ void print_struct(t_data *data)
             printf("CYLINDRE: coord: [%f, %f, %f], vector: [%f, %f, %f], radius: [%f], height: [%f], color: [%f, %f, %f]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->radius, obj->height, obj->color.r, obj->color.g, obj->color.b);
         if(obj->type == PLAN)
             printf("PLAN: coord: [%f, %f, %f], vector: [%f, %f, %f], color: [%f, %f, %f]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->color.r, obj->color.g, obj->color.b);
+        if (obj->type == CONE)
+            printf("CONE: coord: [%f, %f, %f], vector: [%f, %f, %f], radius: [%f], height: [%f], color: [%f, %f, %f]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->radius, obj->height, obj->color.r, obj->color.g, obj->color.b);
         if(obj->type == TRIANGLE)
             printf("TRIANGLE: coord: [%f, %f, %f], vector: [%f, %f, %f], color: [%f, %f, %f]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->color.r, obj->color.g, obj->color.b);
         obj = obj->next;

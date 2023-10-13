@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:17:55 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/11 17:17:34 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/13 15:28:59 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	multiply_transforms(t_objs *obj, t_mat4 *scale, t_mat4 *rot,
 	ft_memcpy(translate, &obj->transf, sizeof(t_mat4));
 	mat_multiply(&obj->transf, translate, scale);
 	mat_inverse(&obj->inv_transf, &obj->transf);
-	// if (obj->type == CONE)
-	// {
-	// 	translate_matrix(&temp, 0, 0.5, 0);
-	// 	mat_multiply(&obj->inv_transf, &temp, &obj->inv_transf);
-	// }
+	if (obj->type == CONE)
+	{
+		translate_matrix(&temp, 0, 0.5, 0);
+		mat_multiply(&obj->inv_transf, &temp, &obj->inv_transf);
+	}
 	ft_memcpy(&obj->norm_transf, &obj->inv_transf, sizeof(t_mat4));
 	transpose_matrix(&obj->norm_transf);
 }
@@ -76,10 +76,10 @@ void	object_transform(t_objs *obj)
 	if (obj->type == CYLINDER)
 		scaling_matrix(&scale, obj->scale.x,
 			1, obj->scale.z);
-	// if (obj->type == CONE)
-	// 	scaling_matrix(&scale, obj->props.radius * 2,
-	// 		obj->props.height * 2, obj->props.radius * 2);
-	if (obj->type == PLAN || obj->type == CYLINDER)
+	if (obj->type == CONE)
+		scaling_matrix(&scale, obj->radius * 2,
+			obj->height * 2, obj->radius * 2);
+	if (obj->type == PLAN || obj->type == CYLINDER || obj->type == CONE)
 		calculate_orientation(&rot, obj);
 	translate_matrix(&translate, obj->position.x,
 		obj->position.y, obj->position.z);
@@ -107,5 +107,4 @@ void	calcul_transform(t_data	*data)
 		mat_vec_multiply(&light->dir, &light->added_rots, &light->dir);
 		light = light->next;
 	}
-
 }

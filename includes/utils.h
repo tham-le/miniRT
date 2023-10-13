@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:54:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/05 11:41:15 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/13 16:34:16 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ void	ft_freearr(char **tab);
 void	init_obj_value(t_objs	*obj);
 void	ft_clear_light(t_light **lst, void (*del)(void *));
 void	ft_clear_obj(t_objs **lst, void (*del)(void *));
+void	ft_swapd(double *a, double *b);
 #endif
