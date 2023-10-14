@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:03:31 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/11 16:49:46 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/14 18:27:26 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,9 @@ typedef struct s_objs
 	float			height;
 	float			ratio;
 	double			distance_to_origin;
+	t_vector		vertex[3];
+	t_vector		edge[3];
+	t_vector		normal;
 	t_color			color;
 	t_vector		position;
 	t_vector		vector;

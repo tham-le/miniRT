@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:13:03 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/13 16:41:23 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/14 17:02:05 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ bool	intersect_plane(const t_ray *ray, t_objs *plane,
 bool	intersect_cylinder(const t_ray *ray, t_objs *obj,
 	t_intersect_list *xs);
 bool	intersect_cone(const t_ray *ray, t_objs *shape, t_intersect_list *xs);
+bool	intersect_triangle(t_ray *ray, t_objs *triangle, t_intersect_list *xs);
 void	camera_transform(t_scene *scene);
 void	view_transform(t_mat4 *res, const t_vector *from, const t_vector *up,
 			const t_vector *forward);

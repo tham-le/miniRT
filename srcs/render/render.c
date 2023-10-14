@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/13 17:01:15 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/14 20:10:48 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ void	intersect(t_ray	*ray, t_objs *obj, t_intersect_list *arr)
 		intersect_sphere(ray, arr, obj);
 	if (obj->type == PLAN)
 		intersect_plane(ray, obj, arr);
+	if (obj->type == TRIANGLE)
+		intersect_triangle(ray, obj, arr);
 	transform_ray(&transformed_ray, ray, obj);
 	if (obj->type == CYLINDER)
 		intersect_cylinder(&transformed_ray, obj, arr);
 	if (obj->type == CONE)
 		intersect_cone(&transformed_ray, obj, arr);
-	
-	// else if (obj->type == TRIANGLE)
-	// 	intersect_triangle(ray, obj, arr);
+
 	// 		// else if (obj->type == SQUARE)
 	// 	intersect_square(ray, obj, arr);
 }
@@ -100,23 +100,23 @@ t_vector	sphere_normal(t_vector *normal, const t_objs *obj,
 	return (world_normal);
 }
 
-t_vector	plane_normal(const t_objs *shape, const t_vector *itx_point)
-{
-	t_vector	object_normal;
-	t_vector	world_normal;
+// t_vector	plane_normal(const t_objs *shape, const t_vector *itx_point)
+// {
+// 	t_vector	object_normal;
+// 	t_vector	world_normal;
 
-	object_normal.x = 0;
-	object_normal.y = 1;
-	object_normal.z = 0;
-	object_normal.w = 0;
-	(void)itx_point;
-	// if (shape->normal_tex != NULL)
-	// 	return (normal_map(&object_normal, shape, itx_point));
-	mat_vec_multiply(&world_normal, &shape->norm_transf, &object_normal);
-	world_normal.w = 0;
-	normalize_vec(&world_normal);
-	return (world_normal);
-}
+// 	object_normal.x = 0;
+// 	object_normal.y = 1;
+// 	object_normal.z = 0;
+// 	object_normal.w = 0;
+// 	(void)itx_point;
+// 	// if (shape->normal_tex != NULL)
+// 	// 	return (normal_map(&object_normal, shape, itx_point));
+// 	mat_vec_multiply(&world_normal, &shape->norm_transf, &object_normal);
+// 	world_normal.w = 0;
+// 	normalize_vec(&world_normal);
+// 	return (world_normal);
+// }
 
 t_vector	cylinder_normal(const t_objs *shape, const t_vector *itx_point)
 {
@@ -176,6 +176,19 @@ t_vector	cone_normal(const t_objs *shape, const t_vector *itx_point)
 	return (world_normal);
 }
 
+t_vector	triangle_normal(const t_objs *shape, const t_vector *itx_point)
+{
+	t_vector	world_normal;
+
+	(void)itx_point;
+	// if (shape->normal_tex != NULL)
+	// 	return (normal_map(&object_normal, shape, itx_point));
+	mat_vec_multiply(&world_normal, &shape->norm_transf, &shape->normal);
+	world_normal.w = 0;
+	normalize_vec(&world_normal);
+	return (shape->normal);
+}
+
 t_vector	normal_at(const t_objs *obj, const t_vector *itx_point)
 {
 	t_vector	normal;
@@ -184,11 +197,13 @@ t_vector	normal_at(const t_objs *obj, const t_vector *itx_point)
 	if (obj->type == SPHERE)
 		return (sphere_normal(&normal, obj, itx_point));
 	else if (obj->type == PLAN)
-		return (plane_normal(obj, itx_point));
+		return (obj->vector);
 	else if (obj->type == CYLINDER)
 		return (cylinder_normal(obj, itx_point));
 	else if (obj->type == CONE)
 		return (cone_normal(obj, itx_point));
+	else if (obj->type == TRIANGLE)
+		return (obj->normal);
 	// normal = cube_normal(obj, itx_point);
 	// if (obj->normal_tex != NULL)
 	// 	return (normal_map(&normal, obj, itx_point));
@@ -469,6 +484,8 @@ t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 	result.r += phong.diffuse.r + phong.specular.r;
 	result.g += phong.diffuse.g + phong.specular.g;
 	result.b += phong.diffuse.b + phong.specular.b;
+	//printf("phong.diffuse %f %f %f\n", 255 * phong.diffuse.r, 255*phong.diffuse.g, 255*phong.diffuse.b);
+
  	return (result);
 }
 

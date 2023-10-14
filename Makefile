@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/10/13 16:40:18 by thi-le           ###   ########.fr        #
+#    Updated: 2023/10/14 17:02:21 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ SRC_FILES	+=	$(addprefix $(SETTING_DIR), $(SETTING_FILES))
 RENDER_DIR		=	render/
 RENDER_FILES	=	transform.c  fill_pixel.c  \
 					intersect_sphere.c  intersect_cylinder.c \
-					intersect_cone.c render.c \
+					intersect_cone.c intersect_triangle.c render.c \
 					camera.c	get_rgb.c ray_to_pixel.c  set_color.c
 SRC_FILES		+=	$(addprefix $(RENDER_DIR), $(RENDER_FILES))
 
