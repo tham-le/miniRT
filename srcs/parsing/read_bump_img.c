@@ -15,6 +15,84 @@ void	push_bump_color(t_colors_bmp *obj, t_colors_bmp **objs)
 	}
 }
 
+unsigned int stringToHex(const char *input) 
+{
+    unsigned int result = 0;
+    int length = strlen(input);
+
+    for (int i = 0; i < length; i++) {
+        unsigned char byte = input[i];
+        unsigned char upperNibble = (byte >> 4) & 0x0F;
+        result = (result << 4) | upperNibble;
+        unsigned char lowerNibble = byte & 0x0F;
+        result = (result << 4) | lowerNibble;
+    }
+
+    return result;
+}
+
+int str_to_int(char *str)
+{
+    unsigned int hexa;
+    int result = 0;
+    int numNibbles = sizeof(unsigned int) * 2;
+    int nibbleIndex = numNibbles - 1;
+
+    hexa = stringToHex(str);
+    while(nibbleIndex >= 0) 
+    {
+        int nibbleValue = (hexa >> (nibbleIndex * 4)) & 0xF;
+        result <<= 4;
+        result |= nibbleValue;
+        nibbleIndex--;
+    }
+
+    return result;
+}
+
+int convert_to_color(char pixel, t_colors_bmp **pixel_lst)
+{
+    t_colors_bmp *ptr;
+
+    ptr = *pixel_lst;
+    while(ptr)
+    {
+        printf("c: %c\n", ptr->c);
+        if(ptr->c == pixel)
+            return(str_to_int(ptr->color));
+        ptr = ptr->next;
+    }
+    //printf("zero\n");
+    return(0);
+}
+
+int **ft_colortab(t_bumpmap *colors_bmp, int text_file, t_colors_bmp **pixel_lst)
+{
+    int **colortab;
+    char *line;
+    int i;
+    int j;
+
+    colortab = (int **)malloc(sizeof(int ) * colors_bmp->width + 1);
+    i = 0;
+    j = 0;
+    while(i < colors_bmp->height)
+    {
+        line = get_next_line(text_file);
+        j = 0;
+        while(j < colors_bmp->width)
+        {
+            colortab[i][j] = convert_to_color(line[j], pixel_lst);
+            printf("color is  %d\n", colortab[i][j]);
+            j++;
+        }
+        free(line);
+        i++;
+    }
+    colortab[i][j] = 0;
+    return(colortab);
+}
+
 void readbump_img(t_objs *obj)
 {
     char *texture;
@@ -24,6 +102,8 @@ void readbump_img(t_objs *obj)
     char **tab_infos;
     t_colors_bmp *color_map;
     char *line = NULL;
+    int **tab_colors;
+    (void)tab_colors;
 
     if(!(obj->bump_img))
         return;	
@@ -31,10 +111,7 @@ void readbump_img(t_objs *obj)
     texture = obj->bump_img;
     text_file = open(texture, O_RDONLY, 0777);
     if(text_file == -1)
-    {
-        // write(STDERR_FILENO, "Cannot read bump file\n", 22);
         return;
-    }
     while(1)
     {
         line = get_next_line(text_file);
@@ -61,6 +138,7 @@ void readbump_img(t_objs *obj)
 	    push_bump_color(color_map, &obj->colors_bmp);
         obj->colors_bmp = obj->colors_bmp->next;
     }
+    tab_colors = ft_colortab(obj->bmp_img, text_file, &obj->colors_bmp);
     ft_freearr(tab_infos);
     free(obj->bump_img);
 }
