@@ -22,7 +22,7 @@ void print_struct(t_data *data)
         if (obj->type == CONE)
             printf("CONE: coord: [%f, %f, %f], vector: [%f, %f, %f], radius: [%f], height: [%f], color: [%f, %f, %f]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->radius, obj->height, obj->color.r, obj->color.g, obj->color.b);
         if(obj->type == TRIANGLE)
-            printf("TRIANGLE: coord: [%f, %f, %f], vector: [%f, %f, %f], color: [%f, %f, %f]\n", obj->position.x, obj->position.y, obj->position.z, obj->vector.x, obj->vector.y, obj->vector.z, obj->color.r, obj->color.g, obj->color.b);
+            printf("TRIANGLE: corner1 [%f, %f, %f], corner2 [%f, %f, %f], corner3 [%f, %f, %f], color: [%f, %f, %f]\n", obj->vertex[0].x,obj->vertex[0].y, obj->vertex[0].z, obj->vertex[1].x,obj->vertex[1].y, obj->vertex[1].z,  obj->vertex[2].x,obj->vertex[2].y, obj->vertex[2].z, obj->color.r, obj->color.g, obj->color.b);
         obj = obj->next;
     }
     printf("AMBIENT: ratio: [%f], rgb: [%f,%f,%f]\n", scene.ambient.ratio, scene.ambient.color.r, scene.ambient.color.g, scene.ambient.color.b);

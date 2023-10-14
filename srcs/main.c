@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:08:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/11 16:26:14 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/14 20:25:13 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int ac, char **av)
 	data->reflection_depth = 1;
 	if (parsing(data, ac, av) != SUCESS)
 		return (free(data), 1);
-	//print_struct(data);
+	print_struct(data);
 	state = init_display(&data, av[1]);
 	if (state != SUCESS)
 		return (printf("la\n"), clean(data, state));
@@ -65,6 +65,7 @@ int	main(int ac, char **av)
 	state = render(data);
 	if (state != SUCESS)
 		return (printf("ici\n"), clean(data, state));
+	printf("la\n");
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	mlx_loop(data->mlx_ptr);
 	free_all(data);

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:17:55 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/13 15:28:59 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/14 19:05:13 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	object_transform(t_objs *obj)
 	if (obj->type == CONE)
 		scaling_matrix(&scale, obj->radius * 2,
 			obj->height * 2, obj->radius * 2);
-	if (obj->type == PLAN || obj->type == CYLINDER || obj->type == CONE)
+	if (obj->type == PLAN || obj->type == CYLINDER || obj->type == CONE \
+		|| obj->type == TRIANGLE)
 		calculate_orientation(&rot, obj);
 	translate_matrix(&translate, obj->position.x,
 		obj->position.y, obj->position.z);
