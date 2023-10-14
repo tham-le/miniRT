@@ -55,17 +55,16 @@ int	main(int ac, char **av)
 	data->reflection_depth = 1;
 	if (parsing(data, ac, av) != SUCESS)
 		return (free(data), 1);
-	print_struct(data);
+	//print_struct(data);
 	state = init_display(&data, av[1]);
 	if (state != SUCESS)
-		return (printf("la\n"), clean(data, state));
+		return (clean(data, state));
 	hooks(data);
 	camera_setting(data);
 	calcul_transform(data);
 	state = render(data);
 	if (state != SUCESS)
-		return (printf("ici\n"), clean(data, state));
-	printf("la\n");
+		return (clean(data, state));
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	mlx_loop(data->mlx_ptr);
 	free_all(data);
