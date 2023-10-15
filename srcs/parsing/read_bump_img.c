@@ -54,10 +54,10 @@ int convert_to_color(char pixel, t_colors_bmp **pixel_lst)
 {
     t_colors_bmp *ptr;
 
-    ptr = *pixel_lst;
+    ptr = (*pixel_lst);
     while(ptr)
     {
-        printf("c: %c\n", ptr->c);
+        //printf("c: %c\n", ptr->c);
         if(ptr->c == pixel)
             return(str_to_int(ptr->color));
         ptr = ptr->next;
@@ -66,26 +66,29 @@ int convert_to_color(char pixel, t_colors_bmp **pixel_lst)
     return(0);
 }
 
-int **ft_colortab(t_bumpmap *colors_bmp, int text_file, t_colors_bmp **pixel_lst)
+int **ft_colortab(t_bumpmap *colors_bmp, int text_file, t_colors_bmp *pixel_lst)
 {
     int **colortab;
     char *line;
     int i;
     int j;
 
-    colortab = (int **)malloc(sizeof(int ) * colors_bmp->width + 1);
+    colortab = (int **)malloc(sizeof(int) * (colors_bmp->height) + 1);
     i = 0;
     j = 0;
+    printf("height: %d\n", colors_bmp->height);
     while(i < colors_bmp->height)
     {
-        line = get_next_line(text_file);
+        line = ft_split(get_next_line(text_file), '\"')[0];
         j = 0;
         while(j < colors_bmp->width)
         {
-            colortab[i][j] = convert_to_color(line[j], pixel_lst);
-            printf("color is  %d\n", colortab[i][j]);
+            colortab[i][j] = convert_to_color(line[j], &pixel_lst);
+            printf("%dth color is  %d\n", j, colortab[i][j]);
             j++;
         }
+        printf("une ligne\n");
+        colortab[i][j] = 0;
         free(line);
         i++;
     }
@@ -124,7 +127,7 @@ void readbump_img(t_objs *obj)
     obj->bmp_img->height = ft_atoi(tab_infos[1]);
     obj->bmp_img->nb_colors = ft_atoi(tab_infos[2]);
     obj->bmp_img->char_per_pixel = ft_atoi(tab_infos[3]);
-    printf("nb colors: %d\n", obj->bmp_img->nb_colors);
+    //printf("nb colors: %d\n", obj->bmp_img->nb_colors);
     color_map = ft_calloc(sizeof(t_colors_bmp), 1);
     while(1)
     {
@@ -134,11 +137,11 @@ void readbump_img(t_objs *obj)
         color_map->color = new_l[ft_tabsize(new_l) - 1];
         if(!line || strstr(line, "pixels"))
             break;
-        printf("char: %c is color %s", color_map->c, color_map->color);
+        //printf("char: %c is color %s", color_map->c, color_map->color);
 	    push_bump_color(color_map, &obj->colors_bmp);
         obj->colors_bmp = obj->colors_bmp->next;
     }
-    tab_colors = ft_colortab(obj->bmp_img, text_file, &obj->colors_bmp);
+    tab_colors = ft_colortab(obj->bmp_img, text_file, color_map);
     ft_freearr(tab_infos);
     free(obj->bump_img);
 }
