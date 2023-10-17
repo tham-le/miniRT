@@ -73,14 +73,15 @@ int **ft_colortab(t_bumpmap *colors_bmp, int text_file, t_colors_bmp *pixel_lst)
     int i;
     int j;
 
-    colortab = (int **)malloc(sizeof(int) * (colors_bmp->height) + 1);
+    colortab = (int **)malloc(sizeof(int *) * (colors_bmp->height) + 1);
     i = 0;
     j = 0;
-    printf("height: %d\n", colors_bmp->height);
+    printf("height: %d, width: %d\n", colors_bmp->height, colors_bmp->width);
     while(i < colors_bmp->height)
     {
         line = ft_split(get_next_line(text_file), '\"')[0];
         j = 0;
+        colortab[i] = malloc(sizeof(int ) * (colors_bmp->width) + 1);
         while(j < colors_bmp->width)
         {
             colortab[i][j] = convert_to_color(line[j], &pixel_lst);
@@ -137,6 +138,7 @@ void readbump_img(t_objs *obj)
         color_map->color = new_l[ft_tabsize(new_l) - 1];
         if(!line || strstr(line, "pixels"))
             break;
+        else
         //printf("char: %c is color %s", color_map->c, color_map->color);
 	    push_bump_color(color_map, &obj->colors_bmp);
         obj->colors_bmp = obj->colors_bmp->next;
