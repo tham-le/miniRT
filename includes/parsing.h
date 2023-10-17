@@ -66,7 +66,11 @@ char		*dup_one(char c);
 t_xpm_img	*load_img(char *bmp_img, void *mlx_ptr);
 void	push_light(t_light *obj, t_light **objs);
 void    readbump_img(t_objs *obj);
-
+void add_options(t_objs *obj, char **elems);
+void add_reflect_opt(t_objs *obj, char **elems);
+void add_diffuse_opt(t_objs *obj, char **elems);
+void add_shine_opt(t_objs *obj, char **elems);
+void add_specular_opt(t_objs *obj, char **elems);
 //DEBUG
 void		print_struct(t_data *data);
 void free_all(t_data *data);

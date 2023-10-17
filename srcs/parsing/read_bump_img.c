@@ -90,7 +90,7 @@ int **ft_colortab(t_bumpmap *colors_bmp, int text_file, t_colors_bmp *pixel_lst)
             //printf("%dth color is  %d\n", j, colortab[i][j]);
             j++;
         }
-        //printf("ligne %d done\n", i);
+        printf("ligne %d done\n", i);
         colortab[i][j] = 0;
         free(line);
         i++;
@@ -109,7 +109,6 @@ void readbump_img(t_objs *obj)
     t_colors_bmp *color_map;
     char *line = NULL;
     int **tab_colors;
-    (void)tab_colors;
 
     if(!(obj->bump_img))
         return;	

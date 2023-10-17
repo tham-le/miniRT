@@ -49,8 +49,7 @@ int add_a_cone(t_data *data, char **elems)
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
 	if(check_position(elems[1]) || check_vector(elems[2]) || check_float(elems[3]) || check_float(elems[3]) || check_color(elems[5]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
-	if(elems[6])
-		obj->bump_img = ft_strdup(elems[6]);
+	add_options(obj, elems);
 	obj->type = CONE;
 	obj->position = get_position(elems[1]);
 	obj->vector = get_position(elems[2]);
@@ -73,12 +72,11 @@ int add_a_sphere(t_data *data, char **elems)
 
 	obj = ft_calloc(sizeof(t_objs), 1);
 	init_obj_value(obj);
-	if(ft_tabsize(elems) < 4 || ft_tabsize(elems) > 5 || is_void(elems[3][0]))
+	if(ft_tabsize(elems) < 4 || is_void(elems[3][0]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
 	if(check_position(elems[1]) || check_float(elems[2]) || check_color(elems[3]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
-	if(elems[4])
-		obj->bump_img = ft_strdup(elems[4]);
+	add_options(obj, elems);
 	obj->type = SPHERE;
 	obj->position = get_position(elems[1]);
 	obj->diametre = ft_atod(elems[2]);
@@ -88,7 +86,8 @@ int add_a_sphere(t_data *data, char **elems)
 	obj->squared_radius = obj->radius * obj->radius;
 	obj->color = get_color(elems[3]);
 	push_object(obj, &data->objs);
-	// readbump_img(data->objs);
+	// if(obj->bump_img)
+	// 	readbump_img(data->objs);
 	return(0);
 }
 
@@ -103,8 +102,7 @@ int add_a_cylindre(t_data *data, char **elems)
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
 	if(check_position(elems[1]) || check_vector(elems[2]) || check_float(elems[3]) || check_float(elems[3]) || check_color(elems[5]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
-	if(elems[6])
-		obj->bump_img = ft_strdup(elems[6]);
+	add_options(obj, elems);
 	obj->type = CYLINDER;
 	obj->position = get_position(elems[1]);
 	obj->vector = get_position(elems[2]);
@@ -131,8 +129,7 @@ int add_a_plan(t_data *data, char **elems)
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
 	if(check_position(elems[1]) || check_vector(elems[2]) || check_color(elems[3]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
-	if(elems[4])
-		obj->bump_img = ft_strdup(elems[4]);
+	add_options(obj, elems);
 	obj->type = PLAN;
 	obj->position = get_position(elems[1]);
 	obj->vector = get_position(elems[2]);
@@ -156,8 +153,7 @@ int add_a_triangle(t_data *data, char **elems)
 	if(check_position(elems[1]) || check_position(elems[2]) \
 		|| check_position(elems[3]) || check_color(elems[4]))
 		return(free(obj), ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
-	if(elems[5])
-		obj->bump_img = ft_strdup(elems[5]);
+	add_options(obj, elems);
 	obj->type = TRIANGLE;
 	obj->vertex[0] = get_position(elems[1]);
 	obj->vertex[1] = get_position(elems[2]);
