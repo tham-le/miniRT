@@ -137,6 +137,7 @@ typedef struct s_objs
 	t_vector		vector;
 	t_vector		scale;
 	char			*bump_img;
+	int 			**tab_bmp;
 	t_bumpmap		*bmp_img;
 	t_colors_bmp	*colors_bmp;
 	t_xpm_img		*surface;

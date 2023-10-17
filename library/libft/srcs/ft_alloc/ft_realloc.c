@@ -23,6 +23,8 @@ void	*ft_realloc(void *ptr, size_t newsize)
 	if (newsize <= cursize)
 		return (ptr);
 	newptr = malloc(newsize);
+	if(!newptr)
+		return(NULL);
 	ft_memcpy(ptr, newptr, cursize);
 	free(ptr);
 	return (newptr);

@@ -12,7 +12,7 @@ int check_extension(char *file_name)
     return(0);
 }
 
-int parse_input(t_data **data, int ac, char **av)
+int parse_input(int ac, char **av)
 {
     char *buffer;
     int file_no;
@@ -22,10 +22,10 @@ int parse_input(t_data **data, int ac, char **av)
     if(!buffer)
         return(1);
     if(check_extension(av[1]))
-        return(free(*data), free(buffer), write(STDERR_FILENO, ERR_FILE_NAME, 33));
+        return(free(buffer), write(STDERR_FILENO, ERR_FILE_NAME, 33));
     file_no = open(av[1], O_RDONLY);
     if(file_no == -1)
-        return(free(*data), free(buffer), write(STDERR_FILENO, ERROR_FILE, 29));
+        return(free(buffer), write(STDERR_FILENO, ERROR_FILE, 29));
     if(!read(file_no, buffer, sizeof(int)))
         return(free(buffer), close(file_no), write(STDERR_FILENO, ERR_READ_FILE, 28));
     close(file_no);
@@ -95,7 +95,7 @@ int init_and_parse(t_data *data, char **av)
 
 int parsing(t_data *data, int ac, char **av)
 {
-    if(parse_input(&data, ac, av))
+    if(parse_input(ac, av))
         return(1);
     if(init_and_parse(data, av))
         return(1);

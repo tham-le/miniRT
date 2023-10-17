@@ -64,6 +64,8 @@ char		*readfile(char *str, int fd)
 	int		ret;
 
 	str = (char *)ec_malloc(sizeof(char) * (BUFSIZE + 1));
+	if(!str)
+		return(NULL);
 	while ((ret = read(fd, buf, BUFSIZE)) > 0)
 	{
 		ptr = str;

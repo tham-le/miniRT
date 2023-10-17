@@ -75,6 +75,8 @@ void	write_split(char **split, char *str, char *charset)
 			while (char_is_separator(str[i + j], charset) == 0)
 				j++;
 			split[word] = (char *)malloc(sizeof(char) * (j + 1));
+			if(!split[word])
+				return;
 			write_word(split[word], str + i, charset);
 			i += j;
 			word++;
@@ -89,6 +91,8 @@ char	**ft_split_charset(char *str, char *charset)
 
 	words = count_words(str, charset);
 	split = (char **)malloc(sizeof(char *) * (words + 1));
+	if(!split)
+		return(NULL);
 	split[words] = 0;
 	write_split(split, str, charset);
 	return (split);

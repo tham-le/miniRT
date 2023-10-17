@@ -10,6 +10,16 @@ void	ft_freearr(char **tab)
 	free(tab);
 }
 
+void	ft_freearr_int(int **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
+}
+
 
 int		ft_tabsize(char **tab)
 {

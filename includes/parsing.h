@@ -31,7 +31,7 @@
 //PARSING
 int			parsing(t_data *data, int		 ac, char **av);
 int			init_and_parse(t_data *data, char **av);
-int			parse_input(t_data **data, int		 ac, char **av);
+int			parse_input(int		 ac, char **av);
 int			check_line(t_scene *sc, t_objs *objs, char *line);
 int			first_element(char *elem);
 int			add_to_struct(t_data *data, int		 type, char *line);

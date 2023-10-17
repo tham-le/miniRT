@@ -57,12 +57,10 @@ int convert_to_color(char pixel, t_colors_bmp **pixel_lst)
     ptr = (*pixel_lst);
     while(ptr)
     {
-        //printf("c: %c\n", ptr->c);
         if(ptr->c == pixel)
             return(str_to_int(ptr->color));
         ptr = ptr->next;
     }
-    //printf("zero\n");
     return(0);
 }
 
@@ -74,26 +72,30 @@ int **ft_colortab(t_bumpmap *colors_bmp, int text_file, t_colors_bmp *pixel_lst)
     int j;
 
     colortab = (int **)malloc(sizeof(int *) * (colors_bmp->height) + 1);
+    if(!colortab)
+        return(NULL);
     i = 0;
     j = 0;
-    printf("height: %d, width: %d\n", colors_bmp->height, colors_bmp->width);
+    // printf("height: %d, width: %d\n", colors_bmp->height, colors_bmp->width);
     while(i < colors_bmp->height)
     {
         line = ft_split(get_next_line(text_file), '\"')[0];
         j = 0;
-        colortab[i] = malloc(sizeof(int ) * (colors_bmp->width) + 1);
+        colortab[i] = malloc(sizeof(int ) * 2 * (colors_bmp->width) + 1);
+        if(!colortab[i])
+            return(NULL);
         while(j < colors_bmp->width)
         {
             colortab[i][j] = convert_to_color(line[j], &pixel_lst);
-            printf("%dth color is  %d\n", j, colortab[i][j]);
+            //printf("%dth color is  %d\n", j, colortab[i][j]);
             j++;
         }
-        printf("une ligne\n");
+        //printf("ligne %d done\n", i);
         colortab[i][j] = 0;
         free(line);
         i++;
     }
-    colortab[i][j] = 0;
+    colortab[i] = 0;
     return(colortab);
 }
 
@@ -144,6 +146,8 @@ void readbump_img(t_objs *obj)
         obj->colors_bmp = obj->colors_bmp->next;
     }
     tab_colors = ft_colortab(obj->bmp_img, text_file, color_map);
+    obj->tab_bmp = tab_colors;
+    ft_freearr_int(tab_colors);
     ft_freearr(tab_infos);
     free(obj->bump_img);
 }
