@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:49:30 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/21 18:51:31 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 19:36:38 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,3 @@ void	axis_angle(t_mat4 *rot_mat, const t_vector *ax, double angle)
 }
 
 /* https://en.wikipedia.org/wiki/Rotation_matrix */
-

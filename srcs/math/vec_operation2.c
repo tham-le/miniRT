@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 16:44:43 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/07 20:17:39 by thi-le           ###   ########.fr       */
+/*   Created: 2023/10/11 14:48:06 by thi-le            #+#    #+#             */
+/*   Updated: 2023/10/18 19:37:20 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,13 @@ double	vec_magnitude(const t_vector *vec)
  * @brief Normalizes a vector
  * @param vec Vector to be normalized
  */
-void normalize_vec(t_vector *vec)
+void	normalize_vec(t_vector *vec)
 {
-    if (vec_magnitude(vec) == 0)
-        return;
-    
-    scale_vec(vec, vec, 1 / vec_magnitude(vec));
-    vec->w = 0;
+	if (vec_magnitude(vec) == 0)
+		return ;
+	scale_vec(vec, vec, 1 / vec_magnitude(vec));
+	vec->w = 0;
 }
-
 
 /**
  * @brief Returns the dot product of two vectors

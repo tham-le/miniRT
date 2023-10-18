@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:40:22 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/18 19:32:13 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 19:38:15 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_obj_value(t_objs	*obj)
 {
 	obj->diffuse = 0.9;
 	obj->highlighted = true;
-	obj->reflective= 0.1;
+	obj->reflective = 0.1;
 	obj->shininess = 200;
 	obj->specular = 0.9;
 	obj->pattern_type = PLAIN;
