@@ -48,6 +48,14 @@ int	add_to_struct(t_data *data, int type, char *line)
 		ret = add_light(data, elems);
 	else if (type == CAMERA)
 		ret = add_camera(data, elems);
+	else if (type == DIMENSIONS)
+	{
+		if(ft_tabsize(elems) > 3)
+			return(ft_freearr(elems), ret);
+		data->width = ft_atoi(elems[1]);
+		data->height = ft_atoi(elems[2]);
+		ret = 0;
+	}
 	ft_freearr(elems);
 	return (ret);
 }

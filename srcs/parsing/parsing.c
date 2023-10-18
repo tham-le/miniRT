@@ -55,6 +55,10 @@ int get_type(char *line)
 		return (ft_freearr(tab), CONE);
 	else if (!ft_strncmp(tab[0], "tr", ft_strlen(tab[0])))
 		return (ft_freearr(tab), TRIANGLE);
+	else if (!ft_strncmp(tab[0], "R", ft_strlen(tab[0])))
+		return (ft_freearr(tab), DIMENSIONS);
+	else if (!ft_strncmp(tab[0], "//", 2))
+		return (ft_freearr(tab), COMMENT);
 	else if (!ft_strncmp(tab[0], "#", 1))
 		return (ft_freearr(tab), COMMENT);
 	else
@@ -88,8 +92,10 @@ int	init_and_parse(t_data *data, char **av)
 			return (1);
 		}
 		free(sp_line);
+
 	}
 	close(file_no);
+
 	return (0);
 }
 

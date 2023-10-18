@@ -24,10 +24,10 @@ int	init_display(t_data **data, char *fname)
 	(*data)->mlx_ptr = mlx_init();
 	if (!(*data)->mlx_ptr)
 		return (print_error("Error: mlx_init failed", 1));
-	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, W_W, W_H, fname);
+	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, (*data)->width, (*data)->height, fname);
 	if (!(*data)->win_ptr)
 		return (print_error("Error: mlx_new_window failed", 2));
-	(*data)->img_ptr = mlx_new_image((*data)->mlx_ptr, W_W, W_H);
+	(*data)->img_ptr = mlx_new_image((*data)->mlx_ptr, (*data)->width, (*data)->height);
 	if (!(*data)->img_ptr)
 		return (print_error("Error: mlx_new_image failed", 3));
 	(*data)->addr = mlx_get_data_addr((*data)->img_ptr, &(*data)->bpp, \
@@ -46,6 +46,8 @@ int	main(int ac, char **av)
 		return (ft_print_help());
 	data = ft_calloc(sizeof(t_data), 2);
 	data->reflection_depth = 1;
+	data->width = W_W;
+	data->height = W_H;
 	if (parsing(data, ac, av) != SUCESS)
 		return (clean(data, 1));
 	//print_struct(data);

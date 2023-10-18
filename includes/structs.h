@@ -28,6 +28,7 @@ typedef enum e_type{
 	CYLINDER,
 	CONE,
 	TRIANGLE,
+	DIMENSIONS,
 	COMMENT,
 }		  t_type;
 

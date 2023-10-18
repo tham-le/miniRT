@@ -522,10 +522,10 @@ int	render(t_data *data)
 
 
 	y = -1;
-	while (++y < W_H)
+	while (++y < data->height)
 	{
 		x = -1;
-		while (++x < W_W)
+		while (++x < data->width)
 			render_ray(data, &arr, x, y);
 	}
 	return (SUCESS);
