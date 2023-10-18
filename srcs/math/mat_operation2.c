@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:10:42 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/18 19:33:19 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 19:36:17 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static double	cofactor4(const t_mat4 *mat4, int row, int col)
 
 static double	det4(const t_mat4 *mat4)
 {
-	return (cofactor4 (mat4, 0, 0) * (*mat4)[0][0]
-			+ cofactor4 (mat4, 0, 1) * (*mat4)[0][1]
-			+ cofactor4 (mat4, 0, 2) * (*mat4)[0][2]
-			+ cofactor4 (mat4, 0, 3) * (*mat4)[0][3]);
+	return (cofactor4(mat4, 0, 0) * (*mat4)[0][0]
+			+cofactor4(mat4, 0, 1) * (*mat4)[0][1]
+			+cofactor4(mat4, 0, 2) * (*mat4)[0][2]
+			+cofactor4(mat4, 0, 3) * (*mat4)[0][3]);
 }
 
 void	mat_inverse(t_mat4 *res, const t_mat4 *mat)
