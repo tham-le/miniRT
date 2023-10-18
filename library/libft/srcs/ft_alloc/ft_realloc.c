@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   untitled                                           :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 21:15:59 by thi-le            #+#    #+#             */
-/*   Updated: 2023/03/28 21:17:24 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 19:19:15 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	*ft_realloc(void *ptr, size_t newsize)
 	if (newsize <= cursize)
 		return (ptr);
 	newptr = malloc(newsize);
-	if(!newptr)
-		return(NULL);
+	if (!newptr)
+		return (NULL);
 	ft_memcpy(ptr, newptr, cursize);
 	free(ptr);
 	return (newptr);

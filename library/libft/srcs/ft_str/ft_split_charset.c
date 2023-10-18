@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 15:19:06 by thi-le            #+#    #+#             */
-/*   Updated: 2023/03/07 15:23:53 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 19:18:55 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -75,8 +75,8 @@ void	write_split(char **split, char *str, char *charset)
 			while (char_is_separator(str[i + j], charset) == 0)
 				j++;
 			split[word] = (char *)malloc(sizeof(char) * (j + 1));
-			if(!split[word])
-				return;
+			if (!split[word])
+				return ;
 			write_word(split[word], str + i, charset);
 			i += j;
 			word++;
@@ -91,8 +91,8 @@ char	**ft_split_charset(char *str, char *charset)
 
 	words = count_words(str, charset);
 	split = (char **)malloc(sizeof(char *) * (words + 1));
-	if(!split)
-		return(NULL);
+	if (!split)
+		return (NULL);
 	split[words] = 0;
 	write_split(split, str, charset);
 	return (split);

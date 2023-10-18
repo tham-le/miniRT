@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 18:12:21 by thi-le            #+#    #+#             */
-/*   Updated: 2023/01/04 13:39:14 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 20:45:59 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -49,6 +49,26 @@ static char	*check_and_return(char **s, ssize_t n, int fd)
 	return (return_next_line(&s[fd]));
 }
 
+static int	false_input(int fd, char **s)
+{
+	int	i;
+
+	if (fd > FD_SIZE || BUFFER_SIZE <= 0)
+		return (-1);
+	if (fd < 0)
+	{
+		i = 0;
+		while (i < FD_SIZE)
+		{
+			if (s[i])
+				free(s[i]);
+			i++;
+		}
+		return (-1);
+	}
+	return (0);
+}
+
 char	*get_next_line(int fd)
 {
 	char		*tmp;
@@ -56,7 +76,7 @@ char	*get_next_line(int fd)
 	static char	*s[FD_SIZE];
 	ssize_t		n;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (false_input(fd, s) == -1)
 		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
