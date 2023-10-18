@@ -21,7 +21,7 @@ void	ft_freearr_int(int **tab)
 }
 
 
-int		ft_tabsize(char **tab)
+int	ft_tabsize(char **tab)
 {
 	size_t	i;
 
