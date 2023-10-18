@@ -82,12 +82,14 @@ int	init_and_parse(t_data *data, char **av)
 		type = get_type(sp_line);
 		if (add_to_struct(data, type, sp_line) > 0)
 		{
-			line = get_next_line(-1);
+			get_next_line(-1);
 			free(sp_line);
+			close(file_no);
 			return (1);
 		}
 		free(sp_line);
 	}
+	close(file_no);
 	return (0);
 }
 
