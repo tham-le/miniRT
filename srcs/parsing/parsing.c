@@ -70,9 +70,11 @@ int	init_and_parse(t_data *data, char **av)
 
 	file_no = open(av[1], O_RDONLY);
 	// init_scene(data);
-	line = get_next_line(file_no);
-	while (line != NULL)
+	while (1)
 	{
+		line = get_next_line(file_no);
+		if (!line)
+			break ;
 		sp_line = spaces_check(line);
 		free(line);
 		if (!sp_line)
@@ -85,7 +87,6 @@ int	init_and_parse(t_data *data, char **av)
 			return (1);
 		}
 		free(sp_line);
-		line = get_next_line(file_no);
 	}
 	return (0);
 }
