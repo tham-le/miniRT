@@ -23,12 +23,12 @@ int parse_input(int ac, char **av)
 	if (!buffer)
 		return (1);
 	if (check_extension(av[1]))
-		return (free(buffer), write(STDERR_FILENO, ERR_FILE_NAME, 33));
+		return (free(buffer), printf("Error: %s is not a .rt file\n", av[1]), 1);
 	file_no = open(av[1], O_RDONLY);
 	if (file_no == -1)
-		return (free(buffer), write(STDERR_FILENO, ERROR_FILE, 29));
+		return (free(buffer), printf("Error: %s cannot be opened\n", av[1]), 1);
 	if (!read(file_no, buffer, sizeof(int)))
-		return (free(buffer), close(file_no), write(STDERR_FILENO, ERR_READ_FILE, 28));
+		return (free(buffer), close(file_no), printf("Error: file %s is empty\n", av[1]), 1);
 	close(file_no);
 	free(buffer);
 	return (0);
@@ -84,6 +84,7 @@ int	init_and_parse(t_data *data, char **av)
 		if (!sp_line)
 			continue ;
 		type = get_type(sp_line);
+		data->nb_lines++;
 		if (add_to_struct(data, type, sp_line) > 0)
 		{
 			get_next_line(-1);
@@ -92,10 +93,10 @@ int	init_and_parse(t_data *data, char **av)
 			return (1);
 		}
 		free(sp_line);
-
 	}
+	if(!data->nb_lines)
+		return(printf("Error: file %s is empty\n", av[1]), 1);
 	close(file_no);
-
 	return (0);
 }
 

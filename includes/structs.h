@@ -205,6 +205,7 @@ typedef struct	s_data
 	int			width;
 	int			bpp;
 	int			line_length;
+	int			nb_lines;
 	int			endian;
 	t_scene		scene;
 	t_objs		*objs;

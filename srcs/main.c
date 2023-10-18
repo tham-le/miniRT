@@ -48,7 +48,7 @@ int	main(int ac, char **av)
 	data->reflection_depth = 1;
 	data->width = W_W;
 	data->height = W_H;
-	if (parsing(data, ac, av) != SUCESS)
+	if (parsing(data, ac, av) != SUCESS || !data->nb_lines)
 		return (clean(data, 1));
 	//print_struct(data);
 	state = init_display(&data, av[1]);
