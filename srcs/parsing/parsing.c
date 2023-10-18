@@ -1,9 +1,9 @@
 #include "miniRT.h"
 #include <stdlib.h>
 
-int check_extension(char *file_name)
+int	check_extension(char *file_name)
 {
-	char *ext;
+	char	*ext;
 
 	if (!ft_strchr(file_name, '.'))
 		return (1);
@@ -15,10 +15,10 @@ int check_extension(char *file_name)
 
 int parse_input(int ac, char **av)
 {
-	char *buffer;
-	int file_no;
+	char	*buffer;
+	int		file_no;
+
 	(void)ac;
-	
 	buffer = malloc(sizeof(int));
 	if (!buffer)
 		return (1);
@@ -36,7 +36,7 @@ int parse_input(int ac, char **av)
 
 int get_type(char *line)
 {
-	char **tab;
+	char	**tab;
 
 	tab = ft_split(line, ' ');
 	if (!ft_strncmp(tab[0], "A", ft_strlen(tab[0])))
@@ -57,7 +57,7 @@ int get_type(char *line)
 		return (ft_freearr(tab), TRIANGLE);
 	else if (!ft_strncmp(tab[0], "#", 1))
 		return (ft_freearr(tab), COMMENT);
-	else	
+	else
 		return (ft_freearr(tab), -1);
 }
 
@@ -80,7 +80,6 @@ int	init_and_parse(t_data *data, char **av)
 		type = get_type(sp_line);
 		if (add_to_struct(data, type, sp_line) > 0)
 		{
-			printf("Error: parsing failed\n");
 			line = get_next_line(-1);
 			free(sp_line);
 			return (1);
