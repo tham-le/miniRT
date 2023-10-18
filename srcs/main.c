@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:08:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/14 20:25:13 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 17:50:25 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ int	init_display(t_data **data, char *fname)
 	return (SUCESS);
 }
 
-void free_all(t_data *data)
-{
-	ft_clear_light(&data->scene.light, free);
-	ft_clear_obj(&data->objs, free);
-	free(data);
-}
-
 int	main(int ac, char **av)
 {
 	t_data	*data;
@@ -67,6 +60,6 @@ int	main(int ac, char **av)
 		return (clean(data, state));
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	mlx_loop(data->mlx_ptr);
-	free_all(data);
+	clean(data, 5);
 	return (0);
 }

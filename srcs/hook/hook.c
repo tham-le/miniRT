@@ -6,29 +6,22 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:34:39 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 17:49:22 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 17:41:34 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <miniRT.h>
 
-void	free_all_ok(t_data *data)
-{
-	clean(data, 6);
-	free_all(data);
-	exit(0);
-}
-
 int	red_cross(t_data *data)
 {
-	free_all_ok(data);
+	clean(data, 5);
 	return (0);
 }
 
 int	key_press(int key, t_data *data)
 {
 	if (key == XK_Escape)
-		free_all_ok(data);
+		clean(data, 5);
 	return (0);
 }
 
