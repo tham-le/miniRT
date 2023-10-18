@@ -6,11 +6,12 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:18:57 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/17 17:49:56 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 17:42:44 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "parsing.h"
 #include "structs.h"
 
 /* clean code
@@ -21,10 +22,8 @@
 ** state 5: ft_parse_file failed -> destroy image, window, mlx_ptr
 **
  */
-int		clean(t_data *data, int state)
+int	clean(t_data *data, int state)
 {
-	// if (state > 4)
-	// 	free(data);
 	if (state > 3)
 		mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	if (state > 2)
@@ -34,5 +33,10 @@ int		clean(t_data *data, int state)
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
+	ft_clear_light(&data->scene.light, free);
+	ft_clear_obj(&data->objs, free);
+	free(data);
+	if (state > 4)
+		exit(0);
 	return (1);
 }
