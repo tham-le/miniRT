@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/14 20:10:48 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/18 20:00:57 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ void	intersect(t_ray	*ray, t_objs *obj, t_intersect_list *arr)
 		intersect_cylinder(&transformed_ray, obj, arr);
 	if (obj->type == CONE)
 		intersect_cone(&transformed_ray, obj, arr);
-
-	// 		// else if (obj->type == SQUARE)
-	// 	intersect_square(ray, obj, arr);
 }
 
 t_intersect	*hit(t_intersect_list *xs)
@@ -99,24 +96,6 @@ t_vector	sphere_normal(t_vector *normal, const t_objs *obj,
 	normalize_vec(&world_normal);
 	return (world_normal);
 }
-
-// t_vector	plane_normal(const t_objs *shape, const t_vector *itx_point)
-// {
-// 	t_vector	object_normal;
-// 	t_vector	world_normal;
-
-// 	object_normal.x = 0;
-// 	object_normal.y = 1;
-// 	object_normal.z = 0;
-// 	object_normal.w = 0;
-// 	(void)itx_point;
-// 	// if (shape->normal_tex != NULL)
-// 	// 	return (normal_map(&object_normal, shape, itx_point));
-// 	mat_vec_multiply(&world_normal, &shape->norm_transf, &object_normal);
-// 	world_normal.w = 0;
-// 	normalize_vec(&world_normal);
-// 	return (world_normal);
-// }
 
 t_vector	cylinder_normal(const t_objs *shape, const t_vector *itx_point)
 {
