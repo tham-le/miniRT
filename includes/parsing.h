@@ -27,7 +27,11 @@
 # define ERR_NB_CAMERA "Error: only one camera is allowed\n"
 # define ERR_NB_LIGHT "Error: only one light is allowed\n"
 # define ERR_NAME_ELMT "Error: invalid name of element\n"
-
+# define ERROR_POS_ARGS "Error: all position/vector arguments should be written in this format: x,x,x\n"
+# define ERROR_POS_ARGS_DIGIT "Error: a position/vector argument contains a character that is not a digit\n"
+# define ERROR_COL_ARGS "Error: all color arguments should be written in this format: x,x,x with a x in the range from 0 to 255\n"
+# define ERROR_COL_ARGS_DIGIT "Error: one of rgb color contains a character that is not a digit\n"
+# define ERROR_COL_ARGS_RANGE "Error: one of the rgb colors is not within the range 0 to 255\n"
 //PARSING
 int			parsing(t_data *data, int		 ac, char **av);
 int			init_and_parse(t_data *data, char **av);
@@ -71,6 +75,8 @@ void add_reflect_opt(t_objs *obj, char **elems);
 void add_diffuse_opt(t_objs *obj, char **elems);
 void add_shine_opt(t_objs *obj, char **elems);
 void add_specular_opt(t_objs *obj, char **elems);
+void	add_bmp_file(t_objs *obj, char **elems);
+int	add_to_struct_suite(t_data *data, int type, char **elems);
 //DEBUG
 void		print_struct(t_data *data);
 void free_all(t_data *data);

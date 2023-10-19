@@ -14,11 +14,11 @@
 #include	"mlx_int.h"
 
 #define WIN1_SX 242
-#define	WIN1_SY 242
-#define	IM1_SX 42
-#define	IM1_SY 42
-#define	IM3_SX		242
-#define	IM3_SY		242
+#define WIN1_SY 242
+#define IM1_SX 42
+#define IM1_SY 42
+#define IM3_SX 242
+#define IM3_SY 242
 
 void	*mlx;
 void	*win1;

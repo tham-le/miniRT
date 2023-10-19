@@ -50,7 +50,6 @@ int	main(int ac, char **av)
 	data->height = W_H;
 	if (parsing(data, ac, av) != SUCESS || !data->nb_lines)
 		return (clean(data, 1));
-	//print_struct(data);
 	state = init_display(&data, av[1]);
 	if (state != SUCESS)
 		return (clean(data, state));

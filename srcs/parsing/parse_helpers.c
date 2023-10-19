@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_helpers.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itchinda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/19 21:38:42 by itchinda          #+#    #+#             */
+/*   Updated: 2023/10/19 21:39:24 by itchinda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
-char *dup_one(char c)
+char	*dup_one(char c)
 {
-	char *new_elt;
+	char	*new_elt;
 
 	new_elt = malloc(sizeof(char) + 1);
 	if (!new_elt)
@@ -34,10 +46,10 @@ char	*str_concate(char *s, char c)
 	return (str);
 }
 
-char *spaces_check(char *line)
+char	*spaces_check(char *line)
 {
-	char *new_line;
-	int i;
+	char	*new_line;
+	int		i;
 
 	new_line = NULL;
 	i = 0;

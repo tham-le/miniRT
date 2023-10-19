@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_elements.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itchinda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/19 21:33:31 by itchinda          #+#    #+#             */
+/*   Updated: 2023/10/19 21:38:19 by itchinda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
 int	first_element(char *elem)
@@ -21,10 +33,33 @@ int	first_element(char *elem)
 	return (-1);
 }
 
+int	add_to_struct_suite(t_data *data, int type, char **elems)
+{
+	int		ret;
+
+	ret = -1;
+	if (type == AMBIENT)
+		ret = add_ambient(data, elems);
+	else if (type == LIGHT)
+		ret = add_light(data, elems);
+	else if (type == CAMERA)
+		ret = add_camera(data, elems);
+	else if (type == DIMENSIONS)
+	{
+		if (ft_tabsize(elems) != 3)
+			return (ft_freearr(elems),
+				printf("Error: R should have 2 arguments\n"), 1);
+		data->width = ft_atoi(elems[1]);
+		data->height = ft_atoi(elems[2]);
+		ret = 0;
+	}
+	return (ret);
+}
+
 int	add_to_struct(t_data *data, int type, char *line)
 {
-	char **elems;
-	int ret;
+	char	**elems;
+	int		ret;
 
 	elems = ft_split(line, ' ');
 	ret = -1;
@@ -42,20 +77,8 @@ int	add_to_struct(t_data *data, int type, char *line)
 		ret = add_a_triangle(data, elems);
 	else if (type == CONE)
 		ret = add_a_cone(data, elems);
-	else if (type == AMBIENT)
-		ret = add_ambient(data, elems);
-	else if (type == LIGHT)
-		ret = add_light(data, elems);
-	else if (type == CAMERA)
-		ret = add_camera(data, elems);
-	else if (type == DIMENSIONS)
-	{
-		if(ft_tabsize(elems) != 3)
-			return(ft_freearr(elems), printf("Error: R should have 2 arguments\n"), 1);
-		data->width = ft_atoi(elems[1]);
-		data->height = ft_atoi(elems[2]);
-		ret = 0;
-	}
+	else
+		add_to_struct_suite(data, type, elems);
 	ft_freearr(elems);
 	return (ret);
 }

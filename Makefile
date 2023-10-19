@@ -59,10 +59,10 @@ SRC_FILES	+=	$(addprefix $(HOOKS_DIR), $(HOOKS_FILES))
 
 #parse
 PARSE_DIR	=	parsing/
-PARSE_FILES	=	add_objs_elems.c infos_elements.c print_struct.c \
+PARSE_FILES	=	add_objs_elems.c infos_elements.c infos.c \
 				add_scene_elems.c init_scene.c file_elements.c \
 				parsing.c range_check.c parse_helpers.c \
-				read_bump_img.c add_options.c 
+				read_bump_img.c add_options.c options.c
 SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
 
 #math_operations

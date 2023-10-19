@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_scene.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itchinda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/19 21:31:53 by itchinda          #+#    #+#             */
+/*   Updated: 2023/10/19 21:32:45 by itchinda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
 void	init_scene(t_data *data)
@@ -9,7 +21,6 @@ void	init_scene(t_data *data)
 
 void	init_sc_camera(t_camera camera)
 {
-	(void)camera;
 	camera.fov = 0;
 	camera.position.x = 0;
 	camera.position.y = 0;
@@ -21,7 +32,6 @@ void	init_sc_camera(t_camera camera)
 
 void	init_sc_light(t_light light)
 {
-	(void)light;
 	light.color.r = 0;
 	light.color.g = 0;
 	light.color.b = 0;
@@ -33,7 +43,6 @@ void	init_sc_light(t_light light)
 
 void	init_sc_ambient(t_ambient ambient)
 {
-	(void)ambient;
 	ambient.color.r = 0;
 	ambient.color.g = 0;
 	ambient.color.b = 0;

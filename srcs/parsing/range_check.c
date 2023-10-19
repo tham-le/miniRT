@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   range_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itchinda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/19 22:05:10 by itchinda          #+#    #+#             */
+/*   Updated: 2023/10/19 22:06:47 by itchinda         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
 int	check_ratio(char *flt)
 {
-	float converted_num;
+	float	converted_num;
 
 	if (check_float(flt))
 		return (1);
@@ -14,12 +26,10 @@ int	check_ratio(char *flt)
 
 int	check_vector(char *vect)
 {
-	char **position;
-	int	ret;
-	int	vec_x;
-	int	vec_y;
-	int	vec_z;
-	(void)ret;
+	char	**position;
+	int		vec_x;
+	int		vec_y;
+	int		vec_z;
 
 	if (check_position(vect))
 		return (1);
@@ -30,7 +40,8 @@ int	check_vector(char *vect)
 	vec_y = ft_atod(position[1]);
 	vec_z = ft_atod(position[2]);
 	ft_freearr(position);
-	if (vec_x < -1 || vec_x > 1 || vec_y < -1 || vec_y > 1 || vec_z < -1 || vec_z > 1)
+	if (vec_x < -1 || vec_x > 1 || vec_y < -1
+		|| vec_y > 1 || vec_z < -1 || vec_z > 1)
 		return (1);
 	return (0);
 }
@@ -45,5 +56,4 @@ int	check_fov(char *fov)
 	if (converted < 0 || converted > 180)
 		return (1);
 	return (0);
-	
 }
