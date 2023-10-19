@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 20:01:47 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/14 18:41:36 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/19 19:21:10 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool intersect_triangle(t_ray *ray, t_objs *triangle, t_intersect_list *xs)
 	// at this stage we can compute t to find out where
 	// the intersection point is on the line
 	t = a * dot_product(&triangle->edge[2], &h);
-	if (t > EPSILON)
+	if (t > EPSILON && t < xs->arr[0].t)
 	{
 		xs->arr[xs->count].t = t;
 		xs->arr[xs->count].obj = triangle;
