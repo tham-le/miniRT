@@ -10,7 +10,7 @@ void add_bmp_file(t_objs *obj, char **elems)
         if(open(elems[i], O_RDONLY) != -1)
         {
             obj->bump_img = elems[i];
-            printf("file is: %s\n", obj->bump_img);
+            // printf("file is: %s\n", obj->bump_img);
             return;
         }
         i++;
@@ -29,7 +29,7 @@ void add_reflect_opt(t_objs *obj, char **elems)
             if(check_float(elems[i] + 6))
                 return;
             obj->reflective= ft_atod(elems[i] + 6);
-            printf("reflectiveness: %f\n", obj->reflective);
+            // printf("reflectiveness: %f\n", obj->reflective);
             return;
         }
         i++;
@@ -48,7 +48,7 @@ void add_diffuse_opt(t_objs *obj, char **elems)
             if(check_float(elems[i] + 6))
                 return;
             obj->diffuse= ft_atod(elems[i] + 6);
-            printf("diffuse: %f\n", obj->diffuse);
+            // printf("diffuse: %f\n", obj->diffuse);
             return;
         }
         i++;
@@ -67,7 +67,7 @@ void add_shine_opt(t_objs *obj, char **elems)
             if(check_float(elems[i] + 7))
                 return;
             obj->shininess= ft_atod(elems[i] + 7);
-            printf("shininess: %f\n", obj->shininess);
+            // printf("shininess: %f\n", obj->shininess);
             return;
         }
         i++;
@@ -86,7 +86,7 @@ void add_specular_opt(t_objs *obj, char **elems)
             if(check_float(elems[i] + 6))
                 return;
             obj->specular= ft_atod(elems[i] + 6);
-            printf("specular: %f\n", obj->specular);
+            // printf("specular: %f\n", obj->specular);
             return;
         }
         i++;

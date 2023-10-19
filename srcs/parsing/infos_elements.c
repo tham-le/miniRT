@@ -86,10 +86,10 @@ int	check_position(char *elems)
 	(void)ret;
 
 	position = ft_split(elems, ',');
-	if (!position || !position[2])
-		return (1);
+	if (!position || ft_tabsize(position) != 3)
+		return (printf("Error: all position/vector arguments should be written in this format: x,x,x\n"), 1);
 	if (check_float(position[0]) || check_float(position[1]) || check_float(position[2]))
-		return (ft_freearr(position), 1);
+		return (printf("Error: a position/vector argument contains a character that is not a digit\n"), ft_freearr(position), 1);
 	ft_freearr(position);
 	return (0);
 }
@@ -111,22 +111,20 @@ t_vector get_position(char *elems)
 int	check_color(char *elems)
 {
 	char **color;
-	int	ret;
 	int	col_r;
 	int	col_g;
 	int	col_b;
-	(void)ret;
 
 	color = ft_split(elems, ',');
+	if (!color || ft_tabsize(color) != 3)
+		return (printf("Error: all color arguments should be written in this format: x,x,x with a x in the range from 0 to 255\n"), 1);
 	col_r = ft_atod(color[0]);
 	col_g = ft_atod(color[1]);
 	col_b = ft_atod(color[2]);
-	if (!color)
-		return (ret = write(STDERR_FILENO, ERR_INFOS_ELEM, 30), 1);
 	if (only_digits(color[0]) || only_digits(color[1]) || only_digits(color[2]))
-		return (ft_freearr(color), 1);
+		return (ft_freearr(color), printf("Error: one of rgb color contains a character that is not a digit\n"), 1);
 	if (col_r < 0 || col_r > 255 || col_g < 0 || col_g > 255 || col_b < 0 || col_b > 255)
-		return (ft_freearr(color), 1);
+		return (ft_freearr(color), printf("Error: one of the rgb colors is not within the range 0 to 255\n"), 1);
 	ft_freearr(color);
 	return (0);
 }

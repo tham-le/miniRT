@@ -28,6 +28,5 @@ int	key_press(int key, t_data *data)
 void	hooks(t_data *data)
 {
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &key_press, data);
-	//mlx_hook(data->win, ButtonPress, ButtonPressMask, &mouse_press, data);
 	mlx_hook(data->win_ptr, DestroyNotify, 0, &red_cross, data);
 }
