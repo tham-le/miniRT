@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/18 20:00:57 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/19 18:55:11 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -504,6 +504,7 @@ void	render_ray(t_data *data, t_intersect_list *arr, int x, int y)
 
 	ray_to_pixel(&data->scene.camera, &ray, x + 0.5, y + 0.5);
 	arr->count = 0;
+	arr->arr[0].t = INFINITY;
 	obj = data->objs;
 	while (obj)
 	{
