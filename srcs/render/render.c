@@ -6,13 +6,16 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/19 18:55:11 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/20 17:37:25 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
+#include "mathRT.h"
 #include "miniRT.h"
 #include "structs.h"
+#include "utils.h"
+#include <math.h>
 #include <stdio.h>
 
 t_color	shading(t_intersect *itx,	t_data *data, t_light *light);
@@ -60,7 +63,7 @@ t_intersect	*hit(t_intersect_list *xs)
 	min_t = INFINITY;
 	while (i < xs->count)
 	{
-		if (xs->arr[i].t >= 0 && xs->arr[i].t < min_t)
+		if (xs->arr[i].t >= EPSILON && xs->arr[i].t < min_t)
 		{
 			min_t = xs->arr[i].t;
 			idx = i;
@@ -430,11 +433,78 @@ t_color	cast_reflection_ray(t_data	*data, t_intersect *intersection,
 	mult_color(&reflected, &reflected, intersection->obj->reflective);
 	return (reflected);
 }
-t_color	get_obj_color(t_objs *obj)
+
+void	sphere_map(double *u, double *v, t_vector *point)
 {
-	if (obj->pattern_type == PLAIN)
-		return (obj->color);
-	return (obj->color);
+	double		theta;
+	t_vector	vec;
+	double		radius;
+	double		phi;
+
+	vec = *point;
+	vec.w = 0;
+	theta = atan2(point->x, point->z);
+	radius = vec_magnitude(&vec);
+	phi = acos(point->y / radius);
+	*u = 1 - ((theta / (2 * M_PI)) + 0.5);
+	*v = 1 - (phi / M_PI);
+}
+
+void	cylindrical_map(double *u, double *v, t_vector *point)
+{
+	double	theta;
+
+	theta = atan2(point->x, point->z);
+	*u = 1 - (theta / (2 * M_PI) + 0.5);
+	*v = point->y - floor(point->y);
+}
+
+void	plan_map(double *u, double *v, t_vector *point)
+{
+	*v = fmod(point->z, 1);
+	if (*v < 0)
+		*v += 1;
+	*u = fmod(point->x, 1);
+}
+
+
+
+t_color	checker_pattern(t_intersect	*itx,t_vector	*point)
+{
+	//const t_color	black = (t_color){0, 0, 0};
+	//const t_color	white = (t_color){255, 255, 255};
+	double			u;
+	double			v;
+	t_vector		transformed_point;
+	t_color			mixed;
+
+
+	mat_vec_multiply(&transformed_point, &itx->obj->inv_transf, point);
+	if (itx->obj->type == SPHERE)
+		sphere_map(&u, &v, &transformed_point);
+	else if (itx->obj->type == CYLINDER || itx->obj->type == CONE)
+		cylindrical_map(&u, &v, &transformed_point);
+	else
+		plan_map(&u, &v, &transformed_point);
+	if ((int)(floor(u * 40) + floor(v * 20)) % 2 == 0)
+	{
+		mult_color(&mixed, &itx->obj->color, 0.3);
+		return (mixed);
+	}
+	return (itx->obj->color);
+}
+
+
+t_color	get_obj_color(t_intersect *itx)
+{
+	t_color	shape_color;
+
+	shape_color = itx->obj->color;
+	if (itx->obj->pattern_type == PLAIN)
+		return (itx->obj->color);
+	if (itx->obj->pattern_type == CHECKER)
+		shape_color = checker_pattern(itx, &itx->over_point);
+	return (shape_color);
 }
 
 // Phong Blinn shading model
@@ -447,7 +517,7 @@ t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 	const double	attenuation = (100 * light->ratio\
 	- light_dist) / (100 * data->scene.light->ratio - 1);
 
-	shape_color = get_obj_color(itx->obj);
+	shape_color = get_obj_color(itx);
 	blend_colors(&phong.effective_color, &shape_color,
 		&light->color);
 	if (get_specular_and_diffuse(data, light, itx, &phong) == false)
@@ -463,8 +533,6 @@ t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 	result.r += phong.diffuse.r + phong.specular.r;
 	result.g += phong.diffuse.g + phong.specular.g;
 	result.b += phong.diffuse.b + phong.specular.b;
-	//printf("phong.diffuse %f %f %f\n", 255 * phong.diffuse.r, 255*phong.diffuse.g, 255*phong.diffuse.b);
-
  	return (result);
 }
 
