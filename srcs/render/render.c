@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/20 17:37:25 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/20 21:45:37 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,8 +441,7 @@ void	sphere_map(double *u, double *v, t_vector *point)
 	double		radius;
 	double		phi;
 
-	vec = *point;
-	vec.w = 0;
+	vec = (t_vector){point->x, point->y, point->z, 0};
 	theta = atan2(point->x, point->z);
 	radius = vec_magnitude(&vec);
 	phi = acos(point->y / radius);
@@ -450,25 +449,41 @@ void	sphere_map(double *u, double *v, t_vector *point)
 	*v = 1 - (phi / M_PI);
 }
 
-void	cylindrical_map(double *u, double *v, t_vector *point)
+void	cone_map(double *u, double *v, t_vector *point)
 {
 	double	theta;
 
 	theta = atan2(point->x, point->z);
-	*u = 1 - (theta / (2 * M_PI) + 0.5);
-	*v = point->y - floor(point->y);
+	*u = (1 - (theta / (2 * M_PI) + 0.5)) / 2;
+	*v = (point->y - floor(point->y)) / 2;
+}
+
+void	cylinder_map(double *u, double *v, t_vector *point)
+{
+	double	theta;
+
+	theta = atan2(point->x, point->z);
+	*u = (1 - (theta / (2 * M_PI) + 0.5)) / 5;
+	*v = (point->y - floor(point->y)) / 5;
 }
 
 void	plan_map(double *u, double *v, t_vector *point)
 {
-	*v = fmod(point->z, 1);
+	*v = fmod(point->z, 1) / 10;
 	if (*v < 0)
 		*v += 1;
-	*u = fmod(point->x, 1);
+	*u = fmod(point->x, 1) / 10;
+	// v = floor (point->z % ;
+	// if (v < 0)
+	// 	v += 1;
+	// u = floor (point->x) % 1;
 }
 
-
-
+/*That uv_pattern_at() function will multiply u and v by 
+(respectively) the width and height of the pattern, 
+round each down to the nearest whole number, 
+and add them together. If the result modulo 2 is zero, 
+return color_a. Otherwise, return color_b.*/
 t_color	checker_pattern(t_intersect	*itx,t_vector	*point)
 {
 	//const t_color	black = (t_color){0, 0, 0};
@@ -482,32 +497,71 @@ t_color	checker_pattern(t_intersect	*itx,t_vector	*point)
 	mat_vec_multiply(&transformed_point, &itx->obj->inv_transf, point);
 	if (itx->obj->type == SPHERE)
 		sphere_map(&u, &v, &transformed_point);
-	else if (itx->obj->type == CYLINDER || itx->obj->type == CONE)
-		cylindrical_map(&u, &v, &transformed_point);
+	else if (itx->obj->type == CONE)
+		cone_map(&u, &v, &transformed_point);
+	else if (itx->obj->type == CYLINDER)
+	{
+		cylinder_map(&u, &v, &transformed_point);
+		u = u / (itx->obj->height /(M_PI * itx->obj->radius));
+		//v = v /  (itx->obj->height /(M_PI * itx->obj->radius));
+	}
 	else
 		plan_map(&u, &v, &transformed_point);
 	if ((int)(floor(u * 40) + floor(v * 20)) % 2 == 0)
 	{
-		mult_color(&mixed, &itx->obj->color, 0.3);
+		mult_color(&mixed, &itx->obj->color, 0.5);
 		return (mixed);
 	}
 	return (itx->obj->color);
 }
 
+t_color	texture_mapping(t_intersect *itx, double u, double v)
+{
+	v = (int)floor(u * (itx->obj->bmp_img->width - 1)) % itx->obj->bmp_img->width;
+	u = (int)floor(v * (itx->obj->bmp_img->height - 1)) % itx->obj->bmp_img->height;
+	if (u >= itx->obj->bmp_img->height || v >= itx->obj->bmp_img->width)
+		return (itx->obj->color);
+	return (itx->obj->tab_bmp[(int)u][(int)v]);
+}
+
+t_color	get_texture_color(t_intersect *itx)
+{
+	t_vector	shape_point;
+	double		u;
+	double		v;
+
+	mat_vec_multiply(&shape_point, &itx->obj->inv_transf, &itx->point);
+	if (itx->obj->type == CYLINDER || itx->obj->type == CONE)
+	{
+		shape_point.y /= itx->obj->height;
+		shape_point.y -= 0.5;
+		cylinder_map(&u, &v, &shape_point);
+	}
+	else if (itx->obj->type == SPHERE)
+		sphere_map(&u, &v, &shape_point);
+	else
+		plan_map(&u, &v, &shape_point);
+	if (u < 0 || v < 0)
+		return (itx->obj->color);
+	return (texture_mapping(itx, u, v));
+
+}
 
 t_color	get_obj_color(t_intersect *itx)
 {
 	t_color	shape_color;
 
 	shape_color = itx->obj->color;
+	if (itx->obj->tab_bmp != NULL)
+		return (get_texture_color(itx));
 	if (itx->obj->pattern_type == PLAIN)
-		return (itx->obj->color);
+		return (shape_color);
 	if (itx->obj->pattern_type == CHECKER)
 		shape_color = checker_pattern(itx, &itx->over_point);
 	return (shape_color);
 }
 
-// Phong Blinn shading model
+// Phong shading model
 t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 {
 	t_phong			phong;
@@ -562,7 +616,6 @@ t_color	shade( t_data *data,t_intersect_list *arr, t_ray *ray)
 	}
 	return (final_color);
 }
-
 
 void	render_ray(t_data *data, t_intersect_list *arr, int x, int y)
 {
