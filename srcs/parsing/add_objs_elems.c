@@ -46,11 +46,11 @@ int add_a_cone(t_data *data, char **elems)
 	obj = ft_calloc(sizeof(t_objs), 1);
 	init_obj_value(obj);
 	if (ft_tabsize(elems) < 6)
-		return (free(obj), printf("Error: you should enter at least 5 infos for each cone\n"), 1);
-	if (check_position(elems[1]) || check_vector(elems[2]) || check_color(elems[5]))
+		return (free(obj), printf("Error: line %d: you should enter at least 5 infos for each cone\n", data->nb_lines), 1);
+	if (check_position(elems[1], data) || check_vector(elems[2], data) || check_color(elems[5], data))
 		return (free(obj), 1);
 	if(check_float(elems[3]) || check_float(elems[4]))
-		return (free(obj), printf("Error: the height/diameter arguments of a cone contains a character that is not a digit\n"), 1);
+		return (free(obj), printf("Error: line %d: the height/diameter arguments of a cone contains a character that is not a digit\n", data->nb_lines), 1);
 	add_options(obj, elems);
 	obj->type = CONE;
 	obj->position = get_position(elems[1]);
@@ -75,11 +75,11 @@ int add_a_sphere(t_data *data, char **elems)
 	obj = ft_calloc(sizeof(t_objs), 1);
 	init_obj_value(obj);
 	if (ft_tabsize(elems) < 4)
-		return (free(obj), printf("Error: you should enter at least 5 infos for each sphere\n"),  1);
-	if (check_position(elems[1]) || check_color(elems[3]))
+		return (free(obj), printf("Error: line %d: you should enter at least 5 infos for each sphere\n", data->nb_lines),  1);
+	if (check_position(elems[1], data) || check_color(elems[3], data))
 		return (free(obj), 1);
 	if(check_float(elems[2]))
-		return (free(obj), printf("Error: the diameter argument of a sphere contains a character that is not a digit\n"), 1);
+		return (free(obj), printf("Error: line %d: the diameter argument of a sphere contains a character that is not a digit\n", data->nb_lines), 1);
 	add_options(obj, elems);
 	obj->type = SPHERE;
 	obj->position = get_position(elems[1]);
@@ -103,11 +103,11 @@ int add_a_cylindre(t_data *data, char **elems)
 	obj = ft_calloc(sizeof(t_objs), 1);
 	init_obj_value(obj);
 	if (ft_tabsize(elems) < 6)
-		return (free(obj), printf("Error: you should enter at least 5 infos for each cylindre\n"),  1);
-	if (check_position(elems[1]) || check_vector(elems[2]) || check_color(elems[5]))
+		return (free(obj), printf("Error: line %d: you should enter at least 5 infos for each cylindre\n", data->nb_lines),  1);
+	if (check_position(elems[1], data) || check_vector(elems[2], data) || check_color(elems[5], data))
 		return (free(obj), 1);
 	if(check_float(elems[3]) || check_float(elems[3]))
-		return(free(obj), printf("Error: the height/diameter arguments of a cylinder contains a character that is not a digit\n"), 1);
+		return(free(obj), printf("Error: line %d: the height/diameter arguments of a cylinder contains a character that is not a digit\n", data->nb_lines), 1);
 	add_options(obj, elems);
 	obj->type = CYLINDER;
 	obj->position = get_position(elems[1]);
@@ -119,7 +119,7 @@ int add_a_cylindre(t_data *data, char **elems)
 	obj->height = ft_atod(elems[4]);
 	obj->color = get_color(elems[5]);
 	push_object(obj, &data->objs);
-	// readbump_img(data->objs);
+	readbump_img(data->objs);
 	return (0);
 }
 
@@ -131,10 +131,9 @@ int add_a_plan(t_data *data, char **elems)
 	
 	obj = ft_calloc(sizeof(t_objs), 1);
 	init_obj_value(obj);
-	printf("plan\n");
 	if (ft_tabsize(elems) < 4)
-		return (free(obj), printf("Error: you should enter at least 5 infos for each plan\n"),  1);
-	if (check_position(elems[1]) || check_vector(elems[2]) || check_color(elems[3]))
+		return (free(obj), printf("Error: line %d: you should enter at least 5 infos for each plan\n", data->nb_lines),  1);
+	if (check_position(elems[1], data) || check_vector(elems[2], data) || check_color(elems[3], data))
 		return (free(obj), 1);
 	add_options(obj, elems);
 	obj->type = PLAN;
@@ -154,8 +153,8 @@ int add_a_triangle(t_data *data, char **elems)
 	obj = ft_calloc(sizeof(t_objs), 1);
 	init_obj_value(obj);
 	if (ft_tabsize(elems) < 5)
-		return (free(obj), printf("Error: you should enter at least 5 infos for each triangle\n"),  1);
-	if (check_position(elems[1]) || check_position(elems[2]) || check_position(elems[3]) || check_color(elems[4]))
+		return (free(obj), printf("Error: line %d: you should enter at least 5 infos for each triangle\n", data->nb_lines),  1);
+	if (check_position(elems[1], data) || check_position(elems[2], data) || check_position(elems[3], data) || check_color(elems[4], data))
 		return (free(obj), 1);
 	add_options(obj, elems);
 	obj->type = TRIANGLE;

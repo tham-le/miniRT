@@ -78,7 +78,7 @@ int	add_to_struct(t_data *data, int type, char *line)
 	else if (type == CONE)
 		ret = add_a_cone(data, elems);
 	else
-		add_to_struct_suite(data, type, elems);
+		ret = add_to_struct_suite(data, type, elems);
 	ft_freearr(elems);
 	return (ret);
 }

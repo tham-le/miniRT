@@ -73,7 +73,7 @@ int	init_and_parse(t_data *data, char **av)
 	int		type;
 
 	file_no = open(av[1], O_RDONLY);
-	// init_scene(data);
+	data->nb_lines = 0;
 	while (1)
 	{
 		line = get_next_line(file_no);

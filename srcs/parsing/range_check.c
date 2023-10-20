@@ -12,26 +12,26 @@
 
 #include "miniRT.h"
 
-int	check_ratio(char *flt)
+int	check_ratio(char *flt, t_data *data)
 {
 	float	converted_num;
 
 	if (check_float(flt))
-		return (1);
+		return (printf(ERROR_RATIO, data->nb_lines), 1);
 	converted_num = ft_atod(flt);
 	if (converted_num < 0 || converted_num > 1)
 		return (1);
 	return (0);
 }
 
-int	check_vector(char *vect)
+int	check_vector(char *vect, t_data *data)
 {
 	char	**position;
 	int		vec_x;
 	int		vec_y;
 	int		vec_z;
 
-	if (check_position(vect))
+	if (check_position(vect, data))
 		return (1);
 	position = ft_split(vect, ',');
 	if (!position)
