@@ -6,11 +6,12 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:40:22 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/18 20:56:25 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/20 17:37:40 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "structs.h"
 
 void	init_obj_value(t_objs	*obj)
 {
@@ -19,6 +20,6 @@ void	init_obj_value(t_objs	*obj)
 	obj->reflective = 0.1;
 	obj->shininess = 200;
 	obj->specular = 0.9;
-	obj->pattern_type = PLAIN;
+	obj->pattern_type = CHECKER;
 	identity_matrix(&obj->added_rots);
 }
