@@ -18,13 +18,13 @@ int	add_ambient(t_data *data, char **elems)
 	t_ambient		ambient;
 
 	ft_bzero(&ambient, sizeof(t_ambient));
-	data->scene.nb_amb++;
 	if (data->scene.nb_amb > 1)
 		return (printf(ERR_NB_AMBIENT, data->nb_lines), 1);
 	if (ft_tabsize(elems) != 3 || is_void(elems[2][0]))
 		return (printf(ERROR_NB_ARGS_AMB, data->nb_lines), 1);
 	if (check_ratio(elems[1], data) || check_color(elems[2], data))
 		return (1);
+	data->scene.nb_amb++;
 	ambient.ratio = ft_atod(elems[1]);
 	ambient.color = get_color(elems[2]);
 	data->scene.ambient = ambient;
@@ -36,11 +36,14 @@ int	add_light(t_data *data, char **elems)
 	t_light		*light2;
 
 	light2 = ft_calloc(sizeof(t_light), 1);
+	if(!light2)
+		return(1);
 	if (ft_tabsize(elems) < 4)
 		return (printf(ERROR_NB_ARGS_LIGHT, data->nb_lines), 1);
 	if (check_position(elems[1], data) || check_ratio(elems[2], data)
 		|| check_color(elems[3], data))
 		return (1);
+	data->scene.nb_light++;
 	light2->position = get_position(elems[1]);
 	light2->ratio = 2 * ft_atod(elems[2]);
 	light2->color = get_color(elems[3]);
@@ -55,7 +58,7 @@ int	add_camera(t_data *data, char **elems)
 
 	ft_bzero(&camera, sizeof(t_camera));
 	data->scene.nb_cam++;
-	if (data->scene.nb_cam > 1)
+	if (data->scene.nb_cam != 1)
 		return (printf(ERR_NB_CAMERA, data->nb_lines), 1);
 	if (ft_tabsize(elems) < 4)
 		return (printf(ERROR_NB_ARGS_CAM, data->nb_lines), 1);

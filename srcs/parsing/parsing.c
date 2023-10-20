@@ -82,7 +82,10 @@ int	init_and_parse(t_data *data, char **av)
 		sp_line = spaces_check(line);
 		free(line);
 		if (!sp_line)
+		{
+			data->nb_lines++;
 			continue ;
+		}
 		type = get_type(sp_line);
 		data->nb_lines++;
 		if (add_to_struct(data, type, sp_line) > 0)
@@ -103,8 +106,14 @@ int	init_and_parse(t_data *data, char **av)
 int	parsing(t_data *data, int ac, char **av)
 {
 	if (parse_input(ac, av))
-		return (1);
+		return (ERROR);
 	if (init_and_parse(data, av))
-		return (1);
-	return (0);
+		return (ERROR);
+	if(!data->scene.nb_cam)
+		return(printf("Error: you need at leat one camera\n"), ERROR);
+	if(!data->scene.nb_light)
+		return(printf("Error: you need at leat one light\n"), ERROR);
+	if(!data->scene.nb_amb)
+		return(printf("Error: you need at leat one ambient\n"), ERROR);
+	return (SUCESS);
 }
