@@ -113,7 +113,7 @@ int add_a_cone(t_data *data, char **elems)
 	{
 		if(get_wh_bmp(&data->objs))
 			return(1);
-		readbump_img(data->objs, data);
+		readbump_img(data->objs);
 	}
 	return (0);
 }
@@ -146,7 +146,7 @@ int add_a_sphere(t_data *data, char **elems)
 	{
 		if(get_wh_bmp(&data->objs))
 			return(1);
-		readbump_img(data->objs, data);
+		readbump_img(data->objs);
 	}
 	return (0);
 }
@@ -179,7 +179,7 @@ int add_a_cylindre(t_data *data, char **elems)
 	{
 		if(get_wh_bmp(&data->objs))
 			return(1);
-		readbump_img(data->objs, data);
+		readbump_img(data->objs);
 	}
 	return (0);
 }
@@ -208,7 +208,7 @@ int add_a_plan(t_data *data, char **elems)
 	{
 		if(get_wh_bmp(&data->objs))
 			return(1);
-		readbump_img(data->objs, data);
+		readbump_img(data->objs);
 	}
 	return (0);
 }
@@ -238,7 +238,7 @@ int add_a_triangle(t_data *data, char **elems)
 	{
 		if(get_wh_bmp(&data->objs))
 			return(1);
-		readbump_img(data->objs, data);
+		readbump_img(data->objs);
 	}
 	return (0);
 }

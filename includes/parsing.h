@@ -72,7 +72,7 @@ char		*str_concate(char *s, char c);
 char		*dup_one(char c);
 t_xpm_img	*load_img(char *bmp_img, void *mlx_ptr);
 void	push_light(t_light *obj, t_light **objs);
-void    readbump_img(t_objs *obj, t_data *data);
+void    readbump_img(t_objs *obj);
 void add_options(t_objs *obj, char **elems);
 void add_reflect_opt(t_objs *obj, char **elems);
 void add_diffuse_opt(t_objs *obj, char **elems);

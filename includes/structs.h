@@ -37,6 +37,7 @@ typedef struct s_color
 	double	r;
 	double	g;
 	double	b;
+	struct s_color	*next;
 }			  t_color;
 
 typedef struct s_vector
@@ -131,9 +132,10 @@ typedef struct s_objs
 	float			ratio;
 	double			distance_to_origin;
 	void			*mlx_bmp;
-	int			*img_bmp;
+	char			*img_bmp;
 	void			*addr_bmp;
 	void			*win_bmp;
+	t_color			*bmp_col;
 	int				bmp_height;
 	int				bmp_width;
 	int				bpp;
