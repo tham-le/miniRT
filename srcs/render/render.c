@@ -515,11 +515,21 @@ t_color	checker_pattern(t_intersect	*itx,t_vector	*point)
 	return (itx->obj->color);
 }
 
-t_color	texture_mapping(t_intersect *itx, double u, double v)
+t_color    int_to_rgb(int    color)
 {
-	v = (int)floor(u * (itx->obj->bmp_img->width - 1)) % itx->obj->bmp_img->width;
-	u = (int)floor(v * (itx->obj->bmp_img->height - 1)) % itx->obj->bmp_img->height;
-	if (u >= itx->obj->bmp_img->height || v >= itx->obj->bmp_img->width)
+    t_color    rgb;
+
+    rgb.r = ((color >> 16) & 0xFF) / 255.0;
+    rgb.g = ((color >> 8) & 0xFF) / 255.0;
+    rgb.b = (color & 0xFF) / 255.0;
+    return (rgb);
+}
+
+t_color    texture_mapping(t_intersect *itx, double u, double v)
+{
+    v = (int)floor(u * (itx->obj->bmp_img->width - 1)) % itx->obj->bmp_img->width;
+    u = (int)floor(v * (itx->obj->bmp_img->height - 1)) % itx->obj->bmp_img->height;
+    if (u >= itx->obj->bmp_img->height || v >= itx->obj->bmp_img->width)
 		return (itx->obj->color);
 	return (itx->obj->tab_bmp[(int)u][(int)v]);
 }

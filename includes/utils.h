@@ -31,4 +31,5 @@ void	init_obj_value(t_objs	*obj);
 void	ft_clear_light(t_light **lst, void (*del)(void *));
 void	ft_clear_obj(t_objs **lst, void (*del)(void *));
 void	ft_swapd(double *a, double *b);
+int	ft_atoi_base(char *str, char *base);
 #endif

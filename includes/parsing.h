@@ -72,7 +72,7 @@ char		*str_concate(char *s, char c);
 char		*dup_one(char c);
 t_xpm_img	*load_img(char *bmp_img, void *mlx_ptr);
 void	push_light(t_light *obj, t_light **objs);
-void    readbump_img(t_objs *obj);
+void    readbump_img(t_objs *obj, t_data *data);
 void add_options(t_objs *obj, char **elems);
 void add_reflect_opt(t_objs *obj, char **elems);
 void add_diffuse_opt(t_objs *obj, char **elems);
@@ -80,10 +80,12 @@ void add_shine_opt(t_objs *obj, char **elems);
 void add_specular_opt(t_objs *obj, char **elems);
 void	add_bmp_file(t_objs *obj, char **elems);
 int	add_to_struct_suite(t_data *data, int type, char **elems);
-int	convert_to_color(char pixel, t_colors_bmp **pixel_lst);
+t_color	convert_to_color(char pixel, t_colors_bmp **pixel_lst);
 void	push_bump_color(t_colors_bmp *obj, t_colors_bmp **objs);
 //DEBUG
 void		print_struct(t_data *data);
 void free_all(t_data *data);
+t_color	**ft_colortab(t_bumpmap *colors_bmp, int text_file, t_colors_bmp *pixel_lst);
+void set_infos(char *infos, t_objs *obj);
 
 #endif

@@ -62,8 +62,7 @@ PARSE_DIR	=	parsing/
 PARSE_FILES	=	add_objs_elems.c infos_elements.c infos.c \
 				add_scene_elems.c init_scene.c file_elements.c \
 				parsing.c range_check.c parse_helpers.c \
-				read_bump_img.c add_options.c options.c \
-				parse_file.c
+				add_options.c options.c parse_file.c 
 SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
 
 #math_operations
@@ -78,7 +77,7 @@ SRC_FILES	+=	$(addprefix $(MATH_DIR), $(MATH_FILES))
 UTILS_DIR	=	utils/
 UTILS_FILES	=	ft_atod.c ft_lstadd_back.c clean.c print_help.c ft_tabsize.c\
 				color_operation.c init_obj_value.c ft_lstclear.c\
-				ft_swapd.c
+				ft_swapd.c ft_atoi_base.c
 SRC_FILES	+=	$(addprefix $(UTILS_DIR), $(UTILS_FILES))
 
 
