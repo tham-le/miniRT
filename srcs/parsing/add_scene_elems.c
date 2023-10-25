@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_scene_elems.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itchinda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:39:47 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/19 21:45:39 by itchinda         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:10:14 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	add_light(t_data *data, char **elems)
 		return (1);
 	data->scene.nb_light++;
 	light2->position = get_position(elems[1]);
-	light2->ratio = 2 * ft_atod(elems[2]);
+	light2->ratio = ft_atod(elems[2]);
 	light2->color = get_color(elems[3]);
 	identity_matrix(&light2->added_rots);
 	push_light(light2, &data->scene.light);
