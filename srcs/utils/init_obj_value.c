@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:40:22 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/20 17:37:40 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:11:07 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	init_obj_value(t_objs	*obj)
 	obj->reflective = 0.1;
 	obj->shininess = 200;
 	obj->specular = 0.9;
-	obj->pattern_type = CHECKER;
+	obj->pattern_type = PLAIN;
 	identity_matrix(&obj->added_rots);
 }
