@@ -34,6 +34,22 @@ int parse_input(int ac, char **av)
 	return (0);
 }
 
+int get_type_suite(char **tab)
+{
+	if (!ft_strncmp(tab[0], "co", ft_strlen(tab[0])))
+		return (ft_freearr(tab), CONE);
+	else if (!ft_strncmp(tab[0], "tr", ft_strlen(tab[0])))
+		return (ft_freearr(tab), TRIANGLE);
+	else if (!ft_strncmp(tab[0], "R", ft_strlen(tab[0])))
+		return (ft_freearr(tab), DIMENSIONS);
+	else if (!ft_strncmp(tab[0], "//", 2))
+		return (ft_freearr(tab), COMMENT);
+	else if (!ft_strncmp(tab[0], "#", 1))
+		return (ft_freearr(tab), COMMENT);
+	else
+		return (ft_freearr(tab), -1);
+}
+
 int get_type(char *line)
 {
 	char	**tab;
@@ -51,18 +67,8 @@ int get_type(char *line)
 		return (ft_freearr(tab), CYLINDER);
 	else if (!ft_strncmp(tab[0], "pl", ft_strlen(tab[0])))
 		return (ft_freearr(tab), PLAN);
-	else if (!ft_strncmp(tab[0], "co", ft_strlen(tab[0])))
-		return (ft_freearr(tab), CONE);
-	else if (!ft_strncmp(tab[0], "tr", ft_strlen(tab[0])))
-		return (ft_freearr(tab), TRIANGLE);
-	else if (!ft_strncmp(tab[0], "R", ft_strlen(tab[0])))
-		return (ft_freearr(tab), DIMENSIONS);
-	else if (!ft_strncmp(tab[0], "//", 2))
-		return (ft_freearr(tab), COMMENT);
-	else if (!ft_strncmp(tab[0], "#", 1))
-		return (ft_freearr(tab), COMMENT);
 	else
-		return (ft_freearr(tab), -1);
+		return(get_type_suite(tab));
 }
 
 int	init_and_parse(t_data *data, char **av)
@@ -80,7 +86,6 @@ int	init_and_parse(t_data *data, char **av)
 		if (!line)
 			break ;
 		sp_line = spaces_check(line);
-		free(line);
 		if (!sp_line)
 		{
 			data->nb_lines++;
@@ -89,19 +94,13 @@ int	init_and_parse(t_data *data, char **av)
 		type = get_type(sp_line);
 		data->nb_lines++;
 		if (add_to_struct(data, type, sp_line) > 0)
-		{
-			get_next_line(-1);
-			free(sp_line);
-			close(file_no);
-			return (1);
-		}
+			return (get_next_line(-1), free(sp_line), close(file_no), 1);
 		free(sp_line);
 	}
 	if(!data->nb_lines)
 		return(printf("Error: file %s is empty\n", av[1]), 1);
-	close(file_no);
-	return (0);
-}
+	return (close(file_no), 0);
+}//25
 
 int	parsing(t_data *data, int ac, char **av)
 {

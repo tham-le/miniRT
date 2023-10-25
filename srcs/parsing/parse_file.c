@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itchinda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: itchinda <itchinda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 19:04:44 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/20 19:09:01 by itchinda         ###   ########.fr       */
+/*   Updated: 2023/10/25 22:38:21 by itchinda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,11 @@ t_color hextorgb(char *hex)
 
 void	readbump_img(t_objs *obj)
 {
-	obj->mlx_bmp = mlx_init();
-	obj->img_bmp = mlx_xpm_file_to_image(obj->mlx_bmp, obj->bump_img, &obj->bmp_width, &obj->bmp_height);
-	if(!obj->img_bmp)
+	obj->bmp_img->mlx_bmp = mlx_init();
+	obj->bmp_img->img_bmp = mlx_xpm_file_to_image(obj->bmp_img->mlx_bmp, obj->bump_img, &obj->bmp_img->bmp_width, &obj->bmp_img->bmp_height);
+	if(!obj->bmp_img->img_bmp)
 		return;
-	// int i = 0;
-	// while(&obj->img_bmp[i])
-	// {
-	// 	obj->bmp_col[i] = hextorgb(obj->img_bmp[i]);
-	// 	printf("%d: %p\n",i, &obj->img_bmp[i]);
-	// 	i++;
-	// }
-	obj->addr_bmp = mlx_get_data_addr(obj->img_bmp, &obj->bpp, &obj->line_length, &obj->endian);
-	obj->win_bmp = mlx_new_window(obj->mlx_bmp, obj->bmp_width, obj->bmp_height, "bmp");
-	mlx_put_image_to_window(obj->mlx_bmp, obj->win_bmp, obj->img_bmp, 0, 0);
+	obj->bmp_img->addr_bmp = mlx_get_data_addr(obj->bmp_img->img_bmp, &obj->bmp_img->bpp, &obj->bmp_img->line_length, &obj->bmp_img->endian);
+	obj->bmp_img->win_bmp = mlx_new_window(obj->bmp_img->mlx_bmp, obj->bmp_img->bmp_width, obj->bmp_img->bmp_height, "bmp");
+	mlx_put_image_to_window(obj->bmp_img->mlx_bmp, obj->bmp_img->win_bmp, obj->bmp_img->img_bmp, 0, 0);
 }

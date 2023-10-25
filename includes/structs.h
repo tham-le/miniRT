@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itchinda <itchinda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:03:31 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/18 21:05:44 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/25 22:37:15 by itchinda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,16 @@ typedef struct s_bumpmap
 	int				height;
 	int 			nb_colors;
 	int				char_per_pixel;
+	void			*mlx_bmp;
+	char			*img_bmp;
+	void			*addr_bmp;
+	void			*win_bmp;
+	t_color			*bmp_col;
+	int				bmp_height;
+	int				bmp_width;
+	int				bpp;
+	int				line_length;
+	int				endian;
 }			t_bumpmap;
 
 typedef struct s_colors_bmp
@@ -131,16 +141,6 @@ typedef struct s_objs
 	float			height;
 	float			ratio;
 	double			distance_to_origin;
-	void			*mlx_bmp;
-	char			*img_bmp;
-	void			*addr_bmp;
-	void			*win_bmp;
-	t_color			*bmp_col;
-	int				bmp_height;
-	int				bmp_width;
-	int				bpp;
-	int				line_length;
-	int				endian;
 	t_vector		vertex[3];
 	t_vector		edge[3];
 	t_vector		normal;
@@ -152,8 +152,6 @@ typedef struct s_objs
 	t_color 		**tab_bmp;
 	t_bumpmap		*bmp_img;
 	t_colors_bmp	*colors_bmp;
-	t_xpm_img		*surface;
-	t_xpm_img		*map;
 	t_mat4			transf;
 	t_mat4			inv_transf;
 	t_mat4			norm_transf;

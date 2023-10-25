@@ -127,7 +127,6 @@ void		obj_to_rt(char *str, int fd, int vertex)
 				str++;
 		str++;
 	}
-	//printf("first vertex is x = %s, y = %s, z = %s\n", tab[546].x, tab[546].y, tab[546].z); 
 }
 
 int main(int ac, char **av)
@@ -147,11 +146,9 @@ int main(int ac, char **av)
 	for (i = 0; av[1][i] && av[1][i] != '.'; i++)
 		name[i] = av[1][i];
 	strcat(name, ".rt");
-	//printf("name is %s\n", name);
 	if (!((fd2 = open(name, O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR)) > 0))
 		fatal("in main() while creating file");
 	file = readfile(file, fd);
-	//printf("file is %s\n", file);
 
 	i = 0;
 	vertex = 0;
@@ -164,7 +161,6 @@ int main(int ac, char **av)
 				i++;
 		i++;
 	}
-	//printf("number of vertex is %i\n", vertex);
 
 	obj_to_rt(file, fd2, vertex);
 
