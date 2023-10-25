@@ -28,8 +28,6 @@ void	add_pattern_type(t_objs *obj, char **elems)
 	{
 		if (!ft_strncmp("-ptrn:", elems[i], 6))
 		{
-			if (check_float(elems[i] + 6))
-				return ;
 			obj->pattern_type = get_pattern_type(elems[i] + 6);
 			return ;
 		}

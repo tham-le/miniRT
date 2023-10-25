@@ -31,6 +31,7 @@ int get_wh_bmp(t_objs **obj)
 	}
 	(*obj)->bmp_width = ft_atoi(infos_bmp[0]);
 	(*obj)->bmp_height = ft_atoi(infos_bmp[1]);
+	printf("w: %d h: %d\n",(*obj)->bmp_width, (*obj)->bmp_height);
 	return(0);
 }
 
