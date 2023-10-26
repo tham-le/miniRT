@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itchinda <itchinda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:03:31 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/25 22:37:15 by itchinda         ###   ########.fr       */
+/*   Updated: 2023/10/26 11:36:38 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_color
 	double	r;
 	double	g;
 	double	b;
-	struct s_color	*next;
 }			  t_color;
 
 typedef struct s_vector

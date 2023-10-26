@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itchinda <itchinda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/25 22:34:17 by itchinda         ###   ########.fr       */
+/*   Updated: 2023/10/26 15:10:50 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -447,6 +447,7 @@ void	sphere_map(double *u, double *v, t_vector *point)
 	phi = acos(point->y / radius);
 	*u = 1 - ((theta / (2 * M_PI)) + 0.5);
 	*v = 1 - (phi / M_PI);
+	printf("u = %f v = %f\n", *u, *v);
 }
 
 void	cone_map(double *u, double *v, t_vector *point)
@@ -515,23 +516,37 @@ t_color	checker_pattern(t_intersect	*itx,t_vector	*point)
 	return (itx->obj->color);
 }
 
-t_color    int_to_rgb(int    color)
+t_color	tex_colot_at(t_bumpmap	*bmp, int u, int v)
 {
-    t_color    rgb;
+	t_color			color;
+	int				index;
+	unsigned int	*ptr;
 
-    rgb.r = ((color >> 16) & 0xFF) / 255.0;
-    rgb.g = ((color >> 8) & 0xFF) / 255.0;
-    rgb.b = (color & 0xFF) / 255.0;
-    return (rgb);
+	index = v * bmp->width + u * (bmp->bpp / 8 );
+	ptr = (unsigned int *)bmp->addr_bmp + index;
+	//printf("ptr = %i\n", *ptr);
+	//printf("char %i\n",index);
+	color.r = (double)((*ptr >> 16) & 0xFF) / 255.0;
+	color.g = (double)((*ptr >> 8) & 0xFF) / 255.0;
+	color.b = (double)(*ptr & 0xFF) / 255.0;
+	//printf("color = %f %f %f\n", color.r * 255, color.g *255, color.b*255);
+
+	return (color);	
 }
 
 t_color    texture_mapping(t_intersect *itx, double u, double v)
 {
-    v = (int)floor(u * (itx->obj->bmp_img->width - 1)) % itx->obj->bmp_img->width;
-    u = (int)floor(v * (itx->obj->bmp_img->height - 1)) % itx->obj->bmp_img->height;
-    if (u >= itx->obj->bmp_img->height || v >= itx->obj->bmp_img->width)
+
+	//v = 1 - v;
+	// u = floor(u * (itx->obj->bmp_img->bmp_height -1));
+	// v = floor(v * (itx->obj->bmp_img->bmp_width - 1));
+	//printf("TEST  u %f v %f\n", u, v);
+	u = (int)floor(u * (itx->obj->bmp_img->bmp_height - 1)) % itx->obj->bmp_img->bmp_height;
+	v = (int)floor(v * (itx->obj->bmp_img->bmp_width - 1))  % itx->obj->bmp_img->bmp_width;
+	
+	if (u >= itx->obj->bmp_img->bmp_height || v >= itx->obj->bmp_img->bmp_width)
 		return (itx->obj->color);
-	return (itx->obj->tab_bmp[(int)u][(int)v]);
+	return (tex_colot_at(itx->obj->bmp_img, u, v));
 }
 
 t_color	get_texture_color(t_intersect *itx)
@@ -540,7 +555,7 @@ t_color	get_texture_color(t_intersect *itx)
 	double		u;
 	double		v;
 
-	mat_vec_multiply(&shape_point, &itx->obj->inv_transf, &itx->point);
+	mat_vec_multiply(&shape_point, &itx->obj->inv_transf, &itx->over_point);
 	if (itx->obj->type == CYLINDER || itx->obj->type == CONE)
 	{
 		shape_point.y /= itx->obj->height;
@@ -562,7 +577,7 @@ t_color	get_obj_color(t_intersect *itx)
 	t_color	shape_color;
 
 	shape_color = itx->obj->color;
-	if (itx->obj->tab_bmp != NULL)
+	if (itx->obj->bmp_img != NULL)
 		return (get_texture_color(itx));
 	if (itx->obj->pattern_type == PLAIN)
 		return (shape_color);
