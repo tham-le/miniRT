@@ -6,16 +6,15 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 22:04:59 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/18 20:50:34 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 21:35:25 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATHRT_H
 # define MATHRT_H
 
-
 # include "structs.h"
-#include "miniRT.h"
+# include "miniRT.h"
 
 void	add_vec(t_vector *res, const t_vector *v1, const t_vector *v2);
 void	sub_vec(t_vector *res, const t_vector *v1, const t_vector *v2);

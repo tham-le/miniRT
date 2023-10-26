@@ -6,15 +6,14 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 17:42:04 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/04 19:12:25 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 21:35:07 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HOOK_H
 # define HOOK_H
 
-
-#include "miniRT.h"
+# include "miniRT.h"
 
 void	hooks(t_data *data);
 

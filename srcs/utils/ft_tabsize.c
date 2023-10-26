@@ -6,10 +6,9 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 19:32:11 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/18 19:38:05 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 21:38:29 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "utils.h"
 
@@ -32,7 +31,6 @@ void	ft_freearr_int(int **tab)
 		free(tab[i++]);
 	free(tab);
 }
-
 
 int	ft_tabsize(char **tab)
 {

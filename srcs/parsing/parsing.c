@@ -1,17 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/26 11:40:25 by thi-le            #+#    #+#             */
+/*   Updated: 2023/10/26 20:44:33 by thi-le           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 #include <stdlib.h>
-
-int	check_extension(char *file_name)
-{
-	char	*ext;
-
-	if (!ft_strchr(file_name, '.'))
-		return (1);
-	ext = file_name + ft_strlen(file_name) - 3;
-	if (ft_strncmp(ext, ".rt", ft_strlen(ext)))
-		return (1);
-	return (0);
-}
 
 int	parse_input(int ac, char **av)
 {
@@ -28,7 +28,8 @@ int	parse_input(int ac, char **av)
 	if (file_no == -1)
 		return (free(buffer), printf("Error: %s cannot be opened\n", av[1]), 1);
 	if (!read(file_no, buffer, sizeof(int)))
-		return (free(buffer), close(file_no), printf("Error: file %s is empty\n", av[1]), 1);
+		return (free(buffer), close(file_no), printf("Error: file %s is empty\n",
+				av[1]), 1);
 	close(file_no);
 	free(buffer);
 	return (0);
@@ -50,7 +51,7 @@ int	get_type_suite(char **tab)
 		return (ft_freearr(tab), -1);
 }
 
-int get_type(char *line)
+int	get_type(char *line)
 {
 	char	**tab;
 
@@ -87,13 +88,10 @@ int	init_and_parse(t_data *data, char **av)
 			break ;
 		sp_line = spaces_check(line);
 		free(line);
-		if (!sp_line)
-		{
-			data->nb_lines++;
-			continue ;
-		}
-		type = get_type(sp_line);
 		data->nb_lines++;
+		if (!sp_line)
+			continue ;
+		type = get_type(sp_line);
 		if (add_to_struct(data, type, sp_line) > 0)
 			return (get_next_line(-1), free(sp_line), close(file_no), 1);
 		free(sp_line);
@@ -101,7 +99,7 @@ int	init_and_parse(t_data *data, char **av)
 	if (!data->nb_lines)
 		return (printf("Error: file %s is empty\n", av[1]), 1);
 	return (close(file_no), 0);
-}//25
+}
 
 int	parsing(t_data *data, int ac, char **av)
 {

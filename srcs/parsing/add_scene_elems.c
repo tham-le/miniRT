@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:39:47 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/25 14:10:14 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 20:41:01 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	add_light(t_data *data, char **elems)
 	t_light		*light2;
 
 	light2 = ft_calloc(sizeof(t_light), 1);
-	if(!light2)
-		return(1);
+	if (!light2)
+		return (1);
 	if (ft_tabsize(elems) < 4)
 		return (printf(ERROR_NB_ARGS_LIGHT, data->nb_lines), 1);
 	if (check_position(elems[1], data) || check_ratio(elems[2], data)

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:17:34 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/13 16:34:54 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 21:47:30 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,15 @@ static double	get_cone_discriminant(const t_ray *ray, double *abc)
 {
 	double	discriminant;
 
-	abc[0] = ray->direction.x * ray->direction.x - ray->direction.y * ray->direction.y \
-	+ ray->direction.z * ray->direction.z;
-	abc[1] = 2 * ray->direction.x * ray->origin.x - 2 * ray->direction.y * ray->origin.y \
-		+ 2 * ray->direction.z * ray->origin.z;
-	abc[2] = ray->origin.x * ray->origin.x - ray->origin.y * ray->origin.y \
-		+ ray->origin.z * ray->origin.z;
+	abc[0] = ray->direction.x * ray->direction.x \
+			- ray->direction.y * ray->direction.y \
+			+ ray->direction.z * ray->direction.z;
+	abc[1] = 2 * ray->direction.x * ray->origin.x \
+			- 2 * ray->direction.y * ray->origin.y \
+			+ 2 * ray->direction.z * ray->origin.z;
+	abc[2] = ray->origin.x * ray->origin.x \
+			- ray->origin.y * ray->origin.y \
+			+ ray->origin.z * ray->origin.z;
 	discriminant = abc[1] * abc[1] - 4 * abc[0] * abc[2];
 	return (discriminant);
 }

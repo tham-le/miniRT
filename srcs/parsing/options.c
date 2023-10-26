@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   options.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/26 11:54:34 by thi-le            #+#    #+#             */
+/*   Updated: 2023/10/26 22:09:35 by thi-le           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
 int	get_pattern_type(char *ptrn)
@@ -37,7 +49,6 @@ void	add_pattern_type(t_objs *obj, char **elems)
 
 void	add_options(t_objs *obj, char **elems)
 {
-	add_bmp_file(obj, elems);
 	add_reflect_opt(obj, elems);
 	add_diffuse_opt(obj, elems);
 	add_shine_opt(obj, elems);
