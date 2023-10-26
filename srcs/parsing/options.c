@@ -1,22 +1,22 @@
 #include "miniRT.h"
 
-int get_pattern_type(char *ptrn)
+int	get_pattern_type(char *ptrn)
 {
-	if(!ft_strcmp(ptrn, "PLAIN"))
-		return(PLAIN);
-	else if(!ft_strcmp(ptrn, "CHECKER"))
-		return(CHECKER);
-	else if(!ft_strcmp(ptrn, "STRIPE"))
-		return(STRIPE);
-	else if(!ft_strcmp(ptrn, "RING"))
-		return(RING);
-	else if(!ft_strcmp(ptrn, "GRADIENT"))
-		return(GRADIENT);
-	else if(!ft_strcmp(ptrn, "NOISE"))
-		return(NOISE);
-	else if(!ft_strcmp(ptrn, "MARBLE"))
-		return(MARBLE);
-	return(-1);
+	if (!ft_strcmp(ptrn, "PLAIN"))
+		return (PLAIN);
+	else if (!ft_strcmp(ptrn, "CHECKER"))
+		return (CHECKER);
+	else if (!ft_strcmp(ptrn, "STRIPE"))
+		return (STRIPE);
+	else if (!ft_strcmp(ptrn, "RING"))
+		return (RING);
+	else if (!ft_strcmp(ptrn, "GRADIENT"))
+		return (GRADIENT);
+	else if (!ft_strcmp(ptrn, "NOISE"))
+		return (NOISE);
+	else if (!ft_strcmp(ptrn, "MARBLE"))
+		return (MARBLE);
+	return (-1);
 }
 
 void	add_pattern_type(t_objs *obj, char **elems)

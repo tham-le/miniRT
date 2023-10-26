@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itchinda <itchinda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 19:04:44 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/25 22:38:21 by itchinda         ###   ########.fr       */
+/*   Updated: 2023/10/26 12:15:12 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,6 @@ void set_infos(char *infos, t_objs *obj)
 	ft_freearr(tab_infos);
 }
 
-t_color hextorgb(char *hex)
-{
-	t_color    rgb;
-    int        color;
-	
-    color = ft_atoi_base(hex, "0123456789abcdef");
-    rgb.r = ((color >> 16) & 0xFF) / 255.0;
-    rgb.g = ((color >> 8) & 0xFF) / 255.0;
-    rgb.b = (color & 0xFF) / 255.0;
-    return (rgb);
-}
 
 void	readbump_img(t_objs *obj)
 {

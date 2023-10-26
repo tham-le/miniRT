@@ -13,7 +13,7 @@ int	check_extension(char *file_name)
 	return (0);
 }
 
-int parse_input(int ac, char **av)
+int	parse_input(int ac, char **av)
 {
 	char	*buffer;
 	int		file_no;
@@ -34,7 +34,7 @@ int parse_input(int ac, char **av)
 	return (0);
 }
 
-int get_type_suite(char **tab)
+int	get_type_suite(char **tab)
 {
 	if (!ft_strncmp(tab[0], "co", ft_strlen(tab[0])))
 		return (ft_freearr(tab), CONE);
@@ -68,7 +68,7 @@ int get_type(char *line)
 	else if (!ft_strncmp(tab[0], "pl", ft_strlen(tab[0])))
 		return (ft_freearr(tab), PLAN);
 	else
-		return(get_type_suite(tab));
+		return (get_type_suite(tab));
 }
 
 int	init_and_parse(t_data *data, char **av)
@@ -86,6 +86,7 @@ int	init_and_parse(t_data *data, char **av)
 		if (!line)
 			break ;
 		sp_line = spaces_check(line);
+		free(line);
 		if (!sp_line)
 		{
 			data->nb_lines++;
@@ -97,8 +98,8 @@ int	init_and_parse(t_data *data, char **av)
 			return (get_next_line(-1), free(sp_line), close(file_no), 1);
 		free(sp_line);
 	}
-	if(!data->nb_lines)
-		return(printf("Error: file %s is empty\n", av[1]), 1);
+	if (!data->nb_lines)
+		return (printf("Error: file %s is empty\n", av[1]), 1);
 	return (close(file_no), 0);
 }//25
 
@@ -108,11 +109,11 @@ int	parsing(t_data *data, int ac, char **av)
 		return (ERROR);
 	if (init_and_parse(data, av))
 		return (ERROR);
-	if(!data->scene.nb_cam)
-		return(printf("Error: you need at leat one camera\n"), ERROR);
-	if(!data->scene.nb_light)
-		return(printf("Error: you need at leat one light\n"), ERROR);
-	if(!data->scene.nb_amb)
-		return(printf("Error: you need at leat one ambient\n"), ERROR);
+	if (!data->scene.nb_cam)
+		return (printf("Error: you need at leat one camera\n"), ERROR);
+	if (!data->scene.nb_light)
+		return (printf("Error: you need at leat one light\n"), ERROR);
+	if (!data->scene.nb_amb)
+		return (printf("Error: you need at leat one ambient\n"), ERROR);
 	return (SUCESS);
 }

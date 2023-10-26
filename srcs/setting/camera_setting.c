@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:35:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/09/25 22:43:43 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 13:49:16 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	camera_setting(t_data *data)
 	double	h;
 	double	w;
 
-	h = W_H;
-	w = W_W;
+	h = data->height;
+	w = data->width;
 	half_view = tan((data->scene.camera.fov / 2.0f));
 	data->scene.camera.aspect = w / h;
 	if (data->scene.camera.aspect >= 1)
