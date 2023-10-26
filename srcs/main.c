@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:08:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 11:48:35 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 21:22:33 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int	init_display(t_data **data, char *fname)
 	(*data)->mlx_ptr = mlx_init();
 	if (!(*data)->mlx_ptr)
 		return (print_error("Error: mlx_init failed", 1));
-	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, (*data)->width, (*data)->height, fname);
+	(*data)->win_ptr = mlx_new_window((*data)->mlx_ptr, (*data)->width, \
+		(*data)->height, fname);
 	if (!(*data)->win_ptr)
 		return (print_error("Error: mlx_new_window failed", 2));
-	(*data)->img_ptr = mlx_new_image((*data)->mlx_ptr, (*data)->width, (*data)->height);
+	(*data)->img_ptr = mlx_new_image((*data)->mlx_ptr, (*data)->width, \
+		(*data)->height);
 	if (!(*data)->img_ptr)
 		return (print_error("Error: mlx_new_image failed", 3));
 	(*data)->addr = mlx_get_data_addr((*data)->img_ptr, &(*data)->bpp, \

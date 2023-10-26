@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersect_cylinder.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/26 21:52:35 by thi-le            #+#    #+#             */
+/*   Updated: 2023/10/26 22:06:44 by thi-le           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
-#include "render.h"
-#include "structs.h"
 
 static bool	within_cylinder_radius(const t_ray *ray, double t)
 {
@@ -82,10 +92,12 @@ bool	intersect_cylinder(const t_ray *ray, t_objs *obj,
 	double	discriminant;
 
 	intersected = check_cylinder_caps(ray, obj, xs);
-	a = ray->direction.x * ray->direction.x + ray->direction.z * ray->direction.z;
+	a = ray->direction.x * ray->direction.x + ray->direction.z \
+		* ray->direction.z;
 	if (fabs(a) < 0.0001)
 		return (intersected);
-	b = 2 * ray->direction.x * ray->origin.x + 2 * ray->direction.z * ray->origin.z;
+	b = 2 * ray->direction.x * ray->origin.x + 2 * ray->direction.z \
+	* ray->origin.z;
 	discriminant = b * b - 4 * a * \
 		(ray->origin.x * ray->origin.x + ray->origin.z * ray->origin.z - 1);
 	if (discriminant < 0)

@@ -6,28 +6,19 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 14:48:06 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/18 19:37:20 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 20:25:50 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structs.h"
 #include "mathRT.h"
 
-/**
- * @brief Returns a vector's magnitude
- * @param vec A vector
- * @return vec's magnitude
- */
 double	vec_magnitude(const t_vector *vec)
 {
 	return (sqrt(vec->x * vec->x + vec->y * vec->y \
 			+ vec->z * vec->z));
 }
 
-/**
- * @brief Normalizes a vector
- * @param vec Vector to be normalized
- */
 void	normalize_vec(t_vector *vec)
 {
 	if (vec_magnitude(vec) == 0)
@@ -36,24 +27,11 @@ void	normalize_vec(t_vector *vec)
 	vec->w = 0;
 }
 
-/**
- * @brief Returns the dot product of two vectors
- * @param v1 First vector
- * @param v2 Second vector
- * @return The dot product of v1 and v2
- */
 double	dot_product(const t_vector *v1, const t_vector *v2)
 {
 	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z + v1->w * v2->w);
 }
 
-/**
- * @brief Finds the cross product between two vectors and stores the result in
- * res
- * @param res The result of the cross product will be stored in this vector
- * @param v1 First operand
- * @param v2 Second operand
- */
 void	cross_product(t_vector *res, const t_vector *v1, const t_vector *v2)
 {
 	res->x = v1->y * v2->z - v1->z * v2->y;

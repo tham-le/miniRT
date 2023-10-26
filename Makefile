@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/10/18 20:51:01 by thi-le           ###   ########.fr        #
+#    Updated: 2023/10/26 22:10:43 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,15 +41,29 @@ SRC_FILES	=	main.c
 
 #setting
 SETTING_DIR	=	setting/
-SETTING_FILES = init_setting.c camera_setting.c
+SETTING_FILES = camera_setting.c
 SRC_FILES	+=	$(addprefix $(SETTING_DIR), $(SETTING_FILES))
 
 #render
 RENDER_DIR		=	render/
-RENDER_FILES	=	transform.c  fill_pixel.c  \
-					intersect_sphere.c  intersect_cylinder.c \
-					intersect_cone.c intersect_triangle.c render.c \
-					camera.c	get_rgb.c ray_to_pixel.c  set_color.c
+RENDER_FILES	=	camera.c\
+					get_obj_color.c\
+					get_rgb.c\
+					intersect.c\
+					intersect_cone.c\
+					intersect_cylinder.c\
+					intersect_sphere.c\
+					intersect_triangle.c\
+					normal_at.c\
+					pre_computation.c\
+					ray_to_pixel.c\
+					reflection.c\
+					render.c\
+					set_color.c\
+					specular_and_diffuse.c\
+					transform.c\
+					uv_map.c
+
 SRC_FILES		+=	$(addprefix $(RENDER_DIR), $(RENDER_FILES))
 
 #hooks
@@ -59,10 +73,25 @@ SRC_FILES	+=	$(addprefix $(HOOKS_DIR), $(HOOKS_FILES))
 
 #parse
 PARSE_DIR	=	parsing/
-PARSE_FILES	=	add_objs_elems.c infos_elements.c infos.c \
-				add_scene_elems.c init_scene.c file_elements.c \
-				parsing.c range_check.c parse_helpers.c \
-				add_options.c options.c parse_file.c 
+PARSE_FILES	=	add_a_cone.c\
+				add_a_cylindre.c\
+				add_a_plan.c\
+				add_a_sphere.c\
+				add_a_triangle.c\
+				add_objs_elems.c\
+				add_options.c\
+				add_scene_elems.c\
+				check_extension.c\
+				file_elements.c\
+				infos.c\
+				infos_elements.c\
+				init_scene.c\
+				options.c\
+				parse_file.c\
+				parse_helpers.c\
+				parsing.c\
+				range_check.c
+
 SRC_FILES	+=	$(addprefix $(PARSE_DIR), $(PARSE_FILES))
 
 #math_operations

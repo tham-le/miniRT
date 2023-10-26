@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   infos.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itchinda <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:15:02 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/19 22:31:26 by itchinda         ###   ########.fr       */
+/*   Updated: 2023/10/26 21:41:04 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	check_position(char *elems, t_data *data)
 		return (printf(ERROR_POS_ARGS, data->nb_lines), 1);
 	if (check_float(position[0]) || check_float(position[1])
 		|| check_float(position[2]))
-		return (printf(ERROR_POS_ARGS_DIGIT, data->nb_lines), ft_freearr(position), 1);
+		return (printf(ERROR_POS_ARGS_DIGIT, data->nb_lines), \
+			ft_freearr(position), 1);
 	ft_freearr(position);
 	return (0);
 }
@@ -53,11 +54,14 @@ int	check_color(char *elems, t_data *data)
 	col_r = ft_atod(color[0]);
 	col_g = ft_atod(color[1]);
 	col_b = ft_atod(color[2]);
-	if (only_digits(color[0]) || only_digits(color[1]) || only_digits(color[2]))
-		return (ft_freearr(color), printf(ERROR_COL_ARGS_DIGIT, data->nb_lines), 1);
+	if (only_digits(color[0]) || only_digits(color[1]) \
+		|| only_digits(color[2]))
+		return (ft_freearr(color), \
+			printf(ERROR_COL_ARGS_DIGIT, data->nb_lines), 1);
 	if (col_r < 0 || col_r > 255 || col_g < 0
 		|| col_g > 255 || col_b < 0 || col_b > 255)
-		return (ft_freearr(color), printf(ERROR_COL_ARGS_RANGE, data->nb_lines), 1);
+		return (ft_freearr(color), \
+			printf(ERROR_COL_ARGS_RANGE, data->nb_lines), 1);
 	ft_freearr(color);
 	return (0);
 }

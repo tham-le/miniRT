@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 20:49:21 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/19 19:18:40 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 21:48:06 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 #include "structs.h"
 #include <stdio.h>
 
-bool	intersect_sphere(t_ray *ray, t_intersect_list *xs,\
+bool	intersect_sphere(t_ray *ray, t_intersect_list *xs, \
 t_objs *sphere)
 {
 	t_vector	l;
 	double		b;
 	double		t1c;
 	double		d2;
-	double		t[2];
 
 	sub_vec(&l, &sphere->position, &ray->origin);
 	b = dot_product(&l, &ray->direction);
@@ -32,21 +31,11 @@ t_objs *sphere)
 		return (false);
 	t1c = sqrt(sphere->squared_radius - d2);
 	xs->arr[xs->count].obj = sphere;
-	t[1] = b + t1c;
-	if (t[1] < 0)
-		return (false);
-	t[0] = b - t1c;
-	if (t[0] < 0)
-		return (false);
-	if (t[0] > t[1])
-		ft_swapd(&t[0], &t[1]);
-	if (t[0] < xs->arr[0].t)
-	{
-		xs->arr[xs->count].t = t[0];
-		xs->arr[xs->count].obj = sphere;
-		xs->count++;
-		return (true);
-	}
+	xs->arr[xs->count].t = b + t1c;
+	xs->arr[xs->count].obj = sphere;
+	xs->arr[xs->count + 1].t = b - t1c;
+	xs->arr[xs->count + 1].obj = sphere;
+	xs->count += 2;
 	return (false);
 }
 
@@ -61,14 +50,13 @@ bool	intersect_plane(const t_ray *ray, t_objs *plane,
 		return (false);
 	t = -(dot_product(&ray->origin, &plane->vector) \
 		- plane->distance_to_origin) / denom;
-	if (t < 0 || t >= xs->arr[0].t)
+	if (t < 0)
 		return (false);
 	xs->arr[xs->count].t = t;
 	xs->arr[xs->count].obj = plane;
 	xs->count++;
 	return (true);
 }
-
 /*bool	intersect_sphere(t_ray *ray, t_intersect_list *xs,
 t_objs *sphere)
 {
@@ -116,4 +104,3 @@ t_objs *sphere)
 	xs->count += 2;
 	return (true);
 }*/
-

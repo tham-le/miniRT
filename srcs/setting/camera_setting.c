@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:35:38 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 13:49:16 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 21:23:00 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	camera_setting(t_data *data)
 	}
 	data->scene.camera.pixel_size = (data->scene.camera.half_width * 2) / w;
 	data->scene.camera.phi = acos(data->scene.camera.vector.y);
-	data->scene.camera.theta = atan(data->scene.camera.vector.z / data->scene.camera.vector.x);
+	data->scene.camera.theta = atan(data->scene.camera.vector.z \
+		/ data->scene.camera.vector.x);
 }

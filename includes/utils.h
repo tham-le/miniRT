@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:54:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/14 18:27:06 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/26 21:35:14 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	init_obj_value(t_objs	*obj);
 void	ft_clear_light(t_light **lst, void (*del)(void *));
 void	ft_clear_obj(t_objs **lst, void (*del)(void *));
 void	ft_swapd(double *a, double *b);
-int	ft_atoi_base(char *str, char *base);
+int		ft_atoi_base(char *str, char *base);
 #endif

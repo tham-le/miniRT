@@ -6,27 +6,27 @@
 /*   By: itchinda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:22:09 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/19 21:29:25 by itchinda         ###   ########.fr       */
+/*   Updated: 2023/10/26 22:09:00 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	add_bmp_file(t_objs *obj, char **elems)
-{
-	int			i;
+// void	add_bmp_file(t_objs *obj, char **elems)
+// {
+// 	int			i;
 
-	i = 3;
-	while (i < ft_tabsize(elems))
-	{
-		if (open(elems[i], O_RDONLY) != -1)
-		{
-			obj->bump_img = elems[i];
-			return ;
-		}
-		i++;
-	}
-}
+// 	i = 3;
+// 	while (i < ft_tabsize(elems))
+// 	{
+// 		if (open(elems[i], O_RDONLY) != -1)
+// 		{
+// 			obj->bump_img = elems[i];
+// 			return ;
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	add_reflect_opt(t_objs *obj, char **elems)
 {
