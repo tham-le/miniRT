@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:33:31 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/26 20:33:55 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:34:42 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	add_to_struct(t_data *data, int type, char *line)
 	elems = ft_split(line, ' ');
 	ret = -1;
 	if (!elems)
-		return (1);
+		return (ERROR);
 	if (type == -1)
 		ret = write(STDERR_FILENO, ERR_NAME_ELMT, 31);
 	else if (type == SPHERE)

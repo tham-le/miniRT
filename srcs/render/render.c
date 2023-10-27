@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 21:45:40 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:40:41 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,6 @@ t_intersect	*hit(t_intersect_list *xs)
 	return (&xs->arr[idx]);
 }
 
-// bool	check_spotlight(t_data *data, t_ray *ray,
-// 			double *angle)
-// {
-// 	if (scene->lights[light_idx].type == SPOT)
-// 	{
-// 		*angle = (dot_product(&ray->dir, &scene->lights[light_idx].direction));
-// 		if (*angle < 0)
-// 			return (true);
-// 		if (*angle >= -1 && *angle <= 1)
-// 		{
-// 			*angle = acos(*angle);
-// 			if (*angle > (scene->lights[light_idx].theta / 4))
-// 				return (true);
-// 		}
-// 	}
-// 	return (false);
-// }
 // Phong shading model
 t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 {
@@ -139,5 +122,6 @@ int	render(t_data *data)
 			set_color(data, x, y, get_rgb(shade(data, &arr, &ray)));
 		}
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (SUCESS);
 }

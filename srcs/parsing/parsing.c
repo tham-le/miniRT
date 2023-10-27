@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:40:25 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 20:44:33 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:34:00 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	parse_input(int ac, char **av)
 	(void)ac;
 	buffer = malloc(sizeof(int));
 	if (!buffer)
-		return (1);
+		return (ERROR);
 	if (check_extension(av[1]))
 		return (free(buffer), printf("Error: %s is not a .rt file\n", av[1]), 1);
 	file_no = open(av[1], O_RDONLY);
@@ -30,7 +30,8 @@ int	parse_input(int ac, char **av)
 	if (!read(file_no, buffer, sizeof(int)))
 		return (free(buffer), close(file_no), printf("Error: file %s is empty\n",
 				av[1]), 1);
-	close(file_no);
+	if (close(file_no) == -1)
+		return (free(buffer), printf("Error: %s cannot be closed\n", av[1]), 1);
 	free(buffer);
 	return (0);
 }
@@ -56,6 +57,8 @@ int	get_type(char *line)
 	char	**tab;
 
 	tab = ft_split(line, ' ');
+	if (!tab)
+		return (-42);
 	if (!ft_strncmp(tab[0], "A", ft_strlen(tab[0])))
 		return (ft_freearr(tab), AMBIENT);
 	else if (!ft_strncmp(tab[0], "C", ft_strlen(tab[0])))
@@ -72,6 +75,7 @@ int	get_type(char *line)
 		return (get_type_suite(tab));
 }
 
+/*no need to protect open here because we did check in parse_input*/
 int	init_and_parse(t_data *data, char **av)
 {
 	int		file_no;
@@ -92,7 +96,7 @@ int	init_and_parse(t_data *data, char **av)
 		if (!sp_line)
 			continue ;
 		type = get_type(sp_line);
-		if (add_to_struct(data, type, sp_line) > 0)
+		if (type == -42 || add_to_struct(data, type, sp_line) > 0)
 			return (get_next_line(-1), free(sp_line), close(file_no), 1);
 		free(sp_line);
 	}

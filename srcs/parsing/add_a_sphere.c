@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:35:39 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 21:42:08 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:37:57 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	add_a_sphere(t_data *data, char	**elems)
 	t_objs	*obj;
 
 	obj = ft_calloc(sizeof(t_objs), 1);
+	if (!obj)
+		return (write(STDERR_FILENO, ERR_MALLOC, 13), 1);
 	init_obj_value(obj);
 	if (err_sphere(elems, &obj, data))
 		return (1);
