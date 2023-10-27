@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 21:24:09 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 17:53:22 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 20:35:26 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,7 @@ typedef enum s_pattern
 	PLAIN,
 	CHECKER,
 	STRIPE,
-	RING,
-	GRADIENT,
-	NOISE,
-	MARBLE,
+	PATTERN_ERROR,
 }		t_pattern;
 
 typedef struct s_colors_bmp

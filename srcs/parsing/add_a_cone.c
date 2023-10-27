@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:36:44 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 21:40:08 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 21:00:40 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int	add_a_cone(t_data *data, char	**elems)
 	obj = ft_calloc(sizeof(t_objs), 1);
 	init_obj_value(obj);
 	if (err_cone(elems, &obj, data))
-		return (1);
-	add_options(obj, elems);
+		return (free(obj), 1);
+	if (add_options(obj, elems, 6) == false)
+		return (free(obj), 1);
 	obj->type = CONE;
 	obj->position = get_position(elems[1]);
 	obj->vector = get_position(elems[2]);

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:40:25 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 17:34:00 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 21:27:04 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int	parse_input(int ac, char **av)
 
 int	get_type_suite(char **tab)
 {
-	if (!ft_strncmp(tab[0], "co", ft_strlen(tab[0])))
+	if (!ft_strcmp(tab[0], "co"))
 		return (ft_freearr(tab), CONE);
-	else if (!ft_strncmp(tab[0], "tr", ft_strlen(tab[0])))
+	else if (!ft_strcmp(tab[0], "tr"))
 		return (ft_freearr(tab), TRIANGLE);
-	else if (!ft_strncmp(tab[0], "R", ft_strlen(tab[0])))
+	else if (!ft_strcmp(tab[0], "R"))
 		return (ft_freearr(tab), DIMENSIONS);
 	else if (!ft_strncmp(tab[0], "//", 2))
 		return (ft_freearr(tab), COMMENT);
@@ -59,17 +59,17 @@ int	get_type(char *line)
 	tab = ft_split(line, ' ');
 	if (!tab)
 		return (-42);
-	if (!ft_strncmp(tab[0], "A", ft_strlen(tab[0])))
+	if (!ft_strcmp(tab[0], "A"))
 		return (ft_freearr(tab), AMBIENT);
-	else if (!ft_strncmp(tab[0], "C", ft_strlen(tab[0])))
+	else if (!ft_strcmp(tab[0], "C"))
 		return (ft_freearr(tab), CAMERA);
-	else if (!ft_strncmp(tab[0], "L", ft_strlen(tab[0])))
+	else if (!ft_strcmp(tab[0], "L"))
 		return (ft_freearr(tab), LIGHT);
-	else if (!ft_strncmp(tab[0], "sp", ft_strlen(tab[0])))
+	else if (!ft_strcmp(tab[0], "sp"))
 		return (ft_freearr(tab), SPHERE);
-	else if (!ft_strncmp(tab[0], "cy", ft_strlen(tab[0])))
+	else if (!ft_strcmp(tab[0], "cy"))
 		return (ft_freearr(tab), CYLINDER);
-	else if (!ft_strncmp(tab[0], "pl", ft_strlen(tab[0])))
+	else if (!ft_strcmp(tab[0], "pl"))
 		return (ft_freearr(tab), PLAN);
 	else
 		return (get_type_suite(tab));

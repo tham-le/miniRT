@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/10/27 18:24:57 by thi-le           ###   ########.fr        #
+#    Updated: 2023/10/27 21:29:22 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,12 @@ OBJ_DIR		= objs/
 CC			= cc
 INC			= -I $(INCLUDE) -I$(LIBFT_DIR) -I$(MLX_DIR)\
 
-OPTI_FLAGS	= -O3
+#OPTI_FLAGS	= -O3 
 OPTI_FLAGS	= -O3 -march=native -flto -ffast-math -fforce-addr -fno-plt
 #THR_FLAGS	= -pthread
 
 
-CFLAGS		= -Werror -Wextra -Wall  -g3 $(OPTI_FLAGS) $(INC)
+CFLAGS		= -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
 
 LFLAGS		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz\
 			-L$(LIBFT_DIR) -lft
@@ -36,6 +36,7 @@ LFLAGS		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz\
 RM			= rm -rf
 
 #Sources
+
 
 SRC_FILES	=	main.c
 
@@ -63,7 +64,7 @@ SRC_FILES		+=	$(addprefix $(RENDER_DIR), $(RENDER_FILES))
 
 #hooks
 HOOKS_DIR	=	hook/
-HOOKS_FILES	=	hook.c
+HOOKS_FILES	=	hook.c move_camera.c
 SRC_FILES	+=	$(addprefix $(HOOKS_DIR), $(HOOKS_FILES))
 
 #parse

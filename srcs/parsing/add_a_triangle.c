@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:39:04 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 21:41:27 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 20:45:06 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int	add_a_triangle(t_data *data, char	**elems)
 	init_obj_value(obj);
 	if (err_tri(elems, &obj, data))
 		return (1);
-	add_options(obj, elems);
+	if (add_options(obj, elems, 5) == false)
+		return (1);
 	obj->type = TRIANGLE;
 	obj->vertex[0] = get_position(elems[1]);
 	obj->vertex[1] = get_position(elems[2]);

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 21:52:35 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 17:40:52 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 19:00:35 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ bool	intersect_cylinder(const t_ray *ray, t_objs *obj,
 	intersected = check_cylinder_caps(ray, obj, xs);
 	a = ray->direction.x * ray->direction.x + ray->direction.z \
 		* ray->direction.z;
-	if (fabs(a) < 0.0001)
+	if (fabs(a) < EPSILON)
 		return (intersected);
 	b = 2 * ray->direction.x * ray->origin.x + 2 * ray->direction.z \
 	* ray->origin.z;

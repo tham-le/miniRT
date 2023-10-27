@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:35:49 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 17:55:37 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 21:08:52 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include "utils.h"
 # include "libft.h"
 
-# define ERROR_NB_ARGS_AMB "Error: line %d: at least 2 arguments \
+# define ERROR_NB_ARGS_AMB "Error: line %d: only 2 arguments \
 are required for ambient\n"
-# define ERROR_NB_ARGS_LIGHT "Error: line %d: at least 4 arguments \
+# define ERROR_NB_ARGS_LIGHT "Error: line %d: only 4 arguments \
 are required for light\n"
-# define ERROR_NB_ARGS_CAM "Error: line %d: at least 4 arguments \
+# define ERROR_NB_ARGS_CAM "Error: line %d: only 4 arguments \
 are required for camera\n"
 # define ERROR_RATIO "Error: line %d: invalid ratio\n"
 # define ERROR_FILE "Error: file cannot be opened\n"
@@ -33,15 +33,23 @@ are required for camera\n"
 # define ERR_NB_LIGHT "Error: only one light is allowed\n"
 # define ERR_NAME_ELMT "Error: invalid name of element\n"
 # define ERROR_POS_ARGS "Error: line %d: all position/vector arguments \
-should be written in this format: x,x,x\n"
+should be written in this format: x,y,z\n"
 # define ERROR_POS_ARGS_DIGIT "Error: line %d: a position/vector argument \
 contains a character that is not a digit\n"
 # define ERROR_COL_ARGS "Error: line %d: all color arguments should be written \
-in this format: x,x,x with a x in the range from 0 to 255\n"
+in this format: x,y,z with a x in the range from 0 to 255\n"
 # define ERROR_COL_ARGS_DIGIT "Error: line %d: one of rgb color contains \
 a character that is not a digit\n"
 # define ERROR_COL_ARGS_RANGE "Error: line %d: one of the rgb colors \
 is not within the range 0 to 255\n"
+# define ERROR_RATIO_RANGE "Error: line %d: ratio is not within the range \
+0 to 1\n"
+# define ERROR_REFL_ARGS_DIGIT "Error: reflection argument is not float\n"
+# define ERROR_DIFF_ARGS_DIGIT "Error: diffuse argument is not float\n"
+# define ERROR_SHINE_ARGS_DIGIT "Error: shine argument is not float\n"
+# define ERROR_SPEC_ARGS_DIGIT "Error: specular argument is not float\n"
+# define ERROR_PTRN_ARGS "Error: pattern argument is not valid\n"
+# define ERROR_OPT_ARGS "Error: option argument is not valid\n"
 //PARSING
 //Functions from file : check_extension.c
 int			check_extension(char *file_name);
@@ -49,9 +57,9 @@ int			check_extension(char *file_name);
 //Functions from file : options.c
 int			get_pattern_type(char *ptrn);
 
-void		add_pattern_type(t_objs *obj, char **elems);
+bool		add_pattern_type(t_objs *obj, char **elems, int i);
 
-void		add_options(t_objs *obj, char **elems);
+bool		add_options(t_objs *obj, char **elems, int i);
 
 //Functions from file : add_objs_elems.c
 void		push_light(t_light *obj, t_light **objs);
@@ -153,13 +161,12 @@ int			err_cone(char **elems, t_objs **obj, t_data *data);
 int			add_a_cone(t_data *data, char **elems);
 
 //Functions from file : add_options.c
-void		add_bmp_file(t_objs *obj, char **elems);
 
-void		add_reflect_opt(t_objs *obj, char **elems);
+bool		add_reflect_opt(t_objs *obj, char **elems, int i);
 
-void		add_diffuse_opt(t_objs *obj, char **elems);
+bool		add_diffuse_opt(t_objs *obj, char **elems, int i);
 
-void		add_shine_opt(t_objs *obj, char **elems);
+bool		add_shine_opt(t_objs *obj, char **elems, int i);
 
-void		add_specular_opt(t_objs *obj, char **elems);
+bool		add_specular_opt(t_objs *obj, char **elems, int i);
 #endif

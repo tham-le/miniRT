@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:15:02 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/27 17:39:24 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 20:05:32 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ int	check_position(char *elems, t_data *data)
 	char	**position;
 
 	position = ft_split(elems, ',');
-	if (!position || ft_tabsize(position) != 3)
-		return (printf(ERROR_POS_ARGS, data->nb_lines), 1);
+	if (!position)
+		return (printf(ERR_MALLOC), 1);
+	if (ft_tabsize(position) != 3)
+		return (ft_freearr(position), printf(ERROR_POS_ARGS, \
+			data->nb_lines), 1);
 	if (check_float(position[0]) || check_float(position[1])
 		|| check_float(position[2]))
 		return (printf(ERROR_POS_ARGS_DIGIT, data->nb_lines), \
@@ -34,8 +37,10 @@ t_vector	get_position(char *elems)
 
 	bzero(&vec_pos, sizeof(t_vector));
 	position = ft_split(elems, ',');
-	if (!position || ft_tabsize(position) != 3)
-		return (vec_pos);
+	if (!position)
+		return (printf(ERR_MALLOC), vec_pos);
+	if (ft_tabsize(position) != 3)
+		return (ft_freearr(position), vec_pos);
 	vec_pos.x = ft_atod(position[0]);
 	vec_pos.y = ft_atod(position[1]);
 	vec_pos.z = ft_atod(position[2]);
@@ -52,8 +57,11 @@ int	check_color(char *elems, t_data *data)
 	int			col_b;
 
 	color = ft_split(elems, ',');
-	if (!color || ft_tabsize(color) != 3)
+	if (!color)
 		return (printf(ERROR_COL_ARGS, data->nb_lines), 1);
+	if (ft_tabsize(color) != 3)
+		return (ft_freearr(color), \
+			printf(ERROR_COL_ARGS, data->nb_lines), 1);
 	col_r = ft_atod(color[0]);
 	col_g = ft_atod(color[1]);
 	col_b = ft_atod(color[2]);
@@ -75,6 +83,9 @@ t_color	get_color(char *elems)
 	t_color	vec_col;
 
 	color = ft_split(elems, ',');
+	vec_col = (t_color){0, 0, 0};
+	if (!color)
+		return (printf(ERR_MALLOC), vec_col);
 	vec_col.r = ft_atod(color[0]) / 255.f;
 	vec_col.g = ft_atod(color[1]) / 255.f;
 	vec_col.b = ft_atod(color[2]) / 255.f;

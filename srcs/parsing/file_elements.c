@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:33:31 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/27 17:34:42 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 19:37:06 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int	add_to_struct_suite(t_data *data, int type, char **elems)
 	else if (type == DIMENSIONS)
 	{
 		if (ft_tabsize(elems) != 3)
-			return (ft_freearr(elems),
-				printf("Error: R should have 2 arguments\n"), 1);
+			return (printf("Error: R should have 2 arguments\n"), 1);
 		data->width = ft_atoi(elems[1]);
 		data->height = ft_atoi(elems[2]);
 		ret = 0;

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:39:47 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/26 20:41:01 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 21:10:06 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ int	add_light(t_data *data, char **elems)
 	if (!light2)
 		return (1);
 	if (ft_tabsize(elems) < 4)
-		return (printf(ERROR_NB_ARGS_LIGHT, data->nb_lines), 1);
+		return (free(light2), printf(ERROR_NB_ARGS_LIGHT, data->nb_lines), 1);
 	if (check_position(elems[1], data) || check_ratio(elems[2], data)
 		|| check_color(elems[3], data))
-		return (1);
+		return (free(light2), 1);
 	data->scene.nb_light++;
 	light2->position = get_position(elems[1]);
 	light2->ratio = ft_atod(elems[2]);
