@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   options.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itchinda <itchinda@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:54:34 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 22:07:56 by itchinda         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:14:18 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	add_pattern_type(t_objs *obj, char **elems, int i)
 		}
 		i++;
 	}
-	return (false);
+	return (true);
 }
 
 bool	check_options(char **elems, int i)

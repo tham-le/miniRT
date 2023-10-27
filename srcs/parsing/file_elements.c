@@ -6,11 +6,12 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:33:31 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/27 19:37:06 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:05:23 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "utils.h"
 
 int	first_element(char *elem)
 {
@@ -33,6 +34,42 @@ int	first_element(char *elem)
 	return (-1);
 }
 
+static bool	ft_isint(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+int	add_dimension(t_data	*data, char **elems)
+{
+	data->nb_dimension++;
+	if (data->nb_dimension > 1)
+		return (printf("Error: R should be declared only once\n"), 1);
+	if (ft_tabsize(elems) != 3)
+		return (printf("Error: R should have 2 arguments\n"), 1);
+	if (!ft_isint(elems[1]) || !ft_isint(elems[2]))
+		return (printf("Error: R arguments should be a interger\n"), 1);
+	data->width = ft_atoi(elems[1]);
+	data->height = ft_atoi(elems[2]);
+	if (data->height < 0 || data->width < 0)
+		return (printf("Error: R arguments should be positive\n"), 1);
+	if (data->width > 1920)
+		data->width = W_W;
+	if (data->height > 1080)
+		data->height = W_W;
+	return (0);
+}
+
 int	add_to_struct_suite(t_data *data, int type, char **elems)
 {
 	int		ret;
@@ -45,13 +82,7 @@ int	add_to_struct_suite(t_data *data, int type, char **elems)
 	else if (type == CAMERA)
 		ret = add_camera(data, elems);
 	else if (type == DIMENSIONS)
-	{
-		if (ft_tabsize(elems) != 3)
-			return (printf("Error: R should have 2 arguments\n"), 1);
-		data->width = ft_atoi(elems[1]);
-		data->height = ft_atoi(elems[2]);
-		ret = 0;
-	}
+		ret = add_dimension(data, elems);
 	return (ret);
 }
 

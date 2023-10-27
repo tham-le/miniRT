@@ -62,3 +62,5 @@ miniRT
 *.txt
 *.supp
 note_*
+.*.swp
+.nfs*

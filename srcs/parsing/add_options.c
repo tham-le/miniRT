@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:22:09 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/27 20:30:49 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:07:28 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ bool	add_reflect_opt(t_objs *obj, char **elems, int i)
 			if (check_float(elems[i] + 6))
 				return (printf(ERROR_REFL_ARGS_DIGIT), false);
 			obj->reflective = ft_atod(elems[i] + 6);
+			if (obj->reflective < 0 || obj->reflective > 1)
+				return (printf(ERROR_REFL_ARGS_RANGE), false);
 			return (true);
 		}
 		i++;
@@ -53,6 +55,8 @@ bool	add_diffuse_opt(t_objs *obj, char **elems, int i)
 			if (check_float(elems[i] + 6))
 				return (printf(ERROR_DIFF_ARGS_DIGIT), false);
 			obj->diffuse = ft_atod(elems[i] + 6);
+			if (obj->diffuse < 0 || obj->diffuse > 1)
+				return (printf(ERROR_DIFF_ARGS_RANGE), false);
 			return (true);
 		}
 		i++;
@@ -69,6 +73,8 @@ bool	add_shine_opt(t_objs *obj, char **elems, int i)
 			if (check_float(elems[i] + 7))
 				return (printf(ERROR_SHINE_ARGS_DIGIT), false);
 			obj->shininess = ft_atod(elems[i] + 7);
+			if (obj->shininess < 0)
+				return (printf(ERROR_SHINE_ARGS_RANGE), false);
 			return (true);
 		}
 		i++;
@@ -85,6 +91,8 @@ bool	add_specular_opt(t_objs *obj, char **elems, int i)
 			if (check_float(elems[i] + 6))
 				return (printf(ERROR_SPEC_ARGS_DIGIT), false);
 			obj->specular = ft_atod(elems[i] + 6);
+			if (obj->specular < 0 || obj->specular > 1)
+				return (printf(ERROR_SPEC_ARGS_RANGE), false);
 			return (true);
 		}
 		i++;

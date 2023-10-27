@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:35:39 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 20:45:02 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 22:53:20 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ int	err_sphere(char	**elems, t_objs **obj, t_data *data)
 	(void)obj;
 	if (ft_tabsize(elems) < 4)
 		return (printf("Error: line %d: \
-			you should enter at least 5 infos for each sphere\n", \
+you should enter at least 5 infos for each sphere\n", \
 			data->nb_lines), 1);
 	if (check_position(elems[1], data) || check_color(elems[3], data))
 		return (1);
 	if (check_float(elems[2]))
 		return (printf("Error: line %d: \
-			the diameter argument of a sphere contains a character that \
-			is not a digit\n", data->nb_lines), 1);
+the diameter argument of a sphere contains a character that \
+is not a digit\n", data->nb_lines), 1);
 	return (0);
 }
 

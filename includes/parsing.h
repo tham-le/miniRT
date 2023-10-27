@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:35:49 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 21:08:52 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 23:09:00 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ should be written in this format: x,y,z\n"
 # define ERROR_POS_ARGS_DIGIT "Error: line %d: a position/vector argument \
 contains a character that is not a digit\n"
 # define ERROR_COL_ARGS "Error: line %d: all color arguments should be written \
-in this format: x,y,z with a x in the range from 0 to 255\n"
+in this format: x,y,z  in the range from 0 to 255\n"
 # define ERROR_COL_ARGS_DIGIT "Error: line %d: one of rgb color contains \
 a character that is not a digit\n"
 # define ERROR_COL_ARGS_RANGE "Error: line %d: one of the rgb colors \
@@ -50,6 +50,14 @@ is not within the range 0 to 255\n"
 # define ERROR_SPEC_ARGS_DIGIT "Error: specular argument is not float\n"
 # define ERROR_PTRN_ARGS "Error: pattern argument is not valid\n"
 # define ERROR_OPT_ARGS "Error: option argument is not valid\n"
+# define ERROR_REFL_ARGS_RANGE "Error: reflection argument is not \
+within the range 0 to 1\n"
+# define ERROR_DIFF_ARGS_RANGE "Error: diffuse argument is not \
+within the range 0 to 1\n"
+# define ERROR_SHINE_ARGS_RANGE "Error: shine argument can not be negative\n"
+# define ERROR_SPEC_ARGS_RANGE "Error: specular argument is not \
+within the range 0 to 1\n"
+
 //PARSING
 //Functions from file : check_extension.c
 int			check_extension(char *file_name);
@@ -99,7 +107,6 @@ int			check_vector(char *vect, t_data *data);
 int			check_fov(char *fov);
 
 //Functions from file : add_a_cylindre.c
-int			err_cyl(char **elems, t_objs **obj, t_data *data);
 
 int			add_a_cylindre(t_data *data, char **elems);
 
@@ -156,7 +163,6 @@ void		init_sc_light(t_light light);
 void		init_sc_ambient(t_ambient ambient);
 
 //Functions from file : add_a_cone.c
-int			err_cone(char **elems, t_objs **obj, t_data *data);
 
 int			add_a_cone(t_data *data, char **elems);
 

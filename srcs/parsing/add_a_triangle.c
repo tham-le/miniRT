@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:39:04 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 20:45:06 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 22:53:23 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	err_tri(char	**elems, t_objs **obj, t_data *data)
 {	
 	if (ft_tabsize(elems) < 5)
 		return (free(obj), printf("Error: line %d: \
-			you should enter at least 5 infos for each triangle\n", \
+you should enter at least 5 infos for each triangle\n", \
 			data->nb_lines), 1);
 	if (check_position(elems[1], data) || check_position(elems[2], data) \
 		|| check_position(elems[3], data) || check_color(elems[4], data))

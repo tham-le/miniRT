@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:11:09 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/26 20:33:54 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 22:53:28 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ int	check_float(char *elems)
 
 	dot = 0;
 	bef_dot = before_dot(elems, &dot);
+	if (!bef_dot)
+		return (1);
 	aft_dot = after_dot(elems, &dot);
+	if (!aft_dot)
+		return (free(bef_dot), 1);
 	if (nb_dots(elems) > 1)
 		return (1);
 	if (only_digits(bef_dot) || only_digits(aft_dot))

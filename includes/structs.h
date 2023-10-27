@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 21:24:09 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 20:35:26 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 22:44:07 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ typedef struct s_data
 	char		*addr;
 	int			height;
 	int			width;
+	int			nb_dimension;
 	int			bpp;
 	int			line_length;
 	int			endian;

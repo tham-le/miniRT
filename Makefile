@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/10/27 21:29:22 by thi-le           ###   ########.fr        #
+#    Updated: 2023/10/27 22:28:41 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OPTI_FLAGS	= -O3 -march=native -flto -ffast-math -fforce-addr -fno-plt
 #THR_FLAGS	= -pthread
 
 
-CFLAGS		= -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
+CFLAGS		= -g3 -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
 
 LFLAGS		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz\
 			-L$(LIBFT_DIR) -lft
