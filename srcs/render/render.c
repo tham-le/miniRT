@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itchinda <itchinda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 18:12:01 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 17:40:41 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 21:45:15 by itchinda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ int	render(t_data *data)
 		}
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
+	printf("Render done\n");
 	return (SUCESS);
 }
