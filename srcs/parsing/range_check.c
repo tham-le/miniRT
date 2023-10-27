@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:05:10 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/26 20:34:01 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 19:40:22 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	check_ratio(char *flt, t_data *data)
 		return (printf(ERROR_RATIO, data->nb_lines), 1);
 	converted_num = ft_atod(flt);
 	if (converted_num < 0 || converted_num > 1)
+	{
+		printf(ERROR_RATIO_RANGE, data->nb_lines);
 		return (1);
+	}
 	return (0);
 }
 

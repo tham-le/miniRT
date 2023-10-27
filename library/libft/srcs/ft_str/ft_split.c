@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:21:35 by thi-le            #+#    #+#             */
-/*   Updated: 2023/03/17 17:56:41 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 19:17:50 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -67,7 +67,7 @@ char	**ft_split(const char *s, char c)
 	len = 0;
 	j = -1;
 	i = -1;
-	while (++j < ft_strlen(s) + 1)
+	while (strings && ++j < ft_strlen(s) + 1)
 	{
 		if (s[j] != c && s[j] != 0)
 			len++;

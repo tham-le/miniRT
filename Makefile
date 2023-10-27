@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/10/27 18:24:57 by thi-le           ###   ########.fr        #
+#    Updated: 2023/10/27 20:04:59 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ SRC_FILES		+=	$(addprefix $(RENDER_DIR), $(RENDER_FILES))
 
 #hooks
 HOOKS_DIR	=	hook/
-HOOKS_FILES	=	hook.c
+HOOKS_FILES	=	hook.c move_camera.c
 SRC_FILES	+=	$(addprefix $(HOOKS_DIR), $(HOOKS_FILES))
 
 #parse

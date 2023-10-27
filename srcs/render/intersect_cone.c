@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:17:34 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 17:40:53 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 19:01:34 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ bool	intersect_cone(const t_ray *ray, t_objs *shape, t_intersect_list *xs)
 	discriminant = get_cone_discriminant(ray, abc);
 	if (discriminant < 0)
 		return (intersected);
-	if (fabs(abc[0]) < 0.000001 && fabs(abc[1]) > 0.1)
+	if (fabs(abc[0]) < EPSILON && fabs(abc[1]) > 0.1)
 	{
 		xs->arr[xs->count].t = -abc[2] / (2 * abc[1]);
 		xs->arr[xs->count++].obj = shape;

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:20:40 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 18:16:09 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 21:05:37 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 # define MAX_INTERSECT 128
 
-# define W_W 1920
-# define W_H 1080
+# define W_W 980
+# define W_H 540
 
 # define DEG_2_RAD 0.0174532925
 // PI/180
@@ -32,7 +32,7 @@
 //CAM_SPEED
 
 # define EPSILON 0.001f
-# define ERR_MALLOC "Error: malloc failed\n"
+# define ERR_MALLOC "\033[1;31mError: malloc failed\033[0m\n"
 
 # include <unistd.h>
 # include <stdio.h>

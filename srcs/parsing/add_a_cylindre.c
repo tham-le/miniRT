@@ -6,13 +6,13 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:37:41 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 21:42:56 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 20:50:54 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	err_cyl(char	**elems, t_objs **obj, t_data *data)
+int	err_cyl(char **elems, t_objs **obj, t_data *data)
 {
 	if (ft_tabsize(elems) < 6)
 		return (free(obj), printf("Error: line %d: \
@@ -28,15 +28,16 @@ int	err_cyl(char	**elems, t_objs **obj, t_data *data)
 	return (0);
 }
 
-int	add_a_cylindre(t_data *data, char	**elems)
+int	add_a_cylindre(t_data *data, char **elems)
 {
 	t_objs	*obj;
 
 	obj = ft_calloc(sizeof(t_objs), 1);
 	init_obj_value(obj);
 	if (err_cyl(elems, &obj, data))
-		return (1);
-	add_options(obj, elems);
+		return (free(obj), 1);
+	if (add_options(obj, elems, 6) == false)
+		return (free(obj), 1);
 	obj->type = CYLINDER;
 	obj->position = get_position(elems[1]);
 	obj->vector = get_position(elems[2]);

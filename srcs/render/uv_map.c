@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:59:08 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 22:14:29 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:57:16 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	sphere_map(double *u, double *v, t_vector *point)
 	vec = (t_vector){point->x, point->y, point->z, 0};
 	theta = atan2(point->x, point->z);
 	radius = vec_magnitude(&vec);
-	phi = asin(point->y / radius);
+	if (radius == 0)
+		phi = 0;
+	else
+		phi = asin(point->y / radius);
 	*u = 0.5 + theta / (2 * M_PI);
 	*v = 0.5 + (phi / M_PI);
 }
