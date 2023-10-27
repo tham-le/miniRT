@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:20:40 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/27 21:05:37 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 21:32:16 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define SUCESS 0
 # define ERROR 1
 
-# define MAX_INTERSECT 128
+# define MAX_INTERSECT 200
 
 # define W_W 980
 # define W_H 540
