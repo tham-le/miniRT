@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:38:42 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/26 21:42:51 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:32:34 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ char	*str_concate(char *s, char c)
 	int		i;
 
 	if (!s)
+	{
 		s = ft_strdup("");
+		if (!s)
+			return (NULL);
+	}
 	str = malloc(sizeof(char) * (ft_strlen(s) + 2));
 	if (!str)
 		return (NULL);
@@ -61,6 +65,8 @@ char	*spaces_check(char *line)
 			new_line = str_concate(new_line, ' ');
 		else
 			new_line = str_concate(new_line, line[i]);
+		if (!new_line)
+			return (NULL);
 		i++;
 	}
 	return (new_line);

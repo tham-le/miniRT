@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 21:24:09 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 21:34:49 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:53:22 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ typedef struct s_data
 	int			line_length;
 	int			endian;
 	int			nb_lines;
+	int			key;
 	t_scene		scene;
 	t_objs		*objs;
 	double		reflection_depth;

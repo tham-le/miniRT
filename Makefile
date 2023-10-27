@@ -6,7 +6,7 @@
 #    By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/26 13:30:17 by thi-le            #+#    #+#              #
-#    Updated: 2023/10/26 22:10:43 by thi-le           ###   ########.fr        #
+#    Updated: 2023/10/27 18:24:57 by thi-le           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CC			= cc
 INC			= -I $(INCLUDE) -I$(LIBFT_DIR) -I$(MLX_DIR)\
 
 OPTI_FLAGS	= -O3
-#OPTI_FLAGS	= -O3 -march=native -flto -ffast-math -fforce-addr -fno-plt
+OPTI_FLAGS	= -O3 -march=native -flto -ffast-math -fforce-addr -fno-plt
 #THR_FLAGS	= -pthread
 
 
@@ -38,11 +38,6 @@ RM			= rm -rf
 #Sources
 
 SRC_FILES	=	main.c
-
-#setting
-SETTING_DIR	=	setting/
-SETTING_FILES = camera_setting.c
-SRC_FILES	+=	$(addprefix $(SETTING_DIR), $(SETTING_FILES))
 
 #render
 RENDER_DIR		=	render/
@@ -156,7 +151,7 @@ re:			fclean all
 
 norm:
 			@norminette -R CheckForbiddenSourceHeader \
-			$(SRC) $(INCLUDE) $(LIBFT)
+			$(SRC) $(INCLUDE) $(LIBFT_DIR)
 
 .PHONY:		all clean fclean re norm mlx lib bonus short
 #COLORS

@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 19:20:40 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 21:32:25 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 18:16:09 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@
 # define RAD_2_DEG 57.2957795786
 //180/3.14159265
 
+# define SP 0.5
+//CAM_SPEED
+
 # define EPSILON 0.001f
+# define ERR_MALLOC "Error: malloc failed\n"
 
 # include <unistd.h>
 # include <stdio.h>
@@ -51,7 +55,6 @@
 # include "utils.h"
 # include "libft.h"
 # include "parsing.h"
-# include "setting.h"
 # include "hook.h"
 # include "render.h"
 # include "mathRT.h"

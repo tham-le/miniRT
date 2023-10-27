@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:55:29 by thi-le            #+#    #+#             */
-/*   Updated: 2023/10/26 22:09:49 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:41:17 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_color	stripe_pattern(t_intersect *itx, t_vector point)
 round each down to the nearest whole number, 
 and add them together. If the result modulo 2 is zero, 
 return color_a. Otherwise, return color_b.*/
+
 t_color	checker_pattern(t_intersect *itx, t_vector *point)
 {
 	double			u;

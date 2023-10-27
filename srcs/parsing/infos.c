@@ -6,7 +6,7 @@
 /*   By: thi-le <thi-le@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:15:02 by itchinda          #+#    #+#             */
-/*   Updated: 2023/10/26 21:41:04 by thi-le           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:39:24 by thi-le           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ t_vector	get_position(char *elems)
 	char		**position;
 	t_vector	vec_pos;
 
+	bzero(&vec_pos, sizeof(t_vector));
 	position = ft_split(elems, ',');
+	if (!position || ft_tabsize(position) != 3)
+		return (vec_pos);
 	vec_pos.x = ft_atod(position[0]);
 	vec_pos.y = ft_atod(position[1]);
 	vec_pos.z = ft_atod(position[2]);
