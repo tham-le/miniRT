@@ -45,6 +45,7 @@
 # include <limits.h>
 # include <float.h>
 # include <stdbool.h>
+# include <pthread.h>
 
 # include <mlx.h>
 # include "libft.h"

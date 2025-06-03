@@ -25,10 +25,10 @@ INC			= -g3 -I $(INCLUDE) -I$(LIBFT_DIR) -I$(MLX_DIR)\
 
 #OPTI_FLAGS	= -O3 
 OPTI_FLAGS	= -O3 -march=native -flto -ffast-math -fforce-addr -fno-plt
-#THR_FLAGS	= -pthread
+THR_FLAGS	= -pthread
 
 
-CFLAGS		= -g3 -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
+CFLAGS		= -g3 -Werror -Wextra -Wall $(OPTI_FLAGS) $(THR_FLAGS) $(INC)
 
 LFLAGS		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz\
 			-L$(LIBFT_DIR) -lft

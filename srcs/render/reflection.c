@@ -25,6 +25,8 @@ t_color	reflection_color(t_intersect *itx, t_data *data, \
 	t_color			reflected;
 
 	ft_bzero(&final_color, sizeof(t_color));
+	if (!itx || !itx->obj)
+		return (final_color);
 	light_color = shading(itx, data, light);
 	reflected = cast_reflection_ray(data, itx, remaining - 1, light);
 	add_colors(&final_color, &final_color, &light_color);
@@ -57,13 +59,15 @@ t_color	cast_reflection_ray(t_data	*data, t_intersect *intersection,
 	ft_bzero(&reflected, sizeof(t_color));
 	ray.origin = intersection->over_point;
 	ray.direction = intersection->reflect;
+	ft_bzero(&arr, sizeof(t_intersect_list));
 	arr.count = 0;
 	intersect_obj(data, &ray, &arr);
 	itx = hit(&arr);
 	if (itx != NULL)
 	{
 		pre_computations(itx, &ray);
-		reflected = reflection_color(itx, data, reflection_depth, light);
+		if (itx->obj)
+			reflected = reflection_color(itx, data, reflection_depth, light);
 	}
 	mult_color(&reflected, &reflected, intersection->obj->reflective);
 	return (reflected);

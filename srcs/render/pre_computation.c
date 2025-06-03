@@ -22,7 +22,7 @@ static void	ray_position(t_vector *pos, const t_ray *ray, double time)
 
 void	pre_computations(t_intersect *intersection, t_ray *ray)
 {
-	if (!intersection || !ray)
+	if (!intersection || !ray || !intersection->obj)
 		return;
 
 	ray_position(&intersection->point, ray, intersection->t);

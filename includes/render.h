@@ -31,12 +31,12 @@ typedef struct s_intersect
 {
 	double		t;
 	t_objs		*obj;
+	bool		inside;
 	t_vector	point;
 	t_vector	normal;
 	t_vector	eye;
 	t_vector	reflect;
 	t_vector	over_point;
-	bool		inside;
 }				t_intersect;
 
 typedef struct s_inetrsect_list

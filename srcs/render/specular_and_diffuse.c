@@ -51,6 +51,7 @@ bool	is_shadowed(t_data	*data, t_light *light, t_vector *itx_point,
 	distance = vec_magnitude(&ray.direction);
 	scale_vec(&ray.direction, &ray.direction, 1 / distance);
 	ray.origin = *itx_point;
+	ft_bzero(&arr, sizeof(t_intersect_list));
 	arr.count = 0;
 	obj = data->objs;
 	while (obj)

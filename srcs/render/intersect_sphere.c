@@ -20,23 +20,24 @@ t_objs *sphere)
 	t_vector	l;
 	double		b;
 	double		t1c;
+	double		l_squared;
 	double		d2;
 
 	sub_vec(&l, &sphere->position, &ray->origin);
 	b = dot_product(&l, &ray->direction);
 	if (b < 0)
 		return (false);
-	d2 = dot_product(&l, &l) - b * b;
+	l_squared = vec_magnitude_squared(&l);
+	d2 = l_squared - b * b;
 	if (d2 > sphere->squared_radius)
 		return (false);
 	t1c = sqrt(sphere->squared_radius - d2);
 	xs->arr[xs->count].obj = sphere;
 	xs->arr[xs->count].t = b + t1c;
-	xs->arr[xs->count].obj = sphere;
-	xs->arr[xs->count + 1].t = b - t1c;
 	xs->arr[xs->count + 1].obj = sphere;
+	xs->arr[xs->count + 1].t = b - t1c;
 	xs->count += 2;
-	return (false);
+	return (true);
 }
 
 bool	intersect_plane(const t_ray *ray, t_objs *plane,

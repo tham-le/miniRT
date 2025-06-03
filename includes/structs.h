@@ -115,6 +115,8 @@ typedef struct s_objs
 	t_vector		position;
 	t_vector		vector;
 	t_vector		scale;
+	t_vector		bbox_min;
+	t_vector		bbox_max;
 	t_mat4			transf;
 	t_mat4			inv_transf;
 	t_mat4			norm_transf;
@@ -186,6 +188,14 @@ typedef struct s_data
 	t_objs		*objs;
 	double		reflection_depth;
 }				t_data;
+
+typedef struct s_thread_data
+{
+	t_data		*data;
+	int			start_row;
+	int			end_row;
+	int			thread_id;
+}				t_thread_data;
 
 // typedef struct s_xpm_img{
 

@@ -17,26 +17,31 @@
 #include "utils.h"
 #include <math.h>
 #include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
 
 t_intersect	*hit(t_intersect_list *xs)
 {
 	double	min_t;
 	int		i;
 	int		idx;
+	bool	found;
 
 	i = 0;
 	idx = 0;
 	min_t = INFINITY;
+	found = false;
 	while (i < xs->count)
 	{
 		if (xs->arr[i].t >= EPSILON && xs->arr[i].t < min_t)
 		{
 			min_t = xs->arr[i].t;
 			idx = i;
+			found = true;
 		}
 		i++;
 	}
-	if (min_t == INFINITY)
+	if (!found)
 		return (NULL);
 	return (&xs->arr[idx]);
 }
@@ -51,6 +56,9 @@ t_color	shading(t_intersect *itx,	t_data *data, t_light *light)
 	const double	attenuation = (100 * light->ratio \
 	- light_dist) / (100 * data->scene.light->ratio - 1);
 
+	if (!itx || !itx->obj)
+		return ((t_color){0, 0, 0});
+	
 	shape_color = get_obj_color(itx);
 	blend_colors(&phong.effective_color, &shape_color,
 		&light->color);
@@ -83,6 +91,8 @@ t_color	shade( t_data *data, t_intersect_list *arr, t_ray *ray)
 	if (itx != NULL)
 	{
 		pre_computations(itx, ray);
+		if (!itx->obj)
+			return (final_color);
 		light = data->scene.light;
 		while (light)
 		{
@@ -97,31 +107,82 @@ t_color	shade( t_data *data, t_intersect_list *arr, t_ray *ray)
 	return (final_color);
 }
 
-int	render(t_data *data)
+void	*render_thread(void *arg)
 {
+	t_thread_data		*thread_data;
 	t_intersect_list	arr;
 	int					x;
 	int					y;
 	t_ray				ray;
 	t_objs				*obj;
 
-	y = -1;
-	while (++y < data->height)
+	thread_data = (t_thread_data *)arg;
+	y = thread_data->start_row - 1;
+	while (++y < thread_data->end_row)
 	{
 		x = -1;
-		while (++x < data->width)
+		while (++x < thread_data->data->width)
 		{
-			ray_to_pixel(&data->scene.camera, &ray, x + 0.5, y + 0.5);
+			ray_to_pixel(&thread_data->data->scene.camera, &ray, x + 0.5, y + 0.5);
+			ft_bzero(&arr, sizeof(t_intersect_list));
 			arr.count = 0;
-			obj = data->objs;
+			obj = thread_data->data->objs;
+			
 			while (obj)
 			{
 				intersect(&ray, obj, &arr);
 				obj = obj->next;
 			}
-			set_color(data, x, y, get_rgb(shade(data, &arr, &ray)));
+			
+			set_color(thread_data->data, x, y, get_rgb(shade(thread_data->data, &arr, &ray)));
 		}
 	}
+	return (NULL);
+}
+
+int	render(t_data *data)
+{
+	pthread_t		threads[8];
+	t_thread_data	thread_data[8];
+	int				num_threads;
+	int				rows_per_thread;
+	int				extra_rows;
+	int				i;
+
+	num_threads = sysconf(_SC_NPROCESSORS_ONLN);
+	if (num_threads <= 0 || num_threads > 8)
+		num_threads = 8;
+	
+	rows_per_thread = data->height / num_threads;
+	extra_rows = data->height % num_threads;
+	
+	i = -1;
+	while (++i < num_threads)
+	{
+		thread_data[i].data = data;
+		thread_data[i].thread_id = i;
+		thread_data[i].start_row = i * rows_per_thread;
+		thread_data[i].end_row = (i + 1) * rows_per_thread;
+		if (i == num_threads - 1)
+			thread_data[i].end_row += extra_rows;
+		
+		if (pthread_create(&threads[i], NULL, render_thread, &thread_data[i]) != 0)
+		{
+			ft_putendl("Error: Failed to create thread");
+			return (ERROR);
+		}
+	}
+	
+	i = -1;
+	while (++i < num_threads)
+	{
+		if (pthread_join(threads[i], NULL) != 0)
+		{
+			ft_putendl("Error: Failed to join thread");
+			return (ERROR);
+		}
+	}
+	
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (SUCESS);
 }

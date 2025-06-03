@@ -19,11 +19,32 @@ double	vec_magnitude(const t_vector *vec)
 			+ vec->z * vec->z));
 }
 
+double	vec_magnitude_squared(const t_vector *vec)
+{
+	return (vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
+}
+
 void	normalize_vec(t_vector *vec)
 {
-	if (vec_magnitude(vec) == 0)
+	double	magnitude;
+
+	magnitude = vec_magnitude(vec);
+	if (magnitude == 0)
 		return ;
-	scale_vec(vec, vec, 1 / vec_magnitude(vec));
+	scale_vec(vec, vec, 1 / magnitude);
+	vec->w = 0;
+}
+
+void	fast_normalize_vec(t_vector *vec)
+{
+	double	mag_sq;
+	double	inv_mag;
+
+	mag_sq = vec_magnitude_squared(vec);
+	if (mag_sq == 0)
+		return ;
+	inv_mag = 1.0 / sqrt(mag_sq);
+	scale_vec(vec, vec, inv_mag);
 	vec->w = 0;
 }
 

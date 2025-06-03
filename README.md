@@ -18,11 +18,11 @@
 - GCC or Clang compiler
 - GNU Make
 - X11 development libraries (Linux)
-- MLX library (included in repository)
+- MLX library
 
 ### Build
 ```bash
-git clone git@github.com:tham-le/miniRT.git
+git clone --recursive git@github.com:tham-le/miniRT.git
 cd miniRT
 make
 ```

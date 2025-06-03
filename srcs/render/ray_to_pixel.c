@@ -33,5 +33,5 @@ void	ray_to_pixel(t_camera *camera, t_ray *ray, double x, double y)
 	mat_vec_multiply(&ray->origin, &camera->inverse, &center);
 	sub_vec(&ray->direction, &pixel, &ray->origin);
 	ray->direction.w = 0;
-	normalize_vec(&ray->direction);
+	fast_normalize_vec(&ray->direction);
 }
