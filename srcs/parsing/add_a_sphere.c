@@ -34,7 +34,10 @@ int	add_a_sphere(t_data *data, char	**elems)
 
 	obj = ft_calloc(sizeof(t_objs), 1);
 	if (!obj)
-		return (write(STDERR_FILENO, ERR_MALLOC, 13), 1);
+	{
+		if (write(STDERR_FILENO, ERR_MALLOC, 13) < 0) {}
+		return (1);
+	}
 	init_obj_value(obj);
 	if (err_sphere(elems, &obj, data))
 		return (free(obj), 1);
@@ -44,7 +47,11 @@ int	add_a_sphere(t_data *data, char	**elems)
 	obj->position = get_position(elems[1]);
 	obj->diametre = ft_atod(elems[2]);
 	if (obj->diametre < 0)
-		return (free(obj), write(STDERR_FILENO, ERR_INFOS_ELEM, 29), 1);
+	{
+		free(obj);
+		if (write(STDERR_FILENO, ERR_INFOS_ELEM, 29) < 0) {}
+		return (1);
+	}
 	obj->radius = obj->diametre / 2;
 	obj->squared_radius = obj->radius * obj->radius;
 	obj->color = get_color(elems[3]);

@@ -15,12 +15,18 @@
 int	err_tri(char	**elems, t_objs **obj, t_data *data)
 {	
 	if (ft_tabsize(elems) < 5)
-		return (free(obj), printf("Error: line %d: \
+	{
+		free(*obj);
+		return (printf("Error: line %d: \
 you should enter at least 5 infos for each triangle\n", \
 			data->nb_lines), 1);
+	}
 	if (check_position(elems[1], data) || check_position(elems[2], data) \
 		|| check_position(elems[3], data) || check_color(elems[4], data))
-		return (free(obj), 1);
+	{
+		free(*obj);
+		return (1);
+	}
 	return (0);
 }
 
@@ -33,7 +39,7 @@ int	add_a_triangle(t_data *data, char	**elems)
 	if (err_tri(elems, &obj, data))
 		return (1);
 	if (add_options(obj, elems, 5) == false)
-		return (1);
+		return (free(obj), 1);
 	obj->type = TRIANGLE;
 	obj->vertex[0] = get_position(elems[1]);
 	obj->vertex[1] = get_position(elems[2]);

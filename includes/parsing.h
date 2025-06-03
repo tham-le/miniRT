@@ -156,11 +156,11 @@ int			add_to_struct(t_data *data, int type, char *line);
 //Functions from file : init_scene.c
 void		init_scene(t_data *data);
 
-void		init_sc_camera(t_camera camera);
+void		init_sc_camera(t_camera *camera);
 
-void		init_sc_light(t_light light);
+void		init_sc_light(t_light *light);
 
-void		init_sc_ambient(t_ambient ambient);
+void		init_sc_ambient(t_ambient *ambient);
 
 //Functions from file : add_a_cone.c
 

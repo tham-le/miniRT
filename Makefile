@@ -21,14 +21,14 @@ MLX			= $(MLX_DIR)/libmlx.a
 SRC_DIR		= srcs/
 OBJ_DIR		= objs/
 CC			= cc
-INC			= -I $(INCLUDE) -I$(LIBFT_DIR) -I$(MLX_DIR)\
+INC			= -g3 -I $(INCLUDE) -I$(LIBFT_DIR) -I$(MLX_DIR)\
 
 #OPTI_FLAGS	= -O3 
 OPTI_FLAGS	= -O3 -march=native -flto -ffast-math -fforce-addr -fno-plt
 #THR_FLAGS	= -pthread
 
 
-CFLAGS		= -g3 -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
+CFLAGS		= -Werror -Wextra -Wall $(OPTI_FLAGS) $(INC)
 
 LFLAGS		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz\
 			-L$(LIBFT_DIR) -lft
