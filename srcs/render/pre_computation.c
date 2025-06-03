@@ -22,6 +22,9 @@ static void	ray_position(t_vector *pos, const t_ray *ray, double time)
 
 void	pre_computations(t_intersect *intersection, t_ray *ray)
 {
+	if (!intersection || !ray)
+		return;
+
 	ray_position(&intersection->point, ray, intersection->t);
 	intersection->normal = normal_at(intersection->obj, &intersection->point);
 	negate_vec(&intersection->eye, &ray->direction);
